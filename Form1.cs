@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Pascal_AirMax.Analizador;
 
 namespace Pascal_AirMax
 {
@@ -17,5 +18,13 @@ namespace Pascal_AirMax
             InitializeComponent();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //Console.WriteLine("se clickeo el ejecutar");
+
+            string entrada = richTextBox1.Text;
+            Sintactico sintactico= new Sintactico();
+            sintactico.Analizar(entrada);
+        }
     }
 }

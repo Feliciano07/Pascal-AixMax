@@ -1,0 +1,17 @@
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.exe
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.deps.json
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.runtimeconfig.json
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.runtimeconfig.dev.json
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.dll
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Pascal-AirMax.pdb
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.csprojAssemblyReference.cache
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal_AirMax.Form1.resources
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.csproj.GenerateResource.cache
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.AssemblyInfoInputs.cache
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.AssemblyInfo.cs
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.csproj.CoreCompileInputs.cache
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.dll
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.pdb
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.genruntimeconfig.cache
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\bin\Debug\netcoreapp3.1\Irony.dll
+C:\Users\Fernando Chajon\Desktop\Compiladores2\Pascal-AirMax\obj\Debug\netcoreapp3.1\Pascal-AirMax.csproj.CopyComplete
