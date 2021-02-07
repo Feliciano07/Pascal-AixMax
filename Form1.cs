@@ -22,9 +22,18 @@ namespace Pascal_AirMax
         {
             //Console.WriteLine("se clickeo el ejecutar");
 
-            string entrada = richTextBox1.Text;
+            string entrada = richTextBox1.Text; 
             Sintactico sintactico= new Sintactico();
-            sintactico.Analizar(entrada);
+            bool salida = sintactico.Analizar(entrada);
+
+            if (salida)
+            {
+                var result = MessageBox.Show("Analisis correcto");
+            }
+            else
+            {
+                var result = MessageBox.Show("Analisis incorrecto");
+            }
         }
     }
 }

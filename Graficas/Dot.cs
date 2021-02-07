@@ -10,14 +10,16 @@ namespace Pascal_AirMax.Graficas
     {
         private static int Contador;
         private static String grafo;
+        
 
         private static string path = @"C:\compiladores2\AST\ast.txt";
+        private static string Patherrores = @"C:\compiladores2\Error\error.txt";
 
         public static void GenerarAST(ParseTreeNode raiz)
         {
             String grafodot = getDot(raiz);
 
-            SaveFile(grafodot);
+            SaveFile(grafodot, path);
 
             string imagen = path.Replace(".txt", ".jpg");
 
@@ -43,9 +45,37 @@ namespace Pascal_AirMax.Graficas
 
         }
 
-        public static void SaveFile(String cadena)
+        public static void GenerarErrores(LinkedList<Pascal_AirMax.Environment.Error> entrada)
         {
-            TextWriter tw = new StreamWriter(path);
+            String salida = ReccorerErrores(entrada);
+            SaveFile(salida,Patherrores);
+
+            string imagen = Patherrores.Replace(".txt", ".jpg");
+
+            try
+            {
+                var command = string.Format("dot -Tjpg {0} -o {1}", Patherrores, imagen);
+
+                var procStartInfo = new System.Diagnostics.ProcessStartInfo("cmd", "/C " + command);
+
+                var proc = new System.Diagnostics.Process();
+
+                proc.StartInfo = procStartInfo;
+
+                proc.Start();
+
+                proc.WaitForExit();
+
+            }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+        public static void SaveFile(String cadena, string direccion)
+        {
+            TextWriter tw = new StreamWriter(direccion);
             tw.WriteLine(cadena);
             tw.Close();
 
@@ -84,5 +114,26 @@ namespace Pascal_AirMax.Graficas
             cade = cade.Replace("\"", "\\\"");
             return cade;
         }
+
+        //metodos para graficar la tabla de errores 
+
+        public static String ReccorerErrores(LinkedList<Pascal_AirMax.Environment.Error> entrada)
+        {
+            string tabla;
+            tabla = "digraph D { \n";
+            tabla += "node [shape=plaintext] \n";
+            tabla += "some_node [ \n";
+            tabla += "label=< \n";
+            tabla += "<table border=\"0\" cellborder=\"1\" cellspacing=\"0\"> \n";
+            tabla += "<tr> <td bgcolor=\"lightblue\">Tipo</td> <td bgcolor=\"lightblue\">Descripcion</td> <td bgcolor=\"lightblue\">Linea</td> <td bgcolor=\"lightblue\">columna</td> </tr> \n";
+            foreach(var item in entrada)
+            {
+                tabla += "<tr> <td>" + item.tipoError + "</td> <td>" + item.descripcion + "</td> <td> \n" +
+                    +item.linea + "</td> <td>" + item.columna + "</td> </tr> \n";
+            }
+            tabla += " </table>>]; }";
+            return tabla;
+        }
+        
     }
 }
