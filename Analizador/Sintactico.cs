@@ -23,16 +23,16 @@ namespace Pascal_AirMax.Analizador
             }
             GenerarAST(raiz);
 
-            LinkedList<Instruction> ast = instrucciones(raiz.ChildNodes[0]);
+            //LinkedList<Instruction> ast = instrucciones(raiz.ChildNodes[0]);
 
 
             // Realizar la ejecucion de las instrucciones 
-            foreach(Instruction inst in ast)
+           /* foreach(Instruction inst in ast)
             {
                 Object dato = inst.execute();
 
                 Console.WriteLine(dato);
-            }
+            }*/
 
             return true;
         }

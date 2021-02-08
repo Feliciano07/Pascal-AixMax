@@ -1,0 +1,44 @@
+﻿var 
+a,b,c: real;
+d,e,f: integer;
+z:real = 45; 
+y:real; 
+
+
+const 
+a:real = 45;
+
+const c = 'hola guapo';
+
+const 
+k:real = 45;
+f: integer = 45;
+r = 'hola';
+
+
+type 
+vector = array[-1..0] of real;
+vector2 = array[-1..0] of real;
+vector4 = array[-1..0] of real;
+vector3 = array[-1..0] of real;
+vector7 = array[1+1+2+3..10+9] of real;
+
+
+
+type 
+cuadro = object 
+
+var 
+a,b,c: real;
+d,e,f: integer;
+
+type 
+vector = array[-1..0] of real;
+vector2 = array[-1..0] of real;
+vector4 = array[-1..0] of real;
+
+end;
+
+
+
+45+89-89*7/71<78+52 <> 45*(45+56)
