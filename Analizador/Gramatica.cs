@@ -8,7 +8,7 @@ namespace Pascal_AirMax.Analizador
 {
     public class Gramatica: Grammar
     {
-        public Gramatica() : base(false)
+        public Gramatica() : base( caseSensitive: false)
         {
             #region ER
 
@@ -60,6 +60,7 @@ namespace Pascal_AirMax.Analizador
             var Tpuntocoma = ToTerm(";");
             var Tcoma = ToTerm(",");
             var Tdospunto = ToTerm(":");
+            var Tasignar = ToTerm(":=");
 
 
             //TIPO DE DATOS VALIDOS
@@ -79,6 +80,13 @@ namespace Pascal_AirMax.Analizador
 
             var Tobject = ToTerm("object");
             var Tend = ToTerm("end");
+            var Tbegin = ToTerm("begin");
+
+            var Tif = ToTerm("if");
+            var Tthen = ToTerm("then");
+            var Twriteln = ToTerm("writeln");
+            var Telse = ToTerm("else");
+            
 
 
             #endregion
@@ -106,23 +114,42 @@ namespace Pascal_AirMax.Analizador
             NonTerminal objectos = new NonTerminal("objectos");
 
 
+            NonTerminal lista_main = new NonTerminal("lista_main");
+            NonTerminal main = new NonTerminal("main");
+            NonTerminal opciones_main = new NonTerminal("opciones_main");
 
-            //manejar la declaracion de variables
+            NonTerminal asignacion = new NonTerminal("asignacion");
+
+            NonTerminal writeln = new NonTerminal("writeln");
+
+
+            NonTerminal ifthen = new NonTerminal("ifthen");
+            NonTerminal opcion_if = new NonTerminal("opcion_if");
+            NonTerminal opcion_else = new NonTerminal("opcion_else");
+
+            NonTerminal ifelse = new NonTerminal("ifelse");
+            NonTerminal optionIfElse = new NonTerminal("optionIfElse");
+
 
             #endregion
 
 
             #region GRAMATICA
 
-            init.Rule = instrucciones;
+            init.Rule = opciones_main;
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
+            // todo esto es lo que estaria arriba antes del main, exepto exp
             instruccion.Rule = exp
                               | variable
                               | constante
                               | arrays
-                              | objectos;
+                              | objectos
+                              ;
+
+            opciones_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma
+                                | lista_main;
 
             exp.Rule = exp + Tsuma + exp
                        | exp + Tresta + exp
@@ -186,6 +213,42 @@ namespace Pascal_AirMax.Analizador
 
             objectos.Rule = Ttype + Id + Tigual + Tobject + instrucciones + Tend + Tpuntocoma
                            | Ttype + Id + Tigual + Tobject + Tend + Tpuntocoma; ;
+
+
+            // ******************* flujo interno del programa, sentencias y asignaciones
+            lista_main.Rule = MakePlusRule(lista_main, main);
+
+
+
+            main.Rule = asignacion + Tpuntocoma
+                       | writeln + Tpuntocoma
+                       | ifthen
+                       | ifelse;
+
+            asignacion.Rule = Id + Tasignar + exp;
+
+            writeln.Rule = Twriteln + TparA + exp + TparC;
+
+            //**************************** sentencias if then
+
+            ifthen.Rule = Tif + exp + Tthen + main
+                          | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma;
+
+
+
+            //**************************** SENTENCIA IF THEN ELSE
+
+            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + opcion_else ;
+
+
+            optionIfElse.Rule = asignacion
+                               | writeln;
+
+            opcion_if.Rule = optionIfElse
+                            | Tbegin + lista_main + Tend;
+
+            opcion_else.Rule = main
+                              | Tbegin + lista_main + Tend + Tpuntocoma;
 
 
             #endregion

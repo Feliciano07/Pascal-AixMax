@@ -42,3 +42,50 @@ end;
 
 
 45+89-89*7/71<78+52 <> 45*(45+56)
+
+
+
+begin 
+   if ( 45 < 20 ) then
+   writeln('a is less than 20 ' );
+end;
+
+
+   begin
+       if(  78 < 20 ) then
+          writeln('hola')
+       else
+          (* if condition is false then print the following *)
+       writeln('hola');   
+       
+        if(  78 < 20 ) then
+          begin
+          writeln('hola');
+          writeln('hola');
+          writeln('hola');
+          end
+       else
+          (* if condition is false then print the following *)
+       writeln('hola');  
+
+
+        if(  78 < 20 ) then
+          begin
+          writeln('hola');
+          writeln('hola');
+          writeln('hola');
+          end
+       else
+          (* if condition is false then print the following *)
+          begin
+       writeln('hola');
+       writeln('hola');
+       writeln('hola');
+       writeln('hola');
+       end;
+
+       writeln('h');
+       writeln('h');
+       writeln('h');
+
+    end;
