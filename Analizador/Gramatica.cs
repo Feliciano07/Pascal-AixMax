@@ -61,7 +61,7 @@ namespace Pascal_AirMax.Analizador
             var Tcoma = ToTerm(",");
             var Tdospunto = ToTerm(":");
             var Tasignar = ToTerm(":=");
-
+            var Tpunto = ToTerm(".");
 
             //TIPO DE DATOS VALIDOS
             var Tstring = ToTerm("string");
@@ -86,7 +86,10 @@ namespace Pascal_AirMax.Analizador
             var Tthen = ToTerm("then");
             var Twriteln = ToTerm("writeln");
             var Telse = ToTerm("else");
+
+            var Tcase = ToTerm("case");
             
+
 
 
             #endregion
@@ -117,6 +120,10 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_main = new NonTerminal("lista_main");
             NonTerminal main = new NonTerminal("main");
             NonTerminal opciones_main = new NonTerminal("opciones_main");
+          
+            NonTerminal inicio_programa = new NonTerminal("inicio_programa");
+     
+
 
             NonTerminal asignacion = new NonTerminal("asignacion");
 
@@ -128,7 +135,15 @@ namespace Pascal_AirMax.Analizador
             NonTerminal opcion_else = new NonTerminal("opcion_else");
 
             NonTerminal ifelse = new NonTerminal("ifelse");
-            NonTerminal optionIfElse = new NonTerminal("optionIfElse");
+            NonTerminal main_stm = new NonTerminal("main_stm");
+
+            NonTerminal caseof = new NonTerminal("caseof");
+            NonTerminal sentencia_case = new NonTerminal("sentencia_case");
+            NonTerminal lista_exp = new NonTerminal("lista_exp");
+            NonTerminal lista_casos = new NonTerminal("lista_casos");
+            NonTerminal caso = new NonTerminal("caso");
+
+           
 
 
             #endregion
@@ -136,7 +151,7 @@ namespace Pascal_AirMax.Analizador
 
             #region GRAMATICA
 
-            init.Rule = opciones_main;
+            init.Rule = inicio_programa;
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
@@ -147,6 +162,8 @@ namespace Pascal_AirMax.Analizador
                               | arrays
                               | objectos
                               ;
+
+            inicio_programa.Rule = Tbegin + opciones_main + Tend + Tpunto;
 
             opciones_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma
                                 | lista_main;
@@ -171,12 +188,14 @@ namespace Pascal_AirMax.Analizador
                        | Cadena
                        | Ttrue
                        | Tfalse
+                       | Id
                        | TparA + exp + TparC;
 
             tipo_dato.Rule = Tstring
                              | Tinteger
                              | Treal
-                             | Tboolean;
+                             | Tboolean
+                             | Id; // como se declaran variables de objectos
 
             //************************ DECLARACION DE VARIABLES
             variable.Rule = Tvar + lista_variable;
@@ -219,17 +238,23 @@ namespace Pascal_AirMax.Analizador
             lista_main.Rule = MakePlusRule(lista_main, main);
 
 
-
             main.Rule = asignacion + Tpuntocoma
-                       | writeln + Tpuntocoma
-                       | ifthen
-                       | ifelse;
+                         | writeln + Tpuntocoma
+                         | ifthen
+                         | ifelse
+                         | caseof;
+
+
 
             asignacion.Rule = Id + Tasignar + exp;
 
             writeln.Rule = Twriteln + TparA + exp + TparC;
 
-            //**************************** sentencias if then
+
+
+
+
+            //**************************** sentencias if then, puede venir con punto y coma?
 
             ifthen.Rule = Tif + exp + Tthen + main
                           | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma;
@@ -238,17 +263,42 @@ namespace Pascal_AirMax.Analizador
 
             //**************************** SENTENCIA IF THEN ELSE
 
-            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + opcion_else ;
+
+            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main_stm;
 
 
-            optionIfElse.Rule = asignacion
-                               | writeln;
 
-            opcion_if.Rule = optionIfElse
-                            | Tbegin + lista_main + Tend;
+            opcion_if.Rule = asignacion
+                             | writeln
+                             | opcion_else
+                             | sentencia_case
+                             | Tbegin + lista_main + Tend;
 
-            opcion_else.Rule = main
-                              | Tbegin + lista_main + Tend + Tpuntocoma;
+            main_stm.Rule = asignacion + Tpuntocoma
+                             | writeln + Tpuntocoma
+                             | opcion_else
+                             | Tbegin + lista_main + Tend + Tpuntocoma;
+
+
+            opcion_else.Rule = Tif + exp + Tthen + opcion_if + Telse + opcion_if;
+
+
+                                
+
+
+            //*************************** SENTENCIA CASE
+
+            caseof.Rule = sentencia_case + Tpuntocoma;
+
+            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend;
+
+            lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);
+
+            lista_casos.Rule = MakePlusRule(lista_casos, caso);
+
+            caso.Rule = lista_exp + Tdospunto + main
+                        | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma;
+
 
 
             #endregion
@@ -264,6 +314,11 @@ namespace Pascal_AirMax.Analizador
             RegisterOperators(8, Associativity.Left, Tpor, Tdiv, Tmod); // aca se agrega el modulo
             RegisterOperators(9, Associativity.Right, Tresta, Tnot);
             RegisterOperators(10, Associativity.Left, TparA, TparC);
+
+
+            this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
+                "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
+                "then", "writeln");
 
             #endregion
         }

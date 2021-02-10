@@ -89,3 +89,85 @@ end;
        writeln('h');
 
     end;
+
+
+
+
+begin
+
+   case 50 of
+     30 : writeln('Excellent!' );
+     30,40 :  begin
+       writeln('hola');
+       end;
+     30 : writeln('Excellent!' );
+   end;     
+   
+   writeln('Your grade is  ');
+end;
+
+
+
+
+
+
+begin
+        if(  78 < 20 ) then
+             if ( 45 < 20 ) then
+                 if ( 45 < 20 ) then
+                    if ( 45 < 20 ) then
+                    begin
+                    writeln('a is less than 20 ' );
+                    end
+       else
+          (* if condition is false then print the following *)
+       writeln('hola');   
+end.
+
+
+
+
+begin
+
+        if(  100 < 20 ) then
+            if ( 2 < 20 ) then
+                 if ( 2 < 20 ) then
+                    if ( 20 < 20 ) then
+                        begin
+                        if(20<20)then 
+                            writeln(40);
+                        end
+                    else
+                        begin
+                        writeln('a is less than 20 ' );
+                        end
+                else
+                    begin
+                        writeln('hola');
+                    end
+         else
+                begin
+                   writeln('hola');
+                end;
+
+end.
+
+
+
+
+begin
+
+
+  if ( 20 < 20 ) then
+
+        case (grade) of
+        'A' : writeln('Excellent!' );
+        'B', 'C': writeln('Well done' );
+        'D' : writeln('You passed' );
+        'F' : writeln('Better try again' );
+        end;
+            else
+                begin
+                    writeln('a is less than 20 ' );
+                end;
+end.
