@@ -143,6 +143,9 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_casos = new NonTerminal("lista_casos");
             NonTerminal caso = new NonTerminal("caso");
 
+            NonTerminal caselse = new NonTerminal("caselse");
+            NonTerminal sentencia_case_else = new NonTerminal("sentencia_case_else");
+
            
 
 
@@ -243,6 +246,8 @@ namespace Pascal_AirMax.Analizador
                          | ifthen
                          | ifelse
                          | caseof;
+                         
+            
 
 
 
@@ -277,20 +282,22 @@ namespace Pascal_AirMax.Analizador
             main_stm.Rule = asignacion + Tpuntocoma
                              | writeln + Tpuntocoma
                              | opcion_else
+                             | caseof
                              | Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            opcion_else.Rule = Tif + exp + Tthen + opcion_if + Telse + opcion_if;
+            opcion_else.Rule = Tif + exp + Tthen + opcion_if +Telse + opcion_if;
 
 
                                 
 
 
-            //*************************** SENTENCIA CASE
+            //*************************** SENTENCIA CASE, existe conflicto reduce pero sirve 
 
             caseof.Rule = sentencia_case + Tpuntocoma;
 
-            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend;
+            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend 
+                                  | Tcase + exp + Tof + lista_casos + PreferShiftHere() +Telse  + opciones_main + PreferShiftHere() +Tend;
 
             lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);
 
@@ -299,6 +306,7 @@ namespace Pascal_AirMax.Analizador
             caso.Rule = lista_exp + Tdospunto + main
                         | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma;
 
+            
 
 
             #endregion

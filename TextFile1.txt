@@ -93,18 +93,7 @@ end;
 
 
 
-begin
 
-   case 50 of
-     30 : writeln('Excellent!' );
-     30,40 :  begin
-       writeln('hola');
-       end;
-     30 : writeln('Excellent!' );
-   end;     
-   
-   writeln('Your grade is  ');
-end;
 
 
 
@@ -166,8 +155,39 @@ begin
         'D' : writeln('You passed' );
         'F' : writeln('Better try again' );
         end;
-            else
+        else
                 begin
                     writeln('a is less than 20 ' );
                 end;
+end.
+
+
+
+begin
+   grade := 'D';
+   case (grade) of
+      'A' : 
+        case (grade) of
+          'A' : writeln('Excellent!' );
+          'B', 'C': writeln('Well done' );
+          'D' : writeln('You passed' );
+          end; 
+      'B', 'C': 
+      case (grade) of
+          'A' : writeln('Excellent!' );
+          'B', 'C': writeln('Well done' );
+          'D' : writeln('You passed' );
+          end; 
+      'D' : 
+           case (grade) of
+          'A' : writeln('Excellent!' );
+          'B', 'C': writeln('Well done' );
+          'D' : writeln('You passed' );
+          else
+          writeln('You really did not study right!' );
+          end;
+   
+    else
+      writeln('You really did not study right!' );
+    end;     
 end.
