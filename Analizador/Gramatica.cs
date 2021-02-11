@@ -90,7 +90,13 @@ namespace Pascal_AirMax.Analizador
             var Tcase = ToTerm("case");
             var Twhile = ToTerm("while");
             var Tdo = ToTerm("do");
-            
+
+            var Trepeat = ToTerm("repeat");
+            var Tuntil = ToTerm("until");
+
+            var Tfor = ToTerm("for");
+            var Tto = ToTerm("to");
+            var Tdown = ToTerm("downto");
 
 
 
@@ -122,6 +128,7 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_main = new NonTerminal("lista_main");
             NonTerminal main = new NonTerminal("main");
             NonTerminal opciones_main = new NonTerminal("opciones_main");
+            NonTerminal sentencias_main = new NonTerminal("sentencias_main");
           
             NonTerminal inicio_programa = new NonTerminal("inicio_programa");
      
@@ -148,7 +155,11 @@ namespace Pascal_AirMax.Analizador
             NonTerminal sentencia_while = new NonTerminal("sentencia_while");
             NonTerminal whiledo = new NonTerminal("whiledo");
 
-           
+            NonTerminal repeat = new NonTerminal("repeat");
+            NonTerminal sentencia_repeat = new NonTerminal("sentencia_repeat");
+
+            NonTerminal non_for = new NonTerminal("no_for");
+            NonTerminal sentencia_for = new NonTerminal("sentencia_for");
 
 
             #endregion
@@ -170,8 +181,14 @@ namespace Pascal_AirMax.Analizador
 
             inicio_programa.Rule = Tbegin + opciones_main + Tend + Tpunto;
 
-            opciones_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma
-                                | lista_main;
+
+            //TODO: ya la regue, revisar conflicto de shift reduce
+
+            opciones_main.Rule = MakePlusRule(opciones_main, sentencias_main)
+                                 | MakePlusRule(opciones_main, main);
+
+            sentencias_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma;
+
 
             exp.Rule = exp + Tsuma + exp
                        | exp + Tresta + exp
@@ -248,10 +265,9 @@ namespace Pascal_AirMax.Analizador
                          | ifthen
                          | ifelse
                          | caseof
-                         | whiledo;
-                         
-            
-
+                         | whiledo
+                         | repeat
+                         | non_for;
 
 
             asignacion.Rule = Id + Tasignar + exp;
@@ -282,6 +298,8 @@ namespace Pascal_AirMax.Analizador
                              | opcion_else
                              | sentencia_case
                              | sentencia_while
+                             | sentencia_repeat
+                             | sentencia_for
                              | Tbegin + lista_main + Tend;
 
             main_stm.Rule = asignacion + Tpuntocoma
@@ -316,11 +334,34 @@ namespace Pascal_AirMax.Analizador
                         | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
+            //**************************** SENTENCIA WHILE DO
+
             whiledo.Rule = Twhile + exp + Tdo + main
                           | Twhile + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
             sentencia_while.Rule = Twhile + exp + Tdo + opcion_if;
+
+            //********************************  SENTENCIA REPEAT
+            /*
+             * dentro del bloque funcion igual al main
+             */
+
+            repeat.Rule = Trepeat + opciones_main + Tuntil + exp + Tpuntocoma;
+
+            sentencia_repeat.Rule = Trepeat + opciones_main + Tuntil + exp ;
+
+
+            //*************************** SENTENCIA FOR-DO, el for solo aceptar variables normales
+
+            non_for.Rule = Tfor + asignacion + Tto + exp + Tdo + main
+                          | Tfor + asignacion + Tto + exp + Tdo + sentencias_main
+                          | Tfor + asignacion + Tdown + exp + Tdo + main
+                          | Tfor + asignacion + Tdown + exp + Tdo + sentencias_main; ;
+
+
+            sentencia_for.Rule = Tfor + asignacion + Tto + exp + Tdo + opcion_if
+                                | Tfor + asignacion + Tdown + exp + Tdo + opcion_if; ;
 
 
             #endregion
@@ -340,7 +381,8 @@ namespace Pascal_AirMax.Analizador
 
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
                 "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
-                "then", "writeln");
+                "then", "writeln", "while", "do", "repeat", "until");
+
 
             #endregion
         }

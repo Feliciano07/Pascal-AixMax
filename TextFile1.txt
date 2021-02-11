@@ -197,6 +197,9 @@ end.
 
 begin
    a := 10;
+   a := 10;
+   a := 10;
+   a := 10;
    
    if(true) then
    while  a < 20  do
@@ -206,4 +209,62 @@ begin
    end;
    else
    writeln('hola');
+end.
+
+
+
+begin
+   a := 10;
+   (* repeat until loop execution *)
+   
+    if(  78 < 20 ) then
+       repeat
+          writeln('value of a: ');
+          a := a + 1;
+          
+          begin
+            writeln('value of a: ');
+            a := a + 1;
+          end;
+          
+       until a = 20
+    else
+  
+    writeln('hola'); 
+   
+
+end.
+
+
+begin
+     if(  78 < 20 ) then
+            for a:= 15  to 2 do
+            writeln('value of a;')
+       else
+          (* if condition is false then print the following *)
+       writeln('hola');   
+
+end.
+
+
+
+begin
+            for a:= 15  downto 2 do
+            begin
+            writeln('value of a;');
+            end
+
+end.
+
+
+begin
+    cua.ab :=10;
+     if(  78 < 20 ) then
+            for a:= 15  downto 2 do
+            writeln('value of a: ', cua.ab)
+       else
+          (* if condition is false then print the following *)
+       writeln('hola');   
+ 
+
 end.
