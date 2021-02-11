@@ -306,7 +306,7 @@ namespace Pascal_AirMax.Analizador
 
             sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend
                                   | Tcase + exp + Tof + lista_casos + Telse + main + Tend
-                                  | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tend;
+                                  | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tpuntocoma + Tend;
 
             lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);
 
