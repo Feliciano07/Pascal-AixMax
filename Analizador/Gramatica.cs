@@ -88,6 +88,8 @@ namespace Pascal_AirMax.Analizador
             var Telse = ToTerm("else");
 
             var Tcase = ToTerm("case");
+            var Twhile = ToTerm("while");
+            var Tdo = ToTerm("do");
             
 
 
@@ -143,8 +145,8 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_casos = new NonTerminal("lista_casos");
             NonTerminal caso = new NonTerminal("caso");
 
-            NonTerminal caselse = new NonTerminal("caselse");
-            NonTerminal sentencia_case_else = new NonTerminal("sentencia_case_else");
+            NonTerminal sentencia_while = new NonTerminal("sentencia_while");
+            NonTerminal whiledo = new NonTerminal("whiledo");
 
            
 
@@ -245,7 +247,8 @@ namespace Pascal_AirMax.Analizador
                          | writeln + Tpuntocoma
                          | ifthen
                          | ifelse
-                         | caseof;
+                         | caseof
+                         | whiledo;
                          
             
 
@@ -269,7 +272,8 @@ namespace Pascal_AirMax.Analizador
             //**************************** SENTENCIA IF THEN ELSE
 
 
-            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main_stm;
+            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main
+                         | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
 
@@ -277,12 +281,14 @@ namespace Pascal_AirMax.Analizador
                              | writeln
                              | opcion_else
                              | sentencia_case
+                             | sentencia_while
                              | Tbegin + lista_main + Tend;
 
             main_stm.Rule = asignacion + Tpuntocoma
                              | writeln + Tpuntocoma
                              | opcion_else
                              | caseof
+                             | whiledo
                              | Tbegin + lista_main + Tend + Tpuntocoma;
 
 
@@ -296,8 +302,11 @@ namespace Pascal_AirMax.Analizador
 
             caseof.Rule = sentencia_case + Tpuntocoma;
 
-            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend 
-                                  | Tcase + exp + Tof + lista_casos + PreferShiftHere() +Telse  + opciones_main + PreferShiftHere() +Tend;
+            // cambiar esto opciones_main
+
+            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend
+                                  | Tcase + exp + Tof + lista_casos + Telse + main + Tend
+                                  | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tend;
 
             lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);
 
@@ -306,7 +315,12 @@ namespace Pascal_AirMax.Analizador
             caso.Rule = lista_exp + Tdospunto + main
                         | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma;
 
-            
+
+            whiledo.Rule = Twhile + exp + Tdo + main
+                          | Twhile + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma;
+
+
+            sentencia_while.Rule = Twhile + exp + Tdo + opcion_if;
 
 
             #endregion
