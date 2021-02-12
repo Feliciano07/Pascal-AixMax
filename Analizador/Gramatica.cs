@@ -97,6 +97,8 @@ namespace Pascal_AirMax.Analizador
             var Tfor = ToTerm("for");
             var Tto = ToTerm("to");
             var Tdown = ToTerm("downto");
+            var Tbreak = ToTerm("break");
+            var Tcontinue = ToTerm("continue");
 
 
 
@@ -161,19 +163,22 @@ namespace Pascal_AirMax.Analizador
             NonTerminal non_for = new NonTerminal("no_for");
             NonTerminal sentencia_for = new NonTerminal("sentencia_for");
 
+            NonTerminal lista_dimension = new NonTerminal("lista_dimension");
+            NonTerminal dimension = new NonTerminal("dimension");
+
 
             #endregion
 
 
             #region GRAMATICA
 
-            init.Rule = inicio_programa;
+            init.Rule = instrucciones;
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
             // todo esto es lo que estaria arriba antes del main, exepto exp
-            instruccion.Rule = exp
-                              | variable
+            instruccion.Rule = 
+                               variable
                               | constante
                               | arrays
                               | objectos
@@ -216,21 +221,22 @@ namespace Pascal_AirMax.Analizador
             tipo_dato.Rule = Tstring
                              | Tinteger
                              | Treal
-                             | Tboolean
-                             | Id; // como se declaran variables de objectos
+                             | Tboolean;
+                             //| Id; // como se declaran variables de objectos
 
             //************************ DECLARACION DE VARIABLES
             variable.Rule = Tvar + lista_variable;
 
             lista_variable.Rule = MakePlusRule(lista_variable, lista_dec);
 
-            //problema conflicto id o id,
+
             lista_dec.Rule = lista_id + Tdospunto + tipo_dato + Tpuntocoma
-                             | Id + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma
-                             | Id + Tdospunto + tipo_dato + Tpuntocoma;
+                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma
+                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tpuntocoma
+                             | lista_id + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma
+                             |  Id + PreferShiftHere() + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma; 
 
-
-            lista_id.Rule = MakeListRule(lista_id, Tcoma, Id);
+            lista_id.Rule = MakePlusRule(lista_id, Tcoma, Id);
 
             //*************************** DECLARACION DE CONSTANTES
 
@@ -248,7 +254,11 @@ namespace Pascal_AirMax.Analizador
 
             lista_arrays.Rule = MakePlusRule(lista_arrays, id_arrays);
 
-            id_arrays.Rule = Id + Tigual + Tarray + TcorA + exp + Tdimension + exp +TcorC + Tof + tipo_dato + Tpuntocoma;
+            id_arrays.Rule = Id + Tigual + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma;
+
+            lista_dimension.Rule = MakeListRule(lista_dimension, Tcoma, dimension);
+
+            dimension.Rule = exp + Tdimension + exp;
 
             //******************************* DECLARACION DE OBJECTOS
 
@@ -267,7 +277,9 @@ namespace Pascal_AirMax.Analizador
                          | caseof
                          | whiledo
                          | repeat
-                         | non_for;
+                         | non_for
+                         | Tbreak
+                         | Tcontinue;
 
 
             asignacion.Rule = Id + Tasignar + exp;
@@ -292,6 +304,7 @@ namespace Pascal_AirMax.Analizador
                          | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
+            //TODO: falta agregar break y continue, reduce reduce
 
             opcion_if.Rule = asignacion
                              | writeln
@@ -384,6 +397,7 @@ namespace Pascal_AirMax.Analizador
                 "then", "writeln", "while", "do", "repeat", "until");
 
 
+            //this.MarkTransient(lista_id);
             #endregion
         }
 
