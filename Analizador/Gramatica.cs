@@ -100,6 +100,7 @@ namespace Pascal_AirMax.Analizador
             var Tbreak = ToTerm("break");
             var Tcontinue = ToTerm("continue");
 
+            var Twrite = ToTerm("write");
 
 
             #endregion
@@ -139,7 +140,7 @@ namespace Pascal_AirMax.Analizador
             NonTerminal asignacion = new NonTerminal("asignacion");
 
             NonTerminal writeln = new NonTerminal("writeln");
-
+            NonTerminal write = new NonTerminal("write");
 
             NonTerminal ifthen = new NonTerminal("ifthen");
             NonTerminal opcion_if = new NonTerminal("opcion_if");
@@ -166,13 +167,15 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_dimension = new NonTerminal("lista_dimension");
             NonTerminal dimension = new NonTerminal("dimension");
 
+            NonTerminal acceso_array = new NonTerminal("acceso_array");
+
 
             #endregion
 
 
             #region GRAMATICA
 
-            init.Rule = instrucciones;
+            init.Rule = inicio_programa;
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
@@ -216,6 +219,7 @@ namespace Pascal_AirMax.Analizador
                        | Ttrue
                        | Tfalse
                        | Id
+                       | acceso_array
                        | TparA + exp + TparC;
 
             tipo_dato.Rule = Tstring
@@ -272,6 +276,7 @@ namespace Pascal_AirMax.Analizador
 
             main.Rule = asignacion + Tpuntocoma
                          | writeln + Tpuntocoma
+                         | write + Tpuntocoma
                          | ifthen
                          | ifelse
                          | caseof
@@ -282,11 +287,14 @@ namespace Pascal_AirMax.Analizador
                          | Tcontinue;
 
 
-            asignacion.Rule = Id + Tasignar + exp;
+            asignacion.Rule = Id + Tasignar + exp
+                            | acceso_array + Tasignar + exp;
 
-            writeln.Rule = Twriteln + TparA + exp + TparC;
+            acceso_array.Rule = Id + TcorA + lista_exp + TcorC;
 
+            writeln.Rule = Twriteln + TparA + lista_exp + TparC;
 
+            write.Rule = Twrite + TparA + lista_exp + TparC;
 
 
 
@@ -304,10 +312,11 @@ namespace Pascal_AirMax.Analizador
                          | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            //TODO: falta agregar break y continue, reduce reduce
+            //TODO: falta agregar break y continue, ya que genera conflicto reduce reduce
 
             opcion_if.Rule = asignacion
                              | writeln
+                             | write
                              | opcion_else
                              | sentencia_case
                              | sentencia_while
@@ -394,7 +403,7 @@ namespace Pascal_AirMax.Analizador
 
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
                 "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
-                "then", "writeln", "while", "do", "repeat", "until");
+                "then", "writeln", "while", "do", "repeat", "until", "write");
 
 
             //this.MarkTransient(lista_id);
