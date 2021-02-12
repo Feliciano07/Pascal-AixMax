@@ -102,6 +102,11 @@ namespace Pascal_AirMax.Analizador
 
             var Twrite = ToTerm("write");
 
+            var Tfuncion = ToTerm("function");
+
+            var Texit = ToTerm("exit");
+
+            var Tprocedure = ToTerm("procedure");
 
             #endregion
 
@@ -169,13 +174,25 @@ namespace Pascal_AirMax.Analizador
 
             NonTerminal acceso_array = new NonTerminal("acceso_array");
 
+            NonTerminal dec_funcion = new NonTerminal("dec_funcion");
+
+            NonTerminal parametros = new NonTerminal("parametros");
+            NonTerminal parametros_valor = new NonTerminal("parametros_valor");
+            NonTerminal parametros_referencia = new NonTerminal("parametros_referencia");
+
+            NonTerminal var_funciones = new NonTerminal("var_funciones");
+            NonTerminal variable_fun = new NonTerminal("variable_fun");
+
+            NonTerminal sentencia_exit = new NonTerminal("sentencia_exit");
+
+            NonTerminal dec_procedimiento = new NonTerminal("dec_procedimiento");
 
             #endregion
 
 
             #region GRAMATICA
 
-            init.Rule = inicio_programa;
+            init.Rule = instrucciones;
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
@@ -185,6 +202,8 @@ namespace Pascal_AirMax.Analizador
                               | constante
                               | arrays
                               | objectos
+                              | dec_funcion
+                              | dec_procedimiento
                               ;
 
             inicio_programa.Rule = Tbegin + opciones_main + Tend + Tpunto;
@@ -225,8 +244,8 @@ namespace Pascal_AirMax.Analizador
             tipo_dato.Rule = Tstring
                              | Tinteger
                              | Treal
-                             | Tboolean;
-                             //| Id; // como se declaran variables de objectos
+                             | Tboolean
+                             | Id; // como se declaran variables de objectos
 
             //************************ DECLARACION DE VARIABLES
             variable.Rule = Tvar + lista_variable;
@@ -277,6 +296,7 @@ namespace Pascal_AirMax.Analizador
             main.Rule = asignacion + Tpuntocoma
                          | writeln + Tpuntocoma
                          | write + Tpuntocoma
+                         | sentencia_exit + Tpuntocoma
                          | ifthen
                          | ifelse
                          | caseof
@@ -285,6 +305,8 @@ namespace Pascal_AirMax.Analizador
                          | non_for
                          | Tbreak
                          | Tcontinue;
+
+            sentencia_exit.Rule = Texit + TparA + exp + TparC;
 
 
             asignacion.Rule = Id + Tasignar + exp
@@ -317,6 +339,7 @@ namespace Pascal_AirMax.Analizador
             opcion_if.Rule = asignacion
                              | writeln
                              | write
+                             | sentencia_exit
                              | opcion_else
                              | sentencia_case
                              | sentencia_while
@@ -383,7 +406,43 @@ namespace Pascal_AirMax.Analizador
 
 
             sentencia_for.Rule = Tfor + asignacion + Tto + exp + Tdo + opcion_if
-                                | Tfor + asignacion + Tdown + exp + Tdo + opcion_if; ;
+                                | Tfor + asignacion + Tdown + exp + Tdo + opcion_if;
+
+
+            // declaracion de una funcion
+
+            dec_funcion.Rule = Tfuncion + Id + TparA + parametros + TparC + Tdospunto + tipo_dato + Tpuntocoma
+                                 + var_funciones + sentencias_main
+
+                              | Tfuncion + Id + TparA + parametros + TparC + Tdospunto + tipo_dato + Tpuntocoma
+                                 +  sentencias_main;
+
+            parametros.Rule = MakeListRule(parametros, Tpuntocoma, parametros_valor)
+                            | MakeListRule(parametros, Tpuntocoma, parametros_referencia)
+                            | this.Empty;
+
+           
+
+            parametros_valor.Rule = lista_id + Tdospunto + tipo_dato;
+
+            parametros_referencia.Rule = Tvar + parametros_valor;
+
+            var_funciones.Rule = MakePlusRule(var_funciones, variable_fun);
+
+            variable_fun.Rule = variable
+                              | constante
+                              | arrays
+                              | objectos
+                               ;
+
+            // declarar prrocedimientos
+
+            dec_procedimiento.Rule = Tprocedure + Id + TparA + parametros + TparC + Tpuntocoma
+                                 + var_funciones + sentencias_main
+
+                              | Tprocedure + Id + TparA + parametros + TparC + Tpuntocoma
+                                 + sentencias_main;
+
 
 
             #endregion
@@ -403,7 +462,8 @@ namespace Pascal_AirMax.Analizador
 
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
                 "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
-                "then", "writeln", "while", "do", "repeat", "until", "write");
+                "then", "writeln", "while", "do", "repeat", "until", "write", "for","to", "down", "function", "break", "continue",
+                "exit", "procedure");
 
 
             //this.MarkTransient(lista_id);
