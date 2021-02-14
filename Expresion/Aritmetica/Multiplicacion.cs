@@ -8,18 +8,18 @@ using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.Expresion.Aritmetica
 {
-    public class Resta : Nodo
+    public class Multiplicacion : Nodo
     {
         private Nodo left;
         private Nodo right;
 
-        public Resta(int linea, int columna, Nodo left, Nodo right) : base(linea, columna)
+        public Multiplicacion(int linea, int columna, Nodo left, Nodo right): base(linea, columna)
         {
             this.left = left;
             this.right = right;
         }
 
-   
+
         public override Objeto execute()
         {
             Objeto res_left = left.execute();
@@ -29,19 +29,20 @@ namespace Pascal_AirMax.Expresion.Aritmetica
 
             if(tipo_dominante == Objeto.TipoObjeto.INTEGER)
             {
-                return new Primitivo(tipo_dominante, Int16.Parse(res_left.getValor().ToString()) - Int16.Parse(res_right.getValor().ToString()));
+                return new Primitivo(tipo_dominante, Int16.Parse(res_left.getValor().ToString()) * Int16.Parse(res_right.getValor().ToString()));
             }else if(tipo_dominante == Objeto.TipoObjeto.REAL)
             {
-                return new Primitivo(tipo_dominante, Double.Parse(res_left.getValor().ToString()) - Double.Parse(res_right.getValor().ToString()));
+                return new Primitivo(tipo_dominante, Double.Parse(res_left.getValor().ToString()) * Double.Parse(res_right.getValor().ToString()));
             }
             else
             {
                 Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
-                   "No se pueden restar tipos de datos" + res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
+                   "No se pueden multiplicar tipos de datos" + res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
                 Maestra.getInstancia.addError(error);
             }
 
-            throw new Exception("No se pueden restar tipos de datos" + res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
+            throw new Exception("No se pueden multiplicar tipos de datos" + res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
+
         }
     }
 }

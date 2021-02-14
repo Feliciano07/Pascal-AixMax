@@ -187,6 +187,11 @@ namespace Pascal_AirMax.Analizador
 
             NonTerminal dec_procedimiento = new NonTerminal("dec_procedimiento");
 
+            NonTerminal llamada_funciones = new NonTerminal("llamada_funciones");
+
+            NonTerminal acceso_objeto = new NonTerminal("acceso_objeto");
+            NonTerminal ingreso = new NonTerminal("ingreso"); 
+
             #endregion
 
 
@@ -197,8 +202,8 @@ namespace Pascal_AirMax.Analizador
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
             // todo esto es lo que estaria arriba antes del main, exepto exp
-            instruccion.Rule = 
-                               variable
+            instruccion.Rule = exp
+                              | variable
                               | constante
                               | arrays
                               | objectos
@@ -239,7 +244,19 @@ namespace Pascal_AirMax.Analizador
                        | Tfalse
                        | Id
                        | acceso_array
+                       | llamada_funciones
+                       | acceso_objeto
                        | TparA + exp + TparC;
+
+            // LLamada de una funcion
+
+            llamada_funciones.Rule = Id + TparA + lista_exp + TparC
+                                    | Id + TparA + TparC;
+
+            // acceso objeto
+            acceso_objeto.Rule = Id + Tpunto + ingreso;
+
+            ingreso.Rule = MakeListRule(ingreso, Tpunto, Id);
 
             tipo_dato.Rule = Tstring
                              | Tinteger
@@ -463,7 +480,7 @@ namespace Pascal_AirMax.Analizador
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
                 "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
                 "then", "writeln", "while", "do", "repeat", "until", "write", "for","to", "down", "function", "break", "continue",
-                "exit", "procedure");
+                "exit", "procedure", "mod");
 
 
             //this.MarkTransient(lista_id);

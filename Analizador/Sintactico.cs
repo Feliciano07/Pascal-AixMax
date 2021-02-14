@@ -5,6 +5,9 @@ using Irony.Parsing;
 using Pascal_AirMax.Graficas;
 using Pascal_AirMax.Environment;
 using Pascal_AirMax.Abstract;
+using Pascal_AirMax.Manejador;
+
+
 namespace Pascal_AirMax.Analizador
 {
     public class Sintactico
@@ -23,33 +26,27 @@ namespace Pascal_AirMax.Analizador
             }
             GenerarAST(raiz);
 
-            //LinkedList<Instruction> ast = instrucciones(raiz.ChildNodes[0]);
 
+            instrucciones(raiz.ChildNodes[0]);
 
-            // Realizar la ejecucion de las instrucciones 
-           /* foreach(Instruction inst in ast)
-            {
-                Object dato = inst.execute();
-
-                Console.WriteLine(dato);
-            }*/
+            Maestra.getInstancia.ejecutar();
 
             return true;
         }
 
-        public LinkedList<Instruction> instrucciones (ParseTreeNode actual)
+        public void instrucciones (ParseTreeNode actual)
         {
-            LinkedList<Instruction> lista = new LinkedList<Instruction>();
             
             foreach(ParseTreeNode node in actual.ChildNodes)
             {
-                lista.AddLast(instruccion(node.ChildNodes[0]));
+          
+                Maestra.getInstancia.addInstruccion(instruccion(node.ChildNodes[0]));
+
             }
-            return lista;
         }
 
 
-        public Instruction instruccion (ParseTreeNode actual)
+        public Nodo instruccion (ParseTreeNode actual)
         {
             String toke = actual.Term.Name;
 
@@ -71,7 +68,8 @@ namespace Pascal_AirMax.Analizador
 
         public void ErroresLexicos(ParseTree arbol)
         {
-            LinkedList<Error> lexicos = new LinkedList<Error>();
+            //LinkedList<Error> lexicos = new LinkedList<Error>();
+
 
             foreach(var item in arbol.ParserMessages)
             {
@@ -80,15 +78,15 @@ namespace Pascal_AirMax.Analizador
                 if (type.Contains("Invalid"))
                 {
                     Error error = new Error(item.Location.Line, item.Location.Column, Error.Errores.Lexico, item.Message);
-                    lexicos.AddLast(error);
+                    Maestra.getInstancia.addError(error);
                 }
                 else
                 {
                     Error error = new Error(item.Location.Line, item.Location.Column, Error.Errores.Sintactico, item.Message);
-                    lexicos.AddLast(error);
+                    Maestra.getInstancia.addError(error);
                 }
             }
-            Dot.GenerarErrores(lexicos);
+            
         }
     }
 }
