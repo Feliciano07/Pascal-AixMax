@@ -45,11 +45,11 @@ namespace Pascal_AirMax.Expresion.Aritmetica
             {
                 
                 Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico, 
-                    "No se pueden sumar tipos de datos"+ res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
+                    "No se pueden sumar tipos de datos "+ res_left.getTipo().ToString() + " con " + res_right.getTipo().ToString());
                 Maestra.getInstancia.addError(error);
             }
 
-            throw new Exception("No se pueden sumar tipos de datos" + res_left.getTipo().ToString() + "con" + res_right.getTipo().ToString());
+            throw new Exception("No se pueden sumar tipos de datos " + res_left.getTipo().ToString() + " con " + res_right.getTipo().ToString());
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using Pascal_AirMax.Expresion.Aritmetica;
 using Pascal_AirMax.TipoDatos;
 using Pascal_AirMax.Expresion.Logicas;
+using Pascal_AirMax.Expresion.Relacionales;
 
 namespace Pascal_AirMax.Expresion
 {
@@ -36,6 +37,18 @@ namespace Pascal_AirMax.Expresion
                         return new Modulo(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
                     case "and":
                         return new And(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case ">":
+                        return new MayorQ(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case "<":
+                        return new MenorQ(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case ">=":
+                        return new MayorIgual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case "<=":
+                        return new MenorIgual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case "=":
+                        return new Igual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+                    case "<>":
+                        return new NoIgual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
                 }
             }else if(entrada.ChildNodes.Count == 2)
             {
