@@ -202,8 +202,8 @@ namespace Pascal_AirMax.Analizador
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
             // todo esto es lo que estaria arriba antes del main, exepto exp
-            instruccion.Rule = exp
-                              | variable
+            instruccion.Rule = 
+                                variable
                               | constante
                               | arrays
                               | objectos
@@ -222,31 +222,31 @@ namespace Pascal_AirMax.Analizador
             sentencias_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            exp.Rule = exp + Tsuma + exp
-                       | exp + Tresta + exp
-                       | exp + Tpor + exp
-                       | exp + Tdiv + exp
-                       | exp + Tmod + exp
-                       | exp + Tmayorq + exp
-                       | exp + Tmenorq + exp
-                       | exp + Tmayori + exp
-                       | exp + Tmenori + exp
-                       | exp + Tigual + exp
-                       | exp + Tdiferencia + exp
-                       | exp + Tand + exp
-                       | exp + Tor + exp
-                       | Tnot + exp
-                       | Tresta + exp
-                       | Entero
-                       | Decimal
-                       | Cadena
-                       | Ttrue
-                       | Tfalse
+            exp.Rule = exp + Tsuma + exp //*
+                       | exp + Tresta + exp //*
+                       | exp + Tpor + exp //*
+                       | exp + Tdiv + exp //*
+                       | exp + Tmod + exp //*
+                       | exp + Tmayorq + exp //*
+                       | exp + Tmenorq + exp //*
+                       | exp + Tmayori + exp //*
+                       | exp + Tmenori + exp //*
+                       | exp + Tigual + exp //*
+                       | exp + Tdiferencia + exp //*
+                       | exp + Tand + exp //*
+                       | exp + Tor + exp //*
+                       | Tnot + exp //*
+                       | Tresta + exp //*
+                       | Entero //*
+                       | Decimal //*
+                       | Cadena //*
+                       | Ttrue //*
+                       | Tfalse //*
                        | Id
                        | acceso_array
                        | llamada_funciones
                        | acceso_objeto
-                       | TparA + exp + TparC;
+                       | TparA + exp + TparC; //*
 
             // LLamada de una funcion
 

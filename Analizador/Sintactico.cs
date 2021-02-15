@@ -29,7 +29,7 @@ namespace Pascal_AirMax.Analizador
 
             instrucciones(raiz.ChildNodes[0]);
 
-            Maestra.getInstancia.ejecutar();
+            //Maestra.getInstancia.ejecutar();
 
             return true;
         }
@@ -54,6 +54,9 @@ namespace Pascal_AirMax.Analizador
             {
                 case "exp":
                     return Expresion.Expresion.evaluar(actual);
+
+                case "variable":
+                    return TipoDatos.Variables.Lista_variable(actual.ChildNodes[1]);
 
             }
             return null;

@@ -41,7 +41,15 @@ namespace Pascal_AirMax.Manejador
         {
             foreach(Nodo nodo in instrucciones)
             {
-                Objeto retorno =  nodo.execute();
+                
+                try
+                {
+                    Objeto retorno = nodo.execute();
+                }
+                catch(Exception e)
+                {
+
+                }
             }
         }
 

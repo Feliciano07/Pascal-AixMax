@@ -26,6 +26,7 @@ namespace Pascal_AirMax.Expresion.Aritmetica
        
         public override Objeto execute()
         {
+
             Objeto res_left = left.execute(); //izq
             Objeto res_right = right.execute(); // der
 
