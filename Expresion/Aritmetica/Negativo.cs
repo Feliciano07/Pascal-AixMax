@@ -17,9 +17,9 @@ namespace Pascal_AirMax.Expresion.Aritmetica
             this.right = right;
         }
 
-        public override Objeto execute()
+        public override Objeto execute( Entorno entorno)
         {
-            Objeto res_right = right.execute();
+            Objeto res_right = right.execute(entorno);
 
             if(res_right.getTipo() == Objeto.TipoObjeto.INTEGER)
             {

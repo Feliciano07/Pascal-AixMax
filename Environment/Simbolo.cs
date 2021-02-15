@@ -6,23 +6,17 @@ using Pascal_AirMax.Abstract;
 
 namespace Pascal_AirMax.Environment
 {
-    public class Simbolo : Nodo
+    public class Simbolo
     {
         private string nombre;
         private Objeto sym;
-        private Objeto.TipoObjeto tipo;
 
-        public Simbolo(int linea, int columna, string nombre, Objeto valor, Objeto.TipoObjeto tipo) : base(linea, columna)
+        public Simbolo(string nombre, Objeto valor)
         {
             this.nombre = nombre;
             this.sym = valor;
-            this.tipo = tipo;
         }
 
-        public override Objeto execute()
-        {
-            throw new NotImplementedException();
-        }
 
     }
 }

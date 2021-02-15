@@ -25,7 +25,7 @@ namespace Pascal_AirMax.Abstract
         }
 
 
-        public abstract Objeto execute();
+        public abstract Objeto execute(Environment.Entorno entorno);
 
 
     }

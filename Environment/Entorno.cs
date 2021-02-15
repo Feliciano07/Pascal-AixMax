@@ -21,6 +21,19 @@ namespace Pascal_AirMax.Environment
             this.simbolos.Add(nombre, simbolo);
         }
 
+        public bool ExisteSimbolo(string nombre)
+        {
+            foreach(string sym in simbolos.Keys)
+            {
+                if(String.Compare(sym,nombre,true) == 0)
+                {
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
 
     }
 }
