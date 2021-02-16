@@ -10,7 +10,7 @@ using Pascal_AirMax.Expresion.Relacionales;
 
 namespace Pascal_AirMax.Expresion
 {
-    static class Expresion
+    public static class Expresion
     {
 
         public static Nodo evaluar(ParseTreeNode entrada)

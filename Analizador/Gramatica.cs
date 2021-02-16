@@ -270,9 +270,9 @@ namespace Pascal_AirMax.Analizador
             lista_variable.Rule = MakePlusRule(lista_variable, lista_dec);
 
 
-            lista_dec.Rule = lista_id + Tdospunto + tipo_dato + Tpuntocoma
+            lista_dec.Rule = lista_id + Tdospunto + tipo_dato + Tpuntocoma //*
                              | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma
-                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tpuntocoma
+                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tpuntocoma //*
                              | lista_id + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma
                              |  Id + PreferShiftHere() + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma; 
 

@@ -7,35 +7,66 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
 {
-    public class Declaracion: Nodo
+    public class Declaracion : Nodo
     {
         private string[] ids;
-        private Objeto valor;
+        private Nodo expresion;
+        private Objeto.TipoObjeto tipo;
 
-        public Declaracion(int linea, int columna, string[] ids, Objeto valor) : base(linea, columna)
+        public Declaracion(int linea, int columna, string[] ids, Nodo exp, Objeto.TipoObjeto tipo) : base(linea, columna)
         {
             this.ids = ids;
-            this.valor = valor;
+            this.expresion = exp;
+            this.tipo = tipo;
         }
 
         public override Objeto execute(Entorno entorno)
         {
-            
-            foreach(string str in ids)
+
+            foreach (string str in ids)
             {
                 if (entorno.ExisteSimbolo(str))
                 {
                     Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
-                   "ya existe el simbolo "+str + "dentro del programa" );
+                   "ya existe la variable:  " + str + "declarada dentro del programa");
                     Maestra.getInstancia.addError(error);
 
                     throw new Exception("ya existe el simbolo " + "dentro del programa");
                 }
-                Simbolo sym = new Simbolo(str, valor);
-                entorno.addSimbolo(sym, str);
-            }
+                Objeto retorno = null;
+                try
+                {
+                    retorno = expresion.execute(entorno);
 
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                Verificar_Tipo_Valor(retorno, str);
+                retorno.setTipo(tipo);
+                Simbolo simbolo = new Simbolo(str, retorno);
+                entorno.addSimbolo(simbolo, str);
+
+            }
             return null;
         }
+
+        public object Verificar_Tipo_Valor(Objeto resultado, string nombre)
+        {
+            if (resultado.getTipo() == tipo )
+            {
+                return true;
+            }else if(resultado.getTipo() == Objeto.TipoObjeto.INTEGER && tipo == Objeto.TipoObjeto.REAL)
+            {
+                return true;
+            }
+            Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                  "La variable: " + nombre + "No es compatible con el dato asignado "+ resultado.getValor().ToString());
+            Maestra.getInstancia.addError(error);
+
+            throw new Exception("La variable: " + nombre + "No es compatible con el dato asignado " + resultado.getValor().ToString());
+        }
+
     }
 }

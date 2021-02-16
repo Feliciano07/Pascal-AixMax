@@ -15,7 +15,8 @@ namespace Pascal_AirMax.Abstract
             VOID = 4,
             ARRAY = 5,
             OBJECTS = 6,
-            NULO = 10
+            NULO = 10,
+            CONST = 11
         }
 
         private TipoObjeto tipo;
@@ -28,6 +29,11 @@ namespace Pascal_AirMax.Abstract
         public TipoObjeto getTipo()
         {
             return this.tipo;
+        }
+
+        public void setTipo(TipoObjeto tipo)
+        {
+            this.tipo = tipo;
         }
 
         public abstract object getValor();
