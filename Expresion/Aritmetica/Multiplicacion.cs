@@ -20,10 +20,10 @@ namespace Pascal_AirMax.Expresion.Aritmetica
         }
 
 
-        public override Objeto execute()
+        public override Objeto execute(Entorno entorno)
         {
-            Objeto res_left = left.execute();
-            Objeto res_right = right.execute();
+            Objeto res_left = left.execute(entorno);
+            Objeto res_right = right.execute(entorno);
 
             Objeto.TipoObjeto tipo_dominante = TablaTipo.tabla[res_left.getTipo().GetHashCode(), res_right.getTipo().GetHashCode()];
 

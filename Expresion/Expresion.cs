@@ -10,7 +10,7 @@ using Pascal_AirMax.Expresion.Relacionales;
 
 namespace Pascal_AirMax.Expresion
 {
-    static class Expresion
+    public static class Expresion
     {
 
         public static Nodo evaluar(ParseTreeNode entrada)
@@ -49,6 +49,9 @@ namespace Pascal_AirMax.Expresion
                         return new Igual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
                     case "<>":
                         return new NoIgual(linea, columna, evaluar(entrada.ChildNodes[0]), evaluar(entrada.ChildNodes[2]));
+
+                    default:
+                        return evaluar(entrada.ChildNodes[1]);
                 }
             }else if(entrada.ChildNodes.Count == 2)
             {
@@ -60,6 +63,8 @@ namespace Pascal_AirMax.Expresion
                 {
                     case "not":
                         return new Not(linea, columna, evaluar(entrada.ChildNodes[1]));
+                    case "-":
+                        return new Negativo(linea, columna, evaluar(entrada.ChildNodes[1]));
                 }
 
             }

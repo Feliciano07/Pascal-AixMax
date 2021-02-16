@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
+using Pascal_AirMax.Environment;
 namespace Pascal_AirMax.Expresion
 {
     public class Constante : Nodo
@@ -14,7 +15,7 @@ namespace Pascal_AirMax.Expresion
         }
 
        
-        public override Objeto execute()
+        public override Objeto execute(Entorno entorno)
         {
             return this.valor;
         }

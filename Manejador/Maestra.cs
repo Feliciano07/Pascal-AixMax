@@ -39,9 +39,21 @@ namespace Pascal_AirMax.Manejador
 
         public void ejecutar()
         {
-            foreach(Nodo nodo in instrucciones)
+            Entorno entorno = new Entorno();
+            foreach (Nodo nodo in instrucciones)
             {
-                Objeto retorno =  nodo.execute();
+                if(nodo != null)
+                {
+                    try
+                    {
+                        Objeto retorno = nodo.execute(entorno);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+                }    
+
             }
         }
 

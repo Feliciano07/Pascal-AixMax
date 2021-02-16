@@ -24,10 +24,11 @@ namespace Pascal_AirMax.Expresion.Aritmetica
         }
 
        
-        public override Objeto execute()
+        public override Objeto execute(Entorno entorno)
         {
-            Objeto res_left = left.execute(); //izq
-            Objeto res_right = right.execute(); // der
+
+            Objeto res_left = left.execute(entorno); //izq
+            Objeto res_right = right.execute(entorno); // der
 
             Objeto.TipoObjeto tipo_dominante = TablaTipo.tabla[res_left.getTipo().GetHashCode(), res_right.getTipo().GetHashCode()];
             

@@ -55,6 +55,11 @@ namespace Pascal_AirMax.Analizador
                 case "exp":
                     return Expresion.Expresion.evaluar(actual);
 
+                case "variable":
+                    return Variables.Lista_variable(actual.ChildNodes[1]);
+                case "constante":
+                    return Variables.Lista_constante(actual.ChildNodes[1]);
+
             }
             return null;
         }
