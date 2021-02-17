@@ -15,6 +15,9 @@ namespace Pascal_AirMax.Manejador
 
         private LinkedList<Nodo> instrucciones = new LinkedList<Nodo>();
 
+        private String Output = "";
+
+
         static Maestra() { }
         private Maestra() { }
 
@@ -25,6 +28,17 @@ namespace Pascal_AirMax.Manejador
                 return instancia;
             }
         }
+
+        public void add_output_writeln(string mensaje)
+        {
+            this.Output += "\n" + mensaje;
+        }
+
+        public String getOutput()
+        {
+            return this.Output;
+        }
+
 
         public void addError(Error nuevo_error)
         {

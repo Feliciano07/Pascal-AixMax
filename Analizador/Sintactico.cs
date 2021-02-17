@@ -27,26 +27,41 @@ namespace Pascal_AirMax.Analizador
             GenerarAST(raiz);
 
 
-            instrucciones(raiz.ChildNodes[0]);
+           encabezado(raiz.ChildNodes[0]);
 
-            Maestra.getInstancia.ejecutar();
+           Maestra.getInstancia.ejecutar();
 
             return true;
         }
 
-        public void instrucciones (ParseTreeNode actual)
+        public void encabezado (ParseTreeNode actual)
+        {
+            if(actual.ChildNodes.Count == 5)
+            {
+                // declaracion de variables, objetos, arrays, funciones
+                declaraciones(actual.ChildNodes[3]);
+
+                Instruciones(actual.ChildNodes[4].ChildNodes[1]);
+               
+            }else if(actual.ChildNodes.Count == 4)
+            {
+                Instruciones(actual.ChildNodes[3].ChildNodes[1]);
+            }
+        }
+
+        public void declaraciones (ParseTreeNode actual)
         {
             
             foreach(ParseTreeNode node in actual.ChildNodes)
             {
           
-                Maestra.getInstancia.addInstruccion(instruccion(node.ChildNodes[0]));
+                Maestra.getInstancia.addInstruccion(declaracion(node.ChildNodes[0]));
 
             }
         }
 
 
-        public Nodo instruccion (ParseTreeNode actual)
+        public Nodo declaracion (ParseTreeNode actual)
         {
             String toke = actual.Term.Name;
 
@@ -63,6 +78,32 @@ namespace Pascal_AirMax.Analizador
             }
             return null;
         }
+
+
+        public void Instruciones(ParseTreeNode entrada)
+        {
+            foreach( ParseTreeNode node in entrada.ChildNodes)
+            {
+                Maestra.getInstancia.addInstruccion(Instruccion(node.ChildNodes[0]));
+            }
+        }
+
+        public Nodo Instruccion(ParseTreeNode actual)
+        {
+            String toke = actual.Term.Name;
+
+            switch (toke)
+            {
+                case "writeln":
+                    {
+                        return Main.Inst_Writeln(actual);
+                    }
+            }
+            return null;
+        }
+
+        
+
 
 
 

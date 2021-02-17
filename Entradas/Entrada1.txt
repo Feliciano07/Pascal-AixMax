@@ -1,0 +1,11 @@
+﻿program Hello;
+
+var a:integer;
+
+begin
+  writeln ('Hello World');
+  writeln ();
+  writeln ('Hello World');
+  writeln ();
+  writeln ('Hello World');
+end.
