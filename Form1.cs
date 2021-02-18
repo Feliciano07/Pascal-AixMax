@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Pascal_AirMax.Analizador;
+using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax
 {
@@ -29,6 +30,9 @@ namespace Pascal_AirMax
             if (salida)
             {
                 var result = MessageBox.Show("Analisis correcto");
+
+                richTextBox2.Text = Maestra.getInstancia.getOutput();
+
             }
             else
             {

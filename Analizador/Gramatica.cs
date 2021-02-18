@@ -108,6 +108,8 @@ namespace Pascal_AirMax.Analizador
 
             var Tprocedure = ToTerm("procedure");
 
+            var Tprogram = ToTerm("program");
+
             #endregion
 
 
@@ -190,14 +192,21 @@ namespace Pascal_AirMax.Analizador
             NonTerminal llamada_funciones = new NonTerminal("llamada_funciones");
 
             NonTerminal acceso_objeto = new NonTerminal("acceso_objeto");
-            NonTerminal ingreso = new NonTerminal("ingreso"); 
+            NonTerminal ingreso = new NonTerminal("ingreso");
+
+
+            NonTerminal encabezado = new NonTerminal("encabezado");
 
             #endregion
 
 
             #region GRAMATICA
 
-            init.Rule = instrucciones;
+            init.Rule = encabezado;
+
+            encabezado.Rule = Tprogram + Id + Tpuntocoma + instrucciones + inicio_programa
+                             | Tprogram + Id + Tpuntocoma + inicio_programa;
+
 
             instrucciones.Rule = MakePlusRule(instrucciones, instruccion);
 
@@ -208,8 +217,7 @@ namespace Pascal_AirMax.Analizador
                               | arrays
                               | objectos
                               | dec_funcion
-                              | dec_procedimiento
-                              ;
+                              | dec_procedimiento;
 
             inicio_programa.Rule = Tbegin + opciones_main + Tend + Tpunto;
 
@@ -331,9 +339,11 @@ namespace Pascal_AirMax.Analizador
 
             acceso_array.Rule = Id + TcorA + lista_exp + TcorC;
 
-            writeln.Rule = Twriteln + TparA + lista_exp + TparC;
+            writeln.Rule = Twriteln + TparA + lista_exp + TparC
+                            | Twriteln + TparA + TparC;
 
-            write.Rule = Twrite + TparA + lista_exp + TparC;
+            write.Rule = Twrite + TparA + lista_exp + TparC
+                        | Twrite + TparA + TparC;
 
 
 
