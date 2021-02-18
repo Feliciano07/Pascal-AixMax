@@ -29,7 +29,7 @@ namespace Pascal_AirMax.Analizador
 
            encabezado(raiz.ChildNodes[0]);
 
-           Maestra.getInstancia.ejecutar();
+            Maestra.getInstancia.ejecutar();
 
             return true;
         }
@@ -95,11 +95,13 @@ namespace Pascal_AirMax.Analizador
             switch (toke)
             {
                 case "writeln":
-                    {
-                        return Main.Inst_Writeln(actual);
-                    }
+                    return Main.Inst_Writeln(actual);
                 case "write":
                     return Main.Inst_Write(actual);
+                case "ifthen":
+                    return Main.Inst_Ifthen(actual);
+                case "ifelse":
+                    return Main.Instru_IfElse(actual);
             }
             return null;
         }

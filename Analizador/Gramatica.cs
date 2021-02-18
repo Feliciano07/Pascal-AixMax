@@ -225,7 +225,7 @@ namespace Pascal_AirMax.Analizador
             //TODO: ya la regue, revisar conflicto de shift reduce
 
             opciones_main.Rule = MakePlusRule(opciones_main, sentencias_main)
-                                 | MakePlusRule(opciones_main, main);
+                                 | MakePlusRule(opciones_main, main); //*
 
             sentencias_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma;
 
@@ -273,13 +273,13 @@ namespace Pascal_AirMax.Analizador
                              | Id; // como se declaran variables de objectos
 
             //************************ DECLARACION DE VARIABLES
-            variable.Rule = Tvar + lista_variable;
+            variable.Rule = Tvar + lista_variable; //*
 
-            lista_variable.Rule = MakePlusRule(lista_variable, lista_dec);
+            lista_variable.Rule = MakePlusRule(lista_variable, lista_dec); //*
 
 
             lista_dec.Rule = lista_id + Tdospunto + tipo_dato + Tpuntocoma //*
-                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma
+                             | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma //*
                              | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tpuntocoma //*
                              | lista_id + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma
                              |  Id + PreferShiftHere() + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma; 
@@ -288,12 +288,12 @@ namespace Pascal_AirMax.Analizador
 
             //*************************** DECLARACION DE CONSTANTES
 
-            constante.Rule = TCon + lista_constante;
+            constante.Rule = TCon + lista_constante; //*
 
-            lista_constante.Rule = MakePlusRule(lista_constante, id_constante);
+            lista_constante.Rule = MakePlusRule(lista_constante, id_constante); //*
 
-            id_constante.Rule = Id + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma
-                               | Id + Tigual + exp + Tpuntocoma;
+            id_constante.Rule = Id + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma //*
+                               | Id + Tigual + exp + Tpuntocoma; //*
 
 
             //***************************** DECLARACION DE UN ARRAY
@@ -319,8 +319,8 @@ namespace Pascal_AirMax.Analizador
 
 
             main.Rule = asignacion + Tpuntocoma
-                         | writeln + Tpuntocoma
-                         | write + Tpuntocoma
+                         | writeln + Tpuntocoma //*
+                         | write + Tpuntocoma //*
                          | sentencia_exit + Tpuntocoma
                          | ifthen
                          | ifelse
@@ -350,7 +350,8 @@ namespace Pascal_AirMax.Analizador
             //**************************** sentencias if then, puede venir con punto y coma?
 
             ifthen.Rule = Tif + exp + Tthen + main
-                          | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma;
+                          | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma
+                          | Tif + exp + Tthen + Tbegin + Tend + Tpuntocoma;
 
 
 

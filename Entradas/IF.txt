@@ -1,0 +1,65 @@
+﻿program Hello;
+
+var a:integer;
+
+begin
+  if 45<45 then 
+  writeln('hola');
+end.
+
+
+program Hello;
+
+var a:integer;
+
+begin
+  if 45<=45 then 
+  begin
+    writeln('hola1');
+    writeln('hola2');
+    writeln('hola3');
+    writeln('hola4');
+    
+    if false then 
+        writeln('esta funcionando bien');
+    
+  end;
+end.
+
+
+
+
+
+
+program Hello;
+
+
+begin
+  if 45<=45 then 
+    begin
+    writeln('primer if');
+    end
+  else 
+  begin
+    writeln(45);
+  end;
+  
+  
+    if 45<45 then 
+    begin
+    writeln('segundo if');
+    end
+    else 
+    writeln('segundo ifelse falso');
+ 
+  
+  
+    if 45<=45 then 
+    writeln('tercer if')
+    else 
+    begin
+    writeln(45);
+    end;
+  
+  
+end.

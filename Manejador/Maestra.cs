@@ -69,7 +69,7 @@ namespace Pascal_AirMax.Manejador
                     }
                     catch (Exception e)
                     {
-
+                        Console.WriteLine(e);
                     }
                 }    
 
