@@ -342,7 +342,8 @@ namespace Pascal_AirMax.Analizador
             writeln.Rule = Twriteln + TparA + lista_exp + TparC
                             | Twriteln + TparA + TparC;
 
-            write.Rule = Twrite + TparA + lista_exp + TparC;
+            write.Rule = Twrite + TparA + lista_exp + TparC
+                        | Twrite + TparA + TparC;
 
 
 

@@ -98,6 +98,8 @@ namespace Pascal_AirMax.Analizador
                     {
                         return Main.Inst_Writeln(actual);
                     }
+                case "write":
+                    return Main.Inst_Write(actual);
             }
             return null;
         }

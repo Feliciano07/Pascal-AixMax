@@ -46,5 +46,27 @@ namespace Pascal_AirMax.Analizador
             return null;
         }
 
+        public static Nodo Inst_Write(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            if (entrada.ChildNodes.Count == 4)
+            {
+                LinkedList<Nodo> tem;
+                tem = lista_expresion(entrada.ChildNodes[2]);
+                Manejador.Maestra.getInstancia.addInstruccion(new Write(linea, columna));
+                return new LlamadaFuncion(linea, columna, "write", tem);
+
+            }
+            else if (entrada.ChildNodes.Count == 3)
+            {
+                LinkedList<Nodo> tem = new LinkedList<Nodo>();
+                Manejador.Maestra.getInstancia.addInstruccion(new Write(linea, columna));
+                return new LlamadaFuncion(linea, columna, "write", tem);
+            }
+            return null;
+        }
+
     }
 }

@@ -9,13 +9,13 @@ namespace Pascal_AirMax.Environment
     {
 
         private Dictionary<string, Simbolo> simbolos;
-        private Dictionary<string,Funcion> nativas;
+        private Dictionary<string,Funcion> funciones;
 
 
         public Entorno()
         {
             this.simbolos = new Dictionary<string, Simbolo>();
-            this.nativas = new Dictionary<string, Funcion>();
+            this.funciones = new Dictionary<string, Funcion>();
         }
 
 
@@ -44,9 +44,9 @@ namespace Pascal_AirMax.Environment
         {
             string name = ft.getNombre().ToLower();
 
-            if (this.nativas.ContainsKey(name) == false)
+            if (this.funciones.ContainsKey(name) == false)
             {
-                this.nativas.Add(name, ft);
+                this.funciones.Add(name, ft);
                 return true;
             }
             return false;
@@ -56,10 +56,10 @@ namespace Pascal_AirMax.Environment
         {
             id = id.ToLower();
 
-            if (this.nativas.ContainsKey(id))
+            if (this.funciones.ContainsKey(id))
             {
                 Funcion ft;
-                this.nativas.TryGetValue(id, out ft);
+                this.funciones.TryGetValue(id, out ft);
                 return ft;
             }
             return null;

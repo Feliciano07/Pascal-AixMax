@@ -3,9 +3,9 @@
 var a:integer;
 
 begin
-  writeln ('Hello World');
-  writeln ();
-  writeln ('Hello World');
-  writeln ();
-  writeln ('Hello World');
+  writel ('Hello World');
+  writel ();
+  writel ('Hello World');
+  writel ();
+  writel ('Hello World');
 end.
