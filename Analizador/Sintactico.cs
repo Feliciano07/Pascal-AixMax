@@ -102,6 +102,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.Inst_Ifthen(actual);
                 case "ifelse":
                     return Main.Instru_IfElse(actual);
+                case "caseof":
+                    return Main.Case_OF(actual.ChildNodes[0]);
             }
             return null;
         }

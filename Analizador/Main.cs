@@ -218,5 +218,62 @@ namespace Pascal_AirMax.Analizador
             return new IfElse(linea, columna, exp, tem_if, tem_else);
         }
 
+        public static Nodo Case_OF(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+            if(entrada.ChildNodes.Count == 5)
+            {
+                Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+
+                LinkedList<Case> casos = Lista_Casos(entrada.ChildNodes[3]);
+
+                return new Sentencia_case(linea, columna, expresion, casos);
+
+            }
+            return null;
+        }
+
+        public static LinkedList<Case> Lista_Casos(ParseTreeNode entrada)
+        {
+            LinkedList<Case> lista = new LinkedList<Case>();
+
+            foreach(ParseTreeNode actual in entrada.ChildNodes)
+            {
+                lista.AddLast(Casos(actual));
+
+            }
+            return lista;
+        }
+
+        public static Case Casos(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            if(entrada.ChildNodes.Count == 3)
+            {
+                LinkedList<Nodo> tem;
+                tem = lista_expresion(entrada.ChildNodes[0]);
+
+                LinkedList<Nodo> temporal = new LinkedList<Nodo>();
+
+                temporal.AddLast(Main_If(entrada.ChildNodes[2].ChildNodes[0]));
+
+                return new Case(linea, columna, tem, temporal);
+
+            }else if(entrada.ChildNodes.Count == 6)
+            {
+                LinkedList<Nodo> tem_exp;
+                tem_exp = lista_expresion(entrada.ChildNodes[0]);
+
+                LinkedList<Nodo> tem = ListaMain_If(entrada.ChildNodes[3]);
+
+                return new Case(linea, columna, tem_exp, tem);
+
+            }
+            return null;
+        }
+
     }
 }

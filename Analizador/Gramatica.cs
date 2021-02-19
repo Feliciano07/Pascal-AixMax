@@ -349,17 +349,17 @@ namespace Pascal_AirMax.Analizador
 
             //**************************** sentencias if then, puede venir con punto y coma?
 
-            ifthen.Rule = Tif + exp + Tthen + main
-                          | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma
-                          | Tif + exp + Tthen + Tbegin + Tend + Tpuntocoma;
+            ifthen.Rule = Tif + exp + Tthen + main //*
+                          | Tif + exp + Tthen + Tbegin + lista_main + Tend + Tpuntocoma //*
+                          | Tif + exp + Tthen + Tbegin + Tend + Tpuntocoma; //*
 
 
 
             //**************************** SENTENCIA IF THEN ELSE
 
 
-            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main
-                         | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
+            ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main //*
+                         | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma; //*
 
 
             //TODO: falta agregar break y continue, ya que genera conflicto reduce reduce
