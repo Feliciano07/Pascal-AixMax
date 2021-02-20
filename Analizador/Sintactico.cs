@@ -27,9 +27,9 @@ namespace Pascal_AirMax.Analizador
             GenerarAST(raiz);
 
 
-           encabezado(raiz.ChildNodes[0]);
+            encabezado(raiz.ChildNodes[0]);
 
-            Maestra.getInstancia.ejecutar();
+           Maestra.getInstancia.ejecutar();
 
             return true;
         }
@@ -84,7 +84,25 @@ namespace Pascal_AirMax.Analizador
         {
             foreach( ParseTreeNode node in entrada.ChildNodes)
             {
-                Maestra.getInstancia.addInstruccion(Instruccion(node.ChildNodes[0]));
+                
+                String tipo = node.Term.Name;
+
+                switch (tipo)
+                {
+                    case "main":
+                        Maestra.getInstancia.addInstruccion(Instruccion(node.ChildNodes[0]));
+                        break;
+                    case "sentencias_main":
+                        {
+                            foreach(ParseTreeNode node2 in node.ChildNodes[1].ChildNodes)
+                            {
+                                Maestra.getInstancia.addInstruccion(Instruccion(node2.ChildNodes[0]));
+                            }
+                            break;
+                        }
+                }
+
+                
             }
         }
 
@@ -106,6 +124,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.Case_OF(actual.ChildNodes[0]);
                 case "whiledo":
                     return Main.While(actual);
+                case "repeat":
+                    return Main.Repeat(actual);
 
             }
             return null;

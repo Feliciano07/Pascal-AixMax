@@ -114,6 +114,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.Case_OF(actual);
                 case "sentencia_while":
                     return Main.While_If(actual);
+                case "sentencia_repeat":
+                    return Main.Repeat(actual);
             }
             return null;
         }
@@ -343,6 +345,74 @@ namespace Pascal_AirMax.Analizador
             return null;
 
         }
+
+
+        public static Nodo Repeat(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[3]);
+
+            LinkedList<Nodo> tem = Lista_Repeat(entrada.ChildNodes[1]);
+
+            return new Repeat(linea, columna, expresion, tem);
+
+        }
+
+        public static LinkedList<Nodo> Lista_Repeat(ParseTreeNode entrada)
+        {
+            LinkedList<Nodo> nueva_instru = new LinkedList<Nodo>();
+
+            foreach(ParseTreeNode node in entrada.ChildNodes)
+            {
+                //TODO: verificar si es main o sentencia main
+                String tipo = node.Term.Name;
+
+                switch (tipo)
+                {
+                    case "main":
+                        nueva_instru.AddLast(Instrucion_Repeat(node.ChildNodes[0]));
+                        break;
+                    case "sentencias_main":
+                        {
+                            foreach (ParseTreeNode node2 in node.ChildNodes[1].ChildNodes)
+                            {
+                                nueva_instru.AddLast(Instrucion_Repeat(node2.ChildNodes[0]));
+                            }
+                            break;
+                        }
+                }
+            }
+            return nueva_instru;
+        }
+
+        public static Nodo Instrucion_Repeat(ParseTreeNode actual)
+        {
+            String toke = actual.Term.Name;
+
+            switch (toke)
+            {
+                case "writeln":
+                    return Main.Inst_Writeln(actual);
+                case "write":
+                    return Main.Inst_Write(actual);
+                case "ifthen":
+                    return Main.Inst_Ifthen(actual);
+                case "ifelse":
+                    return Main.Instru_IfElse(actual);
+                case "caseof":
+                    return Main.Case_OF(actual.ChildNodes[0]);
+                case "whiledo":
+                    return Main.While(actual);
+                case "repeat":
+                    return Main.Repeat(actual);
+
+            }
+            return null;
+        }
+
+
 
     }
 }

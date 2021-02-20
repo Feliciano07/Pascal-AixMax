@@ -322,10 +322,10 @@ namespace Pascal_AirMax.Analizador
                          | writeln + Tpuntocoma //*
                          | write + Tpuntocoma //*
                          | sentencia_exit + Tpuntocoma
-                         | ifthen
-                         | ifelse
-                         | caseof
-                         | whiledo
+                         | ifthen //*
+                         | ifelse //*
+                         | caseof ///*
+                         | whiledo //*
                          | repeat
                          | non_for
                          | Tbreak
@@ -364,13 +364,13 @@ namespace Pascal_AirMax.Analizador
 
             //TODO: falta agregar break y continue, ya que genera conflicto reduce reduce
 
-            opcion_if.Rule = asignacion
-                             | writeln
-                             | write
+            opcion_if.Rule = asignacion //*
+                             | writeln //*
+                             | write //*
                              | sentencia_exit
-                             | opcion_else
-                             | sentencia_case
-                             | sentencia_while
+                             | opcion_else //*
+                             | sentencia_case //*
+                             | sentencia_while //*
                              | sentencia_repeat
                              | sentencia_for
                              | Tbegin + lista_main + Tend;
@@ -409,11 +409,11 @@ namespace Pascal_AirMax.Analizador
 
             //**************************** SENTENCIA WHILE DO
 
-            whiledo.Rule = Twhile + exp + Tdo + main
-                          | Twhile + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma;
+            whiledo.Rule = Twhile + exp + Tdo + main //*
+                          | Twhile + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma; //*
 
 
-            sentencia_while.Rule = Twhile + exp + Tdo + opcion_if;
+            sentencia_while.Rule = Twhile + exp + Tdo + opcion_if; //*
 
             //********************************  SENTENCIA REPEAT
             /*
