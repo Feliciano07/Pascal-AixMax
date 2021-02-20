@@ -339,11 +339,11 @@ namespace Pascal_AirMax.Analizador
 
             acceso_array.Rule = Id + TcorA + lista_exp + TcorC;
 
-            writeln.Rule = Twriteln + TparA + lista_exp + TparC
-                            | Twriteln + TparA + TparC;
+            writeln.Rule = Twriteln + TparA + lista_exp + TparC //*
+                            | Twriteln + TparA + TparC;  //*
 
-            write.Rule = Twrite + TparA + lista_exp + TparC
-                        | Twrite + TparA + TparC;
+            write.Rule = Twrite + TparA + lista_exp + TparC //*
+                        | Twrite + TparA + TparC; //*
 
 
 
@@ -395,8 +395,8 @@ namespace Pascal_AirMax.Analizador
 
             // cambiar esto opciones_main
 
-            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend
-                                  | Tcase + exp + Tof + lista_casos + Telse + main + Tend
+            sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend//*
+                                  | Tcase + exp + Tof + lista_casos + Telse + main + Tend//*
                                   | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tpuntocoma + Tend;
 
             lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);

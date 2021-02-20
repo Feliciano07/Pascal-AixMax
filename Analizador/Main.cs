@@ -108,6 +108,10 @@ namespace Pascal_AirMax.Analizador
                     return Main.Instru_IfElse(actual);
                 case "opcion_else":
                     return Main.Opcion_else(actual);
+                case "caseof":
+                    return Main.Case_OF(actual.ChildNodes[0]);
+                case "sentencia_case":
+                    return Main.Case_OF(actual);
             }
             return null;
         }
@@ -229,6 +233,25 @@ namespace Pascal_AirMax.Analizador
                 LinkedList<Case> casos = Lista_Casos(entrada.ChildNodes[3]);
 
                 return new Sentencia_case(linea, columna, expresion, casos);
+
+            }else if(entrada.ChildNodes.Count == 7)
+            {
+                Nodo exp = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+                LinkedList<Case> casos = Lista_Casos(entrada.ChildNodes[3]);
+
+                LinkedList<Nodo> temporal = new LinkedList<Nodo>();
+                temporal.AddLast(Main_If(entrada.ChildNodes[5].ChildNodes[0]));
+
+                return new Sentencia_case(linea, columna, exp, casos, temporal);
+
+            }else if(entrada.ChildNodes.Count == 10)
+            {
+                Nodo exp = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+                LinkedList<Case> casos = Lista_Casos(entrada.ChildNodes[3]);
+                LinkedList<Nodo> tem = ListaMain_If(entrada.ChildNodes[6]);
+
+                return new Sentencia_case(linea, columna, exp, casos, tem);
+
 
             }
             return null;

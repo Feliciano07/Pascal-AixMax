@@ -65,8 +65,9 @@ namespace Pascal_AirMax
             // 
             // richTextBox2
             // 
-            this.richTextBox2.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.richTextBox2.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.richTextBox2.BackColor = System.Drawing.SystemColors.InfoText;
+            this.richTextBox2.Font = new System.Drawing.Font("Felix Titling", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBox2.ForeColor = System.Drawing.Color.Lime;
             this.richTextBox2.Location = new System.Drawing.Point(754, 101);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(358, 337);

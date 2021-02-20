@@ -6,7 +6,7 @@ using Pascal_AirMax.Environment;
 using Pascal_AirMax.Expresion;
 using Pascal_AirMax.Expresion.Relacionales;
 using Pascal_AirMax.Manejador;
-
+using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Sentencias
 {
@@ -76,8 +76,11 @@ namespace Pascal_AirMax.Sentencias
                             Console.WriteLine(e);
                         }
                     }
+                    //TODO: verificar que si se cumplido el caso
+                    throw new Exception("se cumplio la condicion");
                 }
 
+                
 
             }
             return null;

@@ -1,0 +1,41 @@
+﻿program checkCase;
+
+begin
+
+if(false) then
+   case ('A') of
+      'A' : writeln('Excellent!' );
+      'B', 'C': writeln('Well done' );
+      'D' : writeln('You passed' );
+      'F' : writeln('Better try again' );
+   end
+ else
+ writeln(45);
+  
+end.
+
+
+
+program checkCase;
+
+begin
+
+if(true) then
+   case ('F') of
+      'A' : writeln('Excellent!' );
+      'B', 'C': writeln('Well done' );
+      'D' : writeln('You passed' );
+      'F' : 
+      if(true) then
+      case ('B') of
+      'A' : writeln('Excellent!' );
+      'B', 'C': writeln('Well done' );
+      'D' : writeln('You passed' );
+      'F' : writeln('Better try again' );
+      end;
+      
+   end
+ else
+ writeln(45);
+  
+end.

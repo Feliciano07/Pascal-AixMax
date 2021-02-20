@@ -10,14 +10,24 @@ namespace Pascal_AirMax.Sentencias
     {
         private Nodo expresion;
         private LinkedList<Case> casos;
+        private LinkedList<Nodo> instru_else;
 
         private LinkedList<Objeto> datos_evaluados;
+     
         
         public Sentencia_case(int linea, int columna, Nodo exp, LinkedList<Case> casos) : base(linea, columna)
         {
             this.expresion = exp;
             this.casos = casos;
             this.datos_evaluados = new LinkedList<Objeto>();
+        }
+
+        public Sentencia_case(int linea, int columna, Nodo exp, LinkedList<Case> casos, LinkedList<Nodo> intru_else):base(linea, columna)
+        {
+            this.expresion = exp;
+            this.casos = casos;
+            this.datos_evaluados = new LinkedList<Objeto>();
+            this.instru_else = intru_else;
         }
 
         public override Objeto execute(Entorno entorno)
@@ -35,10 +45,12 @@ namespace Pascal_AirMax.Sentencias
 
             foreach(Case caso in casos)
             {
-                // TODO: validar si retorna algo o si la condicion fue true
+                
                 try
                 {
-                    caso.execute_caso(entorno, condicion, datos_evaluados);
+                    // TODO: validar si retorna algo
+                    caso.execute_caso(entorno, condicion, this.datos_evaluados);
+                    
                 }
                 catch (Exception e)
                 {
@@ -46,6 +58,21 @@ namespace Pascal_AirMax.Sentencias
                     throw new Exception(e.ToString());
                 }
             }
+            
+            // si llega a este punto es porque no se cumplio ningun caso
+
+            foreach(Nodo instruccion in instru_else)
+            {
+                try
+                {
+                    // TODO: validar si retorna algo
+                    instruccion.execute(entorno);
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+            }
+
             return null;
 
         }
