@@ -391,20 +391,20 @@ namespace Pascal_AirMax.Analizador
 
             //*************************** SENTENCIA CASE, existe conflicto reduce pero sirve 
 
-            caseof.Rule = sentencia_case + Tpuntocoma;
+            caseof.Rule = sentencia_case + Tpuntocoma; //*
 
-            // cambiar esto opciones_main
+            
 
             sentencia_case.Rule = Tcase + exp + Tof + lista_casos + Tend//*
                                   | Tcase + exp + Tof + lista_casos + Telse + main + Tend//*
-                                  | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tpuntocoma + Tend;
+                                  | Tcase + exp + Tof + lista_casos + Telse + Tbegin + lista_main + Tend + Tpuntocoma + Tend; //*
 
-            lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp);
+            lista_exp.Rule = MakeListRule(lista_exp, Tcoma, exp); //*
 
-            lista_casos.Rule = MakePlusRule(lista_casos, caso);
+            lista_casos.Rule = MakePlusRule(lista_casos, caso); //*
 
-            caso.Rule = lista_exp + Tdospunto + main
-                        | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma;
+            caso.Rule = lista_exp + Tdospunto + main //*
+                        | lista_exp + Tdospunto + Tbegin + lista_main + Tend + Tpuntocoma; //*
 
 
             //**************************** SENTENCIA WHILE DO

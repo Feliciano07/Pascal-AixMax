@@ -112,6 +112,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.Case_OF(actual.ChildNodes[0]);
                 case "sentencia_case":
                     return Main.Case_OF(actual);
+                case "sentencia_while":
+                    return Main.While_If(actual);
             }
             return null;
         }
@@ -296,6 +298,50 @@ namespace Pascal_AirMax.Analizador
 
             }
             return null;
+        }
+
+        public static Nodo While(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+            if(entrada.ChildNodes.Count == 4)
+            {
+                Nodo exp = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+                LinkedList<Nodo> temporal = new LinkedList<Nodo>();
+                temporal.AddLast(Main_If(entrada.ChildNodes[3].ChildNodes[0]));
+
+                return new WhileDO(linea, columna, exp, temporal);
+
+            }
+            else if(entrada.ChildNodes.Count == 7)
+            {
+                Nodo exp = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+                LinkedList<Nodo> tem = ListaMain_If(entrada.ChildNodes[4]);
+                return new WhileDO(linea, columna, exp, tem);
+
+            }
+            return null;
+        }
+
+        public static Nodo While_If(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+            Nodo exp = Expresion.Expresion.evaluar(entrada.ChildNodes[1]);
+
+            if(entrada.ChildNodes[3].ChildNodes.Count == 1)
+            {
+                LinkedList<Nodo> tem_else = new LinkedList<Nodo>();
+                tem_else.AddLast(Main_If(entrada.ChildNodes[3].ChildNodes[0]));//else
+                return new WhileDO(linea, columna, exp, tem_else);
+            }
+            else if (entrada.ChildNodes[3].ChildNodes.Count  == 3)
+            {
+                LinkedList<Nodo> tem_if = ListaMain_If(entrada.ChildNodes[3].ChildNodes[1]); //if
+                return new WhileDO(linea, columna, exp, tem_if);
+            }
+            return null;
+
         }
 
     }
