@@ -9,7 +9,8 @@ namespace Pascal_AirMax.Environment
     public class Simbolo
     {
         private string nombre;
-        private Objeto sym;
+        private Objeto sym; // primitivos, array, funcion
+        private bool constante; // para validar si es constante
 
         public Simbolo(string nombre, Objeto valor)
         {

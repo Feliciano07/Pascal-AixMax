@@ -8,8 +8,12 @@ namespace Pascal_AirMax.Environment
     public class Entorno
     {
 
-        private Dictionary<string, Simbolo> simbolos;
+        private Dictionary<string, Simbolo> simbolos;// primitivo, array, objetos
         private Dictionary<string,Funcion> funciones;
+
+        /*
+         * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
+         */
 
 
         public Entorno()

@@ -42,6 +42,8 @@ namespace Pascal_AirMax.Instruccion
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+                    throw new Exception(e.ToString());
+                    
 
                 }
                 Verificar_Tipo_Valor(retorno, str);
