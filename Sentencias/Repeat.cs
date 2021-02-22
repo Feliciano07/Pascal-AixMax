@@ -30,6 +30,7 @@ namespace Pascal_AirMax.Sentencias
                 {
                     try
                     {
+                        //TODO: validar si retorna algo
                         instruccion.execute(entorno);
                     }catch(Exception e)
                     {

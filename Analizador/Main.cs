@@ -366,7 +366,7 @@ namespace Pascal_AirMax.Analizador
 
             foreach(ParseTreeNode node in entrada.ChildNodes)
             {
-                //TODO: verificar si es main o sentencia main
+                
                 String tipo = node.Term.Name;
 
                 switch (tipo)
