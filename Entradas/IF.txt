@@ -36,30 +36,14 @@ program Hello;
 
 begin
   if 45<=45 then 
-    begin
-    writeln('primer if');
-    end
+     for a := 10  to 20 do
+   
+   begin
+      writeln('value of a: ', a);
+   end
+
   else 
   begin
     writeln(45);
   end;
-  
-  
-    if 45<45 then 
-    begin
-    writeln('segundo if');
-    end
-    else 
-    writeln('segundo ifelse falso');
- 
-  
-  
-    if 45<=45 then 
-    writeln('tercer if')
-    else 
-    begin
-    writeln(45);
-    end;
-  
-  
 end.

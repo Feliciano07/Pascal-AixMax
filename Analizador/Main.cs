@@ -116,6 +116,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.While_If(actual);
                 case "sentencia_repeat":
                     return Main.Repeat(actual);
+                case "sentencia_for":
+                    return Main.For_if(actual);
             }
             return null;
         }
@@ -407,12 +409,94 @@ namespace Pascal_AirMax.Analizador
                     return Main.While(actual);
                 case "repeat":
                     return Main.Repeat(actual);
+                case "no_for":
+                    return Main.For(actual);
 
             }
             return null;
         }
 
 
+        public static Nodo For(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            //captura de la expresion
+            Nodo asignacion = null; //entrada.childNodes[1];
+
+            string token = entrada.ChildNodes[2].Term.Name.ToLower();
+            bool comportamiento = false;
+
+            switch (token)
+            {
+                case "to":
+                    comportamiento = false;
+                    break;
+                case "downto":
+                    comportamiento = true;
+                    break;
+            }
+
+            Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[3]);
+
+            token = entrada.ChildNodes[5].Term.Name;
+
+            if(entrada.ChildNodes.Count == 6)
+            {
+                LinkedList<Nodo> temporal = new LinkedList<Nodo>();
+                temporal.AddLast(Main_If(entrada.ChildNodes[5].ChildNodes[0]));
+                return new For(linea, columna, asignacion, expresion, temporal, comportamiento);
+
+            }
+            else if(entrada.ChildNodes.Count == 9)
+            {
+                LinkedList<Nodo> temporal;
+                temporal = ListaMain_If(entrada.ChildNodes[6]);
+                return new For(linea, columna, asignacion, expresion, temporal, comportamiento);
+
+            }
+
+            return null;
+        }
+
+        public static Nodo For_if(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            //captura de la expresion
+            Nodo asignacion = null; //entrada.childNodes[1];
+
+            string token = entrada.ChildNodes[2].Term.Name.ToLower();
+            bool comportamiento = false;
+
+            switch (token)
+            {
+                case "to":
+                    comportamiento = false;
+                    break;
+                case "downto":
+                    comportamiento = true;
+                    break;
+            }
+
+            Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[3]);
+
+            if (entrada.ChildNodes[5].ChildNodes.Count == 1)
+            {
+                LinkedList<Nodo> tem_else = new LinkedList<Nodo>();
+                tem_else.AddLast(Main_If(entrada.ChildNodes[5].ChildNodes[0]));
+                return new For(linea, columna, asignacion, expresion, tem_else, comportamiento);
+            }
+            else if (entrada.ChildNodes[5].ChildNodes.Count == 3)
+            {
+                LinkedList<Nodo> tem_if = ListaMain_If(entrada.ChildNodes[5].ChildNodes[1]);
+                return new For(linea, columna, asignacion, expresion, tem_if, comportamiento);
+
+            }
+            return null;
+        }
 
     }
 }

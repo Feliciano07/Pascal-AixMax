@@ -318,6 +318,8 @@ namespace Pascal_AirMax.Analizador
             lista_main.Rule = MakePlusRule(lista_main, main);
 
 
+            //Todo posible que venga dentro mas begin end
+
             main.Rule = asignacion + Tpuntocoma
                          | writeln + Tpuntocoma //*
                          | write + Tpuntocoma //*
@@ -326,10 +328,9 @@ namespace Pascal_AirMax.Analizador
                          | ifelse //*
                          | caseof ///*
                          | whiledo //*
-                         | repeat
+                         | repeat //*
                          | non_for
-                         | Tbreak
-                         | Tcontinue;
+                         ;
 
             sentencia_exit.Rule = Texit + TparA + exp + TparC;
 
@@ -371,7 +372,7 @@ namespace Pascal_AirMax.Analizador
                              | opcion_else //*
                              | sentencia_case //*
                              | sentencia_while //*
-                             | sentencia_repeat
+                             | sentencia_repeat //*
                              | sentencia_for
                              | Tbegin + lista_main + Tend;
 
@@ -383,7 +384,7 @@ namespace Pascal_AirMax.Analizador
                              | Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            opcion_else.Rule = Tif + exp + Tthen + opcion_if +Telse + opcion_if;
+            opcion_else.Rule = Tif + exp + Tthen + opcion_if +Telse + opcion_if; //*
 
 
                                 
@@ -420,17 +421,17 @@ namespace Pascal_AirMax.Analizador
              * dentro del bloque funcion igual al main
              */
 
-            repeat.Rule = Trepeat + opciones_main + Tuntil + exp + Tpuntocoma;
+            repeat.Rule = Trepeat + opciones_main + Tuntil + exp + Tpuntocoma; //*
 
-            sentencia_repeat.Rule = Trepeat + opciones_main + Tuntil + exp ;
+            sentencia_repeat.Rule = Trepeat + opciones_main + Tuntil + exp ; //*
 
 
             //*************************** SENTENCIA FOR-DO, el for solo aceptar variables normales
 
             non_for.Rule = Tfor + asignacion + Tto + exp + Tdo + main
-                          | Tfor + asignacion + Tto + exp + Tdo + sentencias_main
+                          | Tfor + asignacion + Tto + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma
                           | Tfor + asignacion + Tdown + exp + Tdo + main
-                          | Tfor + asignacion + Tdown + exp + Tdo + sentencias_main; ;
+                          | Tfor + asignacion + Tdown + exp + Tdo + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
             sentencia_for.Rule = Tfor + asignacion + Tto + exp + Tdo + opcion_if
