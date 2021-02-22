@@ -23,22 +23,35 @@ namespace Pascal_AirMax.Environment
         }
 
 
-        //TODO: case sensitive
-
+        
+        // agregar a la tabla lo que se declara como var, const
         public void addSimbolo(Simbolo simbolo, string nombre)
         {
+            nombre = nombre.ToLower();
             this.simbolos.Add(nombre, simbolo);
         }
 
+        
+
         public bool ExisteSimbolo(string nombre)
         {
-            foreach(string sym in simbolos.Keys)
+            nombre = nombre.ToLower();
+            //verifica primero aquello que se declara como var o const
+            foreach (string nombre_simbolo in simbolos.Keys)
             {
-                if(String.Compare(sym,nombre,true) == 0)
+                if(String.Compare(nombre_simbolo,nombre) == 0)
                 {
                     return true;
                 }
 
+            }
+            //verifica primero aquello que se declara como funcion
+            foreach(string nombre_simbolo in funciones.Keys)
+            {
+                if (String.Compare(nombre_simbolo, nombre) == 0)
+                {
+                    return true;
+                }
             }
             return false;
         }

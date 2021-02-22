@@ -23,27 +23,29 @@ namespace Pascal_AirMax.Instruccion
 
         public override Objeto execute(Entorno entorno)
         {
-            Objeto retorno = null;
+            Objeto retorno = retornar_valor(entorno);
 
-            try
+            if (entorno.ExisteSimbolo(nombre))
             {
-                retorno = expresion.execute(entorno);
-          
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                  "Error nombre de simbolo duplicado: " + nombre);
+                Maestra.getInstancia.addError(error);
             }
-            catch(Exception e)
+            else
             {
-                Console.WriteLine(e);
+                Verificar_Tipo_Valor(retorno, nombre);
+                retorno.setTipo(this.tipo);
+                Simbolo simbolo = new Simbolo(nombre, retorno, Simbolo.Tipo_variable.CONST);
+                entorno.addSimbolo(simbolo, nombre);
             }
-            Verificar_Tipo_Valor(retorno, nombre);
 
-            Simbolo simbolo = new Simbolo(nombre, retorno);
-            entorno.addSimbolo(simbolo, nombre);
             return null;
         }
 
         public object Verificar_Tipo_Valor(Objeto resultado, string nombre)
         {
-            if (resultado.getTipo() == tipo | tipo == Objeto.TipoObjeto.CONST)
+            if (resultado.getTipo() == tipo | tipo == Objeto.TipoObjeto.CONST | tipo == Objeto.TipoObjeto.REAL
+                | resultado.getTipo() == Objeto.TipoObjeto.INTEGER)
             {
                 return true;
             }
@@ -52,6 +54,23 @@ namespace Pascal_AirMax.Instruccion
             Maestra.getInstancia.addError(error);
 
             throw new Exception("La constante: " + nombre + "No es compatible con el dato asignado " + resultado.getValor().ToString());
+        }
+
+
+        public Objeto retornar_valor(Entorno entorno)
+        {
+            Objeto valor = null;
+            try
+            {
+                valor = expresion.execute(entorno);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.ToString());
+            }
+            return valor;
         }
     }
 }

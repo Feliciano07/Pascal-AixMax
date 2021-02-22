@@ -28,28 +28,17 @@ namespace Pascal_AirMax.Instruccion
                 if (entorno.ExisteSimbolo(str))
                 {
                     Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
-                   "ya existe la variable:  " + str + "declarada dentro del programa");
+                   "Error nombre de simbolo duplicado: " + str);
                     Maestra.getInstancia.addError(error);
-
-                    throw new Exception("ya existe el simbolo " + "dentro del programa");
                 }
-                Objeto retorno = null;
-                try
+                else
                 {
-                    retorno = expresion.execute(entorno);
-
+                    Objeto retorno = retornar_valor(entorno);
+                    Verificar_Tipo_Valor(retorno, str);
+                    retorno.setTipo(this.tipo);
+                    Simbolo simbolo = new Simbolo(str, retorno);
+                    entorno.addSimbolo(simbolo, str);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw new Exception(e.ToString());
-                    
-
-                }
-                Verificar_Tipo_Valor(retorno, str);
-                retorno.setTipo(tipo);
-                Simbolo simbolo = new Simbolo(str, retorno);
-                entorno.addSimbolo(simbolo, str);
 
             }
             return null;
@@ -69,6 +58,23 @@ namespace Pascal_AirMax.Instruccion
             Maestra.getInstancia.addError(error);
 
             throw new Exception("La variable: " + nombre + "No es compatible con el dato asignado " + resultado.getValor().ToString());
+        }
+
+
+        public Objeto retornar_valor (Entorno entorno)
+        {
+            Objeto valor = null;
+            try
+            {
+                valor = expresion.execute(entorno);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw new Exception(e.ToString());
+            }
+            return valor;
         }
 
     }

@@ -1,11 +1,9 @@
 ﻿program Hello;
 
 var a:integer;
+b,c: real;
+a:real = 45;
 
 begin
-  writel ('Hello World');
-  writel ();
-  writel ('Hello World');
-  writel ();
   writel ('Hello World');
 end.
