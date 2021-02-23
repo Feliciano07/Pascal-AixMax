@@ -27,7 +27,7 @@ namespace Pascal_AirMax.Analizador
             GenerarAST(raiz);
 
 
-            encabezado(raiz.ChildNodes[0]);
+           encabezado(raiz.ChildNodes[0]);
 
             Maestra.getInstancia.ejecutar();
 
@@ -74,6 +74,8 @@ namespace Pascal_AirMax.Analizador
                     return Variables.Lista_variable(actual.ChildNodes[1]);
                 case "constante":
                     return Variables.Lista_constante(actual.ChildNodes[1]);
+                case "objectos":
+                    return Variables.Declaracion_Objeto(actual);
 
             }
             return null;

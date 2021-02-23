@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
-
+ 
 namespace Pascal_AirMax.TipoDatos
 {
     public class Primitivo: Objeto

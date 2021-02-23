@@ -1,0 +1,15 @@
+﻿program forLoop;
+
+
+type
+cuadro = object
+var a: real;
+b,c: integer;
+end;
+
+
+begin
+   begin
+      writeln('value of a: ');
+   end;
+end.

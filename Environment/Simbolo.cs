@@ -15,9 +15,12 @@ namespace Pascal_AirMax.Environment
             VAR = 0,
             CONST =1
         }
+
         private string nombre;
-        private Objeto sym; // primitivos, array, funcion
+        private Objeto sym; // primitivos, array, objectos
         private Tipo_variable tipo;
+
+        //TODO: hace falta ver el entorno
 
         public Simbolo(string nombre, Objeto valor)
         {

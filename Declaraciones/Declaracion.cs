@@ -27,6 +27,7 @@ namespace Pascal_AirMax.Instruccion
             {
                 if (entorno.ExisteSimbolo(str))
                 {
+                    //TODO: posible retornar una exepcion
                     Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
                    "Error nombre de simbolo duplicado: " + str);
                     Maestra.getInstancia.addError(error);

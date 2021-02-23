@@ -197,6 +197,9 @@ namespace Pascal_AirMax.Analizador
 
             NonTerminal encabezado = new NonTerminal("encabezado");
 
+            NonTerminal instrucciones_objeto = new NonTerminal("instrucciones_objeto");
+            NonTerminal instruccion_objeto = new NonTerminal("instruccion_objeto");
+
             #endregion
 
 
@@ -310,8 +313,18 @@ namespace Pascal_AirMax.Analizador
 
             //******************************* DECLARACION DE OBJECTOS
 
-            objectos.Rule = Ttype + Id + Tigual + Tobject + instrucciones + Tend + Tpuntocoma
-                           | Ttype + Id + Tigual + Tobject + Tend + Tpuntocoma; ;
+            objectos.Rule = Ttype + Id + Tigual + Tobject + instrucciones_objeto + Tend + Tpuntocoma
+                           | Ttype + Id + Tigual + Tobject + Tend + Tpuntocoma;
+
+
+            instrucciones_objeto.Rule = MakePlusRule(instrucciones_objeto, instruccion_objeto);
+
+            instruccion_objeto.Rule = variable
+                              | constante
+                              | arrays
+                              | objectos;
+
+
 
 
             // ******************* flujo interno del programa, sentencias y asignaciones

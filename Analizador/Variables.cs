@@ -3,6 +3,7 @@ using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Instruccion;
 using Pascal_AirMax.TipoDatos;
 using Pascal_AirMax.Expresion;
+using Pascal_AirMax.Declaraciones;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +12,9 @@ namespace Pascal_AirMax.Analizador
 {
     static class Variables
     {
+        //Varialbes de conveniencia para manejar las declaracions de objetos
+        
+
 
         public static Nodo Lista_variable(ParseTreeNode entrada)
         {
@@ -29,6 +33,8 @@ namespace Pascal_AirMax.Analizador
             }
             return null;
         }
+
+
 
 
         public static Nodo evaluar(ParseTreeNode entrada)
@@ -179,6 +185,78 @@ namespace Pascal_AirMax.Analizador
         }
 
 
+        // LO QUE ESTA AQUI PARA ABAJO ES SOLO PARA DECLARAR OBJETOS
+        public static Nodo Declaracion_Objeto(ParseTreeNode entrada)
+        {
+            string nombre = entrada.ChildNodes[1].Token.Text;
+            int linea = entrada.ChildNodes[1].Span.Location.Line;
+            int columna = entrada.ChildNodes[1].Span.Location.Column;
+
+            if (entrada.ChildNodes.Count == 7)
+            {
+                LinkedList<Nodo> var_objeto = new LinkedList<Nodo>();
+                Variables_Objeto(entrada.ChildNodes[4], var_objeto);
+
+                return new Declaracion_type(linea, columna, var_objeto, nombre);
+
+            }
+            else if (entrada.ChildNodes.Count == 6)
+            {
+                LinkedList<Nodo> var = new LinkedList<Nodo>();
+                return new Declaracion_type(linea, columna, var, nombre);
+            }
+            return null;
+        }
+
+
+        //retorna una lista de nodos 
+        public static void Variables_Objeto(ParseTreeNode entrada, LinkedList<Nodo> var_objeto)
+        {
+           
+            foreach (ParseTreeNode node in entrada.ChildNodes)
+            {
+                declaraciones_objeto(node.ChildNodes[0], var_objeto);
+            }
+
+        }
+
+        public static void declaraciones_objeto(ParseTreeNode entrada, LinkedList<Nodo> var_objeto)
+        {
+            String toke = entrada.Term.Name;
+
+            switch (toke)
+            {
+              
+                case "variable":
+                    Variables.Lista_variable_obje(entrada.ChildNodes[1], var_objeto);
+                    break;
+                    
+                case "constante":
+                    Lista_constante_obje(entrada.ChildNodes[1], var_objeto);
+                    break;
+            }
+        }
+
+
+        public static void Lista_variable_obje(ParseTreeNode entrada, LinkedList<Nodo> var_objeto)
+        {
+            
+            foreach (ParseTreeNode node in entrada.ChildNodes)
+            {
+                var_objeto.AddLast(evaluar(node));
+            }
+            
+        }
+
+        public static void Lista_constante_obje(ParseTreeNode entrada, LinkedList<Nodo> var_objeto)
+        {
+            
+            foreach (ParseTreeNode node in entrada.ChildNodes)
+            {
+                var_objeto.AddLast(EvaluarConstante(node));
+            }
+            
+        }
 
     }
 }
