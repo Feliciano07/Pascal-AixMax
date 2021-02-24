@@ -13,3 +13,19 @@ begin
       writeln('value of a: ');
    end;
 end.
+
+
+
+program Hello;
+
+type
+vector  = array[1..10] of integer;
+vector2  = array[1..10] of string;
+
+var aa:vector2;
+
+
+begin
+
+  writeln(aa[2]);
+end.

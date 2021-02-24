@@ -258,5 +258,55 @@ namespace Pascal_AirMax.Analizador
             
         }
 
+        // lo que esta aqui para abajo es solo para manejar los arreglos, que se declaran en el entorno global
+
+        public static void Declaracion_arreglo(ParseTreeNode entrada, int enviroment)
+        {
+            foreach(ParseTreeNode node in entrada.ChildNodes)
+            {
+                if(enviroment == 0)// global
+                {
+                    Manejador.Maestra.getInstancia.addInstruccion(definicion_arreglo(node));
+                }
+            }
+        }
+
+        public static Nodo definicion_arreglo(ParseTreeNode entrada)
+        {
+            int linea = entrada.ChildNodes[0].Span.Location.Line;
+            int columna = entrada.ChildNodes[0].Span.Location.Column;
+
+            string nombre = entrada.ChildNodes[0].Token.Text;
+
+            Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[7]);
+
+            Nodo[] arreglo_dimensio;
+
+            arreglo_dimensio = get_dimensiones(entrada.ChildNodes[4]);
+
+            return new Declaracion_Arreglo(linea, columna, arreglo_dimensio, nombre, tipo);
+
+        }
+
+        public static Nodo[] get_dimensiones(ParseTreeNode entrada)
+        {
+            
+            Nodo[] dimensiones = new Nodo[entrada.ChildNodes.Count*2];
+            int contador = 0;
+            foreach(ParseTreeNode node in entrada.ChildNodes)
+            {
+                dimensiones[contador]  = get_dimension(node.ChildNodes[0]);
+                contador++;
+                dimensiones[contador] = get_dimension(node.ChildNodes[2]);
+                contador++;
+            }
+            return dimensiones;
+        }
+
+        public static Nodo get_dimension(ParseTreeNode entrada)
+        {
+            return Expresion.Expresion.evaluar(entrada);
+        }
+
     }
 }

@@ -319,8 +319,8 @@ namespace Pascal_AirMax.Analizador
 
             instrucciones_objeto.Rule = MakePlusRule(instrucciones_objeto, instruccion_objeto);
 
-            instruccion_objeto.Rule = variable
-                              | constante
+            instruccion_objeto.Rule = variable//*
+                              | constante//*
                               | arrays
                               | objectos;
 

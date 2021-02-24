@@ -76,6 +76,9 @@ namespace Pascal_AirMax.Analizador
                     return Variables.Lista_constante(actual.ChildNodes[1]);
                 case "objectos":
                     return Variables.Declaracion_Objeto(actual);
+                case "arrays":
+                    Variables.Declaracion_arreglo(actual.ChildNodes[1],0);
+                    break;
 
             }
             return null;
