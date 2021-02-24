@@ -18,7 +18,6 @@ namespace Pascal_AirMax.TipoDatos
             this.inferior = inferior;
             this.superior = superior;
             this.contenido = cont;
-            this.valor = new LinkedList<Objeto>();
         }
 
 

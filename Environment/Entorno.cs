@@ -1,4 +1,5 @@
 ﻿using Pascal_AirMax.Abstract;
+using Pascal_AirMax.TipoDatos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Pascal_AirMax.Environment
 
         private Dictionary<string, Simbolo> simbolos;// primitivo, array, objetos
         private Dictionary<string,Funcion> funciones;
-
+       
         /*
          * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
          */
@@ -45,7 +46,7 @@ namespace Pascal_AirMax.Environment
                 }
 
             }
-            //verifica primero aquello que se declara como funcion
+            //verifica aquello que se declara como funcion
             foreach(string nombre_simbolo in funciones.Keys)
             {
                 if (String.Compare(nombre_simbolo, nombre) == 0)
@@ -53,6 +54,7 @@ namespace Pascal_AirMax.Environment
                     return true;
                 }
             }
+
             return false;
         }
         //TODO: case sensitive
