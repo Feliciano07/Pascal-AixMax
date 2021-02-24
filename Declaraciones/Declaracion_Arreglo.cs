@@ -35,7 +35,7 @@ namespace Pascal_AirMax.Declaraciones
 
             int niveles = this.dimensiones.Length / 2;
 
-            Objeto arreglo = null;
+            Arreglo arreglo = null;
 
             try
             {
@@ -47,8 +47,7 @@ namespace Pascal_AirMax.Declaraciones
             }
 
 
-            Simbolo simbolo = new Simbolo(this.nombre, arreglo);
-            entorno.addSimbolo(simbolo,this.nombre);
+            entorno.addArreglo(arreglo, this.nombre);
 
             return null;
              

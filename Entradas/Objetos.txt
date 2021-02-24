@@ -33,3 +33,30 @@ begin
 
   writeln(aa[2]);
 end.
+
+
+
+// declaracion de variables de objetos y arreglos
+
+program Hello;
+
+type
+vector2  = array[1..10] of real;
+
+type
+cuadro = object
+var a: real;
+b,c: integer;
+end;
+
+
+var a:vector2;
+
+var obj:cuadro;
+
+
+
+begin
+
+  writeln('h');
+end.

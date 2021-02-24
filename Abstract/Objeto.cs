@@ -17,7 +17,8 @@ namespace Pascal_AirMax.Abstract
             OBJECTS = 6,
             NULO = 10,
             CONST = 11,
-            FUNCION = 12
+            FUNCION = 12,
+            TYPES = 13
         }
 
         private TipoObjeto tipo;
@@ -41,6 +42,7 @@ namespace Pascal_AirMax.Abstract
 
         public abstract object toString();
 
+       
        
 
     }

@@ -17,13 +17,20 @@ namespace Pascal_AirMax.TipoDatos
             this.entorno_type = new Entorno();
         }
 
+        public Type_obj() : base(TipoObjeto.OBJECTS) { }
+
+        public Type_obj Clone()
+        {
+            return (Type_obj)this.MemberwiseClone();
+        }
+
 
         public Entorno GetEntorno()
         {
             return this.entorno_type;
         }
 
-
+       
 
 
         public override object getValor()

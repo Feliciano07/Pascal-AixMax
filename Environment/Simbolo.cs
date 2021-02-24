@@ -36,7 +36,17 @@ namespace Pascal_AirMax.Environment
             this.tipo = tipo;
         }
 
+        public Simbolo() { }
 
+        public void setNombre(string nombre)
+        {
+            this.nombre = nombre;
+        }
+
+        public Objeto getValor()
+        {
+            return this.sym;
+        }
 
     }
 }

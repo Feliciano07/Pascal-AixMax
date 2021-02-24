@@ -19,7 +19,12 @@ namespace Pascal_AirMax.TipoDatos
             this.superior = superior;
             this.contenido = cont;
         }
+        public Arreglo():base(TipoObjeto.ARRAY) { }
 
+        public Arreglo Clone()
+        {
+            return (Arreglo)this.MemberwiseClone();
+        }
 
         public override object getValor()
         {

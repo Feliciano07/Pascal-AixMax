@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Environment;
 using Pascal_AirMax.Manejador;
+using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Instruccion
 {
@@ -12,12 +13,14 @@ namespace Pascal_AirMax.Instruccion
         private string[] ids;
         private Nodo expresion;
         private Objeto.TipoObjeto tipo;
+        private string nombre_tipo;
 
-        public Declaracion(int linea, int columna, string[] ids, Nodo exp, Objeto.TipoObjeto tipo) : base(linea, columna)
+        public Declaracion(int linea, int columna, string[] ids, Nodo exp, Objeto.TipoObjeto tipo, string nombre) : base(linea, columna)
         {
             this.ids = ids;
             this.expresion = exp;
             this.tipo = tipo;
+            this.nombre_tipo = nombre;
         }
 
         public override Objeto execute(Entorno entorno)
@@ -34,11 +37,21 @@ namespace Pascal_AirMax.Instruccion
                 }
                 else
                 {
-                    Objeto retorno = retornar_valor(entorno);
-                    Verificar_Tipo_Valor(retorno, str);
-                    retorno.setTipo(this.tipo);
-                    Simbolo simbolo = new Simbolo(str, retorno);
-                    entorno.addSimbolo(simbolo, str);
+                    if(this.tipo != Objeto.TipoObjeto.TYPES)
+                    {
+                        Objeto retorno = retornar_valor(entorno);
+                        Verificar_Tipo_Valor(retorno, str);
+                        retorno.setTipo(this.tipo);
+                        Simbolo simbolo = new Simbolo(str, retorno);
+                        entorno.addSimbolo(simbolo, str);
+                    }
+                    else
+                    {
+                        Objeto retorno = Buscar_types(entorno);
+                        Simbolo simbolo = new Simbolo(str, retorno);
+                        entorno.addSimbolo(simbolo, str);
+                    }
+
                 }
 
             }
@@ -78,5 +91,33 @@ namespace Pascal_AirMax.Instruccion
             return valor;
         }
 
+
+        public Objeto Buscar_types(Entorno entorno)
+        {
+            Objeto salida = entorno.GetObjeto(this.nombre_tipo);
+            if (salida == null)
+            {
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                    "Error identificador no encontrado, no existe el type: " + this.nombre_tipo);
+                Maestra.getInstancia.addError(error);
+                throw new Exception("Identificador no encontrado");
+            }
+            return Copia(salida);
+        }
+
+        public Objeto Copia(Objeto entrada)
+        {
+            if(entrada.getTipo() == Objeto.TipoObjeto.ARRAY)
+            {
+                Arreglo tem = (Arreglo)entrada;
+
+                return tem.Clone();
+            }
+            else
+            {
+                Type_obj tem = (Type_obj)entrada;
+                return tem.Clone();
+            }
+        }
     }
 }

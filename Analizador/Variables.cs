@@ -52,17 +52,20 @@ namespace Pascal_AirMax.Analizador
                         {
                             string [] nombre = new string[] { entrada.ChildNodes[0].Token.Text };
                             Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[2]);
-                            return new Declaracion(linea,columna, nombre, getObjeto(tipo), tipo);
+                            string nombre_type = Nombre_del_tipo(entrada.ChildNodes[2]);
+                            return new Declaracion(linea,columna, nombre, getObjeto(tipo), tipo, nombre_type);
                         }
                     case "lista_id":
                         {
                             //TODO: indicar mejor la linea y columna
                             string[] nombre = getId(entrada.ChildNodes[0]);
                             Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[2]);
-                            return new Declaracion(linea, columna, nombre, getObjeto(tipo), tipo);
+                            string nombre_type = Nombre_del_tipo(entrada.ChildNodes[2]);
+                            return new Declaracion(linea, columna, nombre, getObjeto(tipo), tipo, nombre_type);
                         }
                     case "id_constante":
                         {
+                            //hace algo?
                             string nombre = entrada.ChildNodes[0].Token.Text;
                             return new DeclaracionConstante(linea, columna, nombre, Expresion.Expresion.evaluar(entrada.ChildNodes[2]), Objeto.TipoObjeto.CONST);
                         }
@@ -79,10 +82,12 @@ namespace Pascal_AirMax.Analizador
                         {
                             string[] nombre = new string[] { entrada.ChildNodes[0].Token.Text };
                             Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[2]);
-                            return new Declaracion(linea, columna, nombre, Expresion.Expresion.evaluar(entrada.ChildNodes[4]), tipo);
+                            string nombre_type = Nombre_del_tipo(entrada.ChildNodes[2]);
+                            return new Declaracion(linea, columna, nombre, Expresion.Expresion.evaluar(entrada.ChildNodes[4]), tipo,nombre_type);
                         }
                     case "id_constante":
                         {
+                            //hace algo?
                             string nombre = entrada.ChildNodes[0].Token.Text;
                             Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[2]);
                             return new DeclaracionConstante(linea, columna, nombre, Expresion.Expresion.evaluar(entrada.ChildNodes[4]), tipo);
@@ -152,9 +157,18 @@ namespace Pascal_AirMax.Analizador
                     return Objeto.TipoObjeto.REAL;
                 case "boolean":
                     return Objeto.TipoObjeto.BOOLEAN;
+                default:
+                    return Objeto.TipoObjeto.TYPES;
             }
-            return Objeto.TipoObjeto.NULO;
+            
         }
+
+        public static string Nombre_del_tipo(ParseTreeNode entrada)
+        {
+            string tipo = entrada.ChildNodes[0].Token.Text;
+            return tipo;
+        }
+
 
         public static object ValoresDefecto(Objeto.TipoObjeto tipo)
         {

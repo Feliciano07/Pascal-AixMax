@@ -47,8 +47,7 @@ namespace Pascal_AirMax.Declaraciones
                         throw new Exception(e.ToString());
                     }
                 }
-                Simbolo sym = new Simbolo(this.nombre, nuevo_objeto);
-                entorno.addSimbolo(sym,this.nombre);
+                entorno.addObjeto(nuevo_objeto, this.nombre);
             }
 
             return null;

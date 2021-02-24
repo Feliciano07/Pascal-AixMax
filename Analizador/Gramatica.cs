@@ -301,15 +301,15 @@ namespace Pascal_AirMax.Analizador
 
             //***************************** DECLARACION DE UN ARRAY
 
-            arrays.Rule = Ttype + lista_arrays;
+            arrays.Rule = Ttype + lista_arrays;//*
 
-            lista_arrays.Rule = MakePlusRule(lista_arrays, id_arrays);
+            lista_arrays.Rule = MakePlusRule(lista_arrays, id_arrays);//*
 
-            id_arrays.Rule = Id + Tigual + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma;
+            id_arrays.Rule = Id + Tigual + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma;//*
 
-            lista_dimension.Rule = MakeListRule(lista_dimension, Tcoma, dimension);
+            lista_dimension.Rule = MakeListRule(lista_dimension, Tcoma, dimension);//*
 
-            dimension.Rule = exp + Tdimension + exp;
+            dimension.Rule = exp + Tdimension + exp;//*
 
             //******************************* DECLARACION DE OBJECTOS
 
