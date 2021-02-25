@@ -13,10 +13,12 @@ namespace Pascal_AirMax.Environment
         private Dictionary<string,Funcion> funciones;
         private Dictionary<string, Arreglo> arreglos;
         private Dictionary<string, Type_obj> objetos;
-       
+        private Entorno anterior;
+
         /*
          * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
          */
+        public Entorno Anterior { get => anterior; set => anterior = value; }
 
 
         public Entorno()
@@ -25,8 +27,16 @@ namespace Pascal_AirMax.Environment
             this.funciones = new Dictionary<string, Funcion>();
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
+            this.anterior = null;
         }
 
+        public Entorno(Entorno padre)
+        {
+            this.simbolos = new Dictionary<string, Simbolo>();
+            this.arreglos = new Dictionary<string, Arreglo>();
+            this.objetos = new Dictionary<string, Type_obj>();
+            this.anterior = padre;
+        }
 
         
         // agregar a la tabla lo que se declara como var, const
@@ -48,7 +58,7 @@ namespace Pascal_AirMax.Environment
             this.objetos.Add(nombre, objeto);
         }
         
-
+        // TODO: cambiar esto
         public bool ExisteSimbolo(string nombre)
         {
             nombre = nombre.ToLower();
@@ -101,9 +111,21 @@ namespace Pascal_AirMax.Environment
             return null;
         }
 
-        public Objeto GetObjeto(string id)
+        // Al declarar un objeto, como puede declarar una variable objeto dentro
+        // buscar en su anterior
+
+        public Objeto search_types_entornos(string id)
         {
             id = id.ToLower();
+            for (Entorno e = this; e != null; e = e.anterior)
+            {
+                Objeto salida = e.GetObjeto(id);
+                if (salida != null) { return salida; }
+            }
+            return null;
+        }
+        public Objeto GetObjeto(string id)
+        {
             if (this.arreglos.ContainsKey(id))
             {
                 Arreglo arr;
@@ -117,6 +139,7 @@ namespace Pascal_AirMax.Environment
                 this.objetos.TryGetValue(id, out arr);
                 return arr;
             }
+
             return null;
         }
 

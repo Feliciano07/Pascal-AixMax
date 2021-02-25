@@ -31,8 +31,6 @@ namespace Pascal_AirMax.TipoDatos
         }
 
        
-
-
         public override object getValor()
         {
             throw new NotImplementedException();

@@ -60,3 +60,60 @@ begin
 
   writeln('h');
 end.
+
+
+// OBJETOS MAS AVANZADOS
+program Hello;
+
+type
+cuadro = object
+type
+circulo = object
+var a:integer;
+end;
+
+type
+area = object
+var a:integer;
+end;
+
+type
+vector2  = array[1..10] of real;
+
+end;
+
+var obj:cuadro;
+
+
+
+begin
+
+  writeln('h');
+end.
+
+
+
+// definicion de objetos dentro de objetos
+program Hello;
+
+type
+circulo = object
+var a:integer;
+end;
+    
+type 
+vector2 = array[1..10] of integer;
+
+
+type
+cuadro = object
+
+var aux:circulo;
+var arreglo1:vector2;
+
+end;
+
+begin
+
+  writeln('hola mundo');
+end.

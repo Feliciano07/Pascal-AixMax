@@ -94,7 +94,7 @@ namespace Pascal_AirMax.Instruccion
 
         public Objeto Buscar_types(Entorno entorno)
         {
-            Objeto salida = entorno.GetObjeto(this.nombre_tipo);
+            Objeto salida = entorno.search_types_entornos(this.nombre_tipo);
             if (salida == null)
             {
                 Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,

@@ -284,6 +284,8 @@ namespace Pascal_AirMax.Analizador
             lista_dec.Rule = lista_id + Tdospunto + tipo_dato + Tpuntocoma //*
                              | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tigual + exp + Tpuntocoma //*
                              | Id + PreferShiftHere() + Tdospunto + tipo_dato + Tpuntocoma //*
+
+                             // lo de abajo ya no
                              | lista_id + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma
                              |  Id + PreferShiftHere() + Tdospunto + Tarray + TcorA + lista_dimension + TcorC + Tof + tipo_dato + Tpuntocoma; 
 
@@ -321,7 +323,8 @@ namespace Pascal_AirMax.Analizador
 
             instruccion_objeto.Rule = variable//*
                               | constante//*
-                              | arrays
+                              //este ya no
+                              | arrays 
                               | objectos;
 
 

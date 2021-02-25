@@ -20,7 +20,7 @@ namespace Pascal_AirMax.Analizador
         {
             foreach (ParseTreeNode node in entrada.ChildNodes)
             {
-                Manejador.Maestra.getInstancia.addInstruccion(evaluar(node));
+                Manejador.Maestra.getInstancia.addInstruccion(evaluar_variable(node));
             }
             return null;
         }
@@ -37,7 +37,7 @@ namespace Pascal_AirMax.Analizador
 
 
 
-        public static Nodo evaluar(ParseTreeNode entrada)
+        public static Nodo evaluar_variable(ParseTreeNode entrada)
         {
             if (entrada.ChildNodes.Count == 4) //Declaraciones de variables sin iniciar
             {
@@ -257,7 +257,7 @@ namespace Pascal_AirMax.Analizador
             
             foreach (ParseTreeNode node in entrada.ChildNodes)
             {
-                var_objeto.AddLast(evaluar(node));
+                var_objeto.AddLast(evaluar_variable(node));
             }
             
         }
@@ -274,13 +274,17 @@ namespace Pascal_AirMax.Analizador
 
         // lo que esta aqui para abajo es solo para manejar los arreglos, que se declaran en el entorno global
 
-        public static void Declaracion_arreglo(ParseTreeNode entrada, int enviroment)
+        public static void Declaracion_arreglo(ParseTreeNode entrada, int enviroment, LinkedList<Nodo> lista)
         {
             foreach(ParseTreeNode node in entrada.ChildNodes)
             {
                 if(enviroment == 0)// global
                 {
                     Manejador.Maestra.getInstancia.addInstruccion(definicion_arreglo(node));
+                }
+                else if(enviroment == 1)
+                {
+                    lista.AddLast(definicion_arreglo(node));
                 }
             }
         }

@@ -35,7 +35,7 @@ namespace Pascal_AirMax.Declaraciones
             else
             {
                 Type_obj nuevo_objeto = new Type_obj(this.nombre);
-
+                nuevo_objeto.entorno_type.Anterior = entorno;
                 foreach(Nodo instruccion in declaraciones)
                 {
                     try
@@ -47,6 +47,7 @@ namespace Pascal_AirMax.Declaraciones
                         throw new Exception(e.ToString());
                     }
                 }
+                entorno.Anterior = null;
                 entorno.addObjeto(nuevo_objeto, this.nombre);
             }
 
