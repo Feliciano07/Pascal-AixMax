@@ -255,8 +255,8 @@ namespace Pascal_AirMax.Analizador
                        | Tfalse //*
                        | Id
                        | acceso_array
-                       | llamada_funciones
-                       | acceso_objeto
+                       //| llamada_funciones
+                      | acceso_objeto
                        | TparA + exp + TparC; //*
 
             // LLamada de una funcion
@@ -264,10 +264,7 @@ namespace Pascal_AirMax.Analizador
             llamada_funciones.Rule = Id + TparA + lista_exp + TparC
                                     | Id + TparA + TparC;
 
-            // acceso objeto
-            acceso_objeto.Rule = Id + Tpunto + ingreso;
 
-            ingreso.Rule = MakeListRule(ingreso, Tpunto, Id);
 
             tipo_dato.Rule = Tstring
                              | Tinteger
@@ -315,15 +312,15 @@ namespace Pascal_AirMax.Analizador
 
             //******************************* DECLARACION DE OBJECTOS
 
-            objectos.Rule = Ttype + Id + Tigual + Tobject + instrucciones_objeto + Tend + Tpuntocoma
-                           | Ttype + Id + Tigual + Tobject + Tend + Tpuntocoma;
+            objectos.Rule = Ttype + Id + Tigual + Tobject + instrucciones_objeto + Tend + Tpuntocoma //*
+                           | Ttype + Id + Tigual + Tobject + Tend + Tpuntocoma;//*
 
 
-            instrucciones_objeto.Rule = MakePlusRule(instrucciones_objeto, instruccion_objeto);
+            instrucciones_objeto.Rule = MakePlusRule(instrucciones_objeto, instruccion_objeto); //*
 
             instruccion_objeto.Rule = variable//*
                               | constante//*
-                              //este ya no
+                              //esto ya no
                               | arrays 
                               | objectos;
 
@@ -348,13 +345,30 @@ namespace Pascal_AirMax.Analizador
                          | non_for
                          ;
 
-            sentencia_exit.Rule = Texit + TparA + exp + TparC;
+
 
 
             asignacion.Rule = Id + Tasignar + exp
-                            | acceso_array + Tasignar + exp;
+                            | acceso_array + Tasignar + exp
+                            | acceso_objeto + Tasignar + exp;
+
+
 
             acceso_array.Rule = Id + TcorA + lista_exp + TcorC;
+
+
+            // acceso objeto
+            acceso_objeto.Rule = Id + Tpunto + ingreso
+                                | Id + TcorA + lista_exp + TcorC + Tpunto + ingreso;
+
+            ingreso.Rule = MakeListRule(ingreso, Tpunto, Id)
+                           |MakeListRule(ingreso, Tpunto, acceso_array);
+
+
+
+            sentencia_exit.Rule = Texit + TparA + exp + TparC;
+
+            //funciones nativas
 
             writeln.Rule = Twriteln + TparA + lista_exp + TparC //*
                             | Twriteln + TparA + TparC;  //*

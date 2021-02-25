@@ -1,0 +1,24 @@
+﻿program Hello;
+
+type
+circulo = object
+var a:integer;
+var b:real;
+end;
+    
+type 
+vector2 = array[1..10] of circulo;
+
+var aa:vector2;
+var cir: circulo;
+
+
+begin
+  cir.a := 50;
+  varia := 40;
+  aa[45]:= 50;
+  aa[45].a.b[45].a:= variable1;
+  aa[45].a.b[45].a:= variable1[45];
+  aa[45].a.b[45].a:= variable1.a.d.g.a;
+  aa[45].a.b[45].a:= variable1.a[45].de.dkdk[0];
+end.
