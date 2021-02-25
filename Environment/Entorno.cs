@@ -63,37 +63,24 @@ namespace Pascal_AirMax.Environment
         {
             nombre = nombre.ToLower();
             //verifica primero aquello que se declara como var o const
-            foreach (string nombre_simbolo in simbolos.Keys)
+            if (this.simbolos.ContainsKey(nombre))
             {
-                if(String.Compare(nombre_simbolo,nombre) == 0)
-                {
-                    return true;
-                }
-
+                return true;
             }
             //verifica aquello que se declara como funcion
-            foreach(string nombre_simbolo in funciones.Keys)
+            if (this.funciones.ContainsKey(nombre))
             {
-                if (String.Compare(nombre_simbolo, nombre) == 0)
-                {
-                    return true;
-                }
+                return true;
             }
 
-            foreach (string nombre_simbolo in arreglos.Keys)
+            if (this.arreglos.ContainsKey(nombre))
             {
-                if (String.Compare(nombre_simbolo, nombre) == 0)
-                {
-                    return true;
-                }
+                return true;
             }
 
-            foreach (string nombre_simbolo in objetos.Keys)
+            if (this.objetos.ContainsKey(nombre))
             {
-                if (String.Compare(nombre_simbolo, nombre) == 0)
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;

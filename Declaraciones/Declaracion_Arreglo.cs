@@ -13,12 +13,14 @@ namespace Pascal_AirMax.Declaraciones
         private Nodo[] dimensiones;
         private string nombre;
         private Objeto.TipoObjeto tipo;
+        private string nombre_tipo;
 
-        public Declaracion_Arreglo(int linea, int columna, Nodo[] dim, string nombre, Objeto.TipoObjeto tipo) : base(linea, columna)
+        public Declaracion_Arreglo(int linea, int columna, Nodo[] dim, string nombre, Objeto.TipoObjeto tipo, string nombre_tipo) : base(linea, columna)
         {
             this.dimensiones = dim;
             this.nombre = nombre;
             this.tipo = tipo;
+            this.nombre_tipo = nombre_tipo;
         }
 
         public override Objeto execute(Entorno entorno)
@@ -62,7 +64,7 @@ namespace Pascal_AirMax.Declaraciones
                 contador++;
                 int superior = retornar_limites(entorno, this.dimensiones[contador]);
                 Validar_limites(inferior, superior);
-                return new Arreglo(inferior, superior, get_tipo());
+                return new Arreglo(inferior, superior, get_tipo(entorno));
             }
             else
             {
@@ -76,7 +78,7 @@ namespace Pascal_AirMax.Declaraciones
         }
 
 
-        public Objeto get_tipo()
+        public Objeto get_tipo(Entorno entorno)
         {
             switch (this.tipo)
             {
@@ -88,7 +90,8 @@ namespace Pascal_AirMax.Declaraciones
                     return new Primitivo(this.tipo, 0.0);
                 case Objeto.TipoObjeto.BOOLEAN:
                     return new Primitivo(this.tipo, false);
-
+                case Objeto.TipoObjeto.TYPES:
+                    return Buscar_types(entorno);
                     //TODO: validar si es un tipo objeto o arreglo
             }
             return null;
@@ -132,6 +135,35 @@ namespace Pascal_AirMax.Declaraciones
             }
         }
 
+
+
+        public Objeto Buscar_types(Entorno entorno)
+        {
+            Objeto salida = entorno.search_types_entornos(this.nombre_tipo);
+            if (salida == null)
+            {
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                    "Error identificador no encontrado, no existe el type: " + this.nombre_tipo);
+                Maestra.getInstancia.addError(error);
+                throw new Exception("Identificador no encontrado");
+            }
+            return Copia(salida);
+        }
+
+        public Objeto Copia(Objeto entrada)
+        {
+            if (entrada.getTipo() == Objeto.TipoObjeto.ARRAY)
+            {
+                Arreglo tem = (Arreglo)entrada;
+
+                return tem.Clone();
+            }
+            else
+            {
+                Type_obj tem = (Type_obj)entrada;
+                return tem.Clone();
+            }
+        }
 
     }
 }

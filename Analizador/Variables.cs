@@ -298,11 +298,13 @@ namespace Pascal_AirMax.Analizador
 
             Objeto.TipoObjeto tipo = getTipo(entrada.ChildNodes[7]);
 
+            string nombre_tipo = Nombre_del_tipo(entrada.ChildNodes[7]);
+
             Nodo[] arreglo_dimensio;
 
             arreglo_dimensio = get_dimensiones(entrada.ChildNodes[4]);
 
-            return new Declaracion_Arreglo(linea, columna, arreglo_dimensio, nombre, tipo);
+            return new Declaracion_Arreglo(linea, columna, arreglo_dimensio, nombre, tipo, nombre_tipo);
 
         }
 
