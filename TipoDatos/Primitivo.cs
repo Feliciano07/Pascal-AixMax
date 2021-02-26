@@ -15,7 +15,8 @@ namespace Pascal_AirMax.TipoDatos
             this.valor = valor;
         }
 
- 
+
+
         public override object getValor()
         {
             return this.valor;
@@ -29,6 +30,16 @@ namespace Pascal_AirMax.TipoDatos
         public override object toString()
         {
             return this.valor.ToString();
+        }
+
+        public override Objeto Clonar_Objeto()
+        {
+            return (Objeto)this.MemberwiseClone();
+        }
+
+        public override Simbolo get_posicion(int posicion)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,12 +19,6 @@ namespace Pascal_AirMax.TipoDatos
 
         public Type_obj() : base(TipoObjeto.OBJECTS) { }
 
-        public Type_obj Clone()
-        {
-            return (Type_obj)this.MemberwiseClone();
-        }
-
-
         public Entorno GetEntorno()
         {
             return this.entorno_type;
@@ -46,6 +40,16 @@ namespace Pascal_AirMax.TipoDatos
             Simbolo retorno = entorno_type.GetSimbolo(nombre);
 
             return retorno;
+        }
+
+        public override Objeto Clonar_Objeto()
+        {
+            return (Objeto)this.MemberwiseClone();
+        }
+
+        public override Simbolo get_posicion(int posicion)
+        {
+            throw new NotImplementedException();
         }
     }
 }

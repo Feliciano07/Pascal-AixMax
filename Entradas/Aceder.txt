@@ -70,3 +70,17 @@ end.
 
 
 // tercera prueba con esto se verifica el acceso a arreglos
+
+program hello;
+
+type 
+vector2 = array[1..10] of integer;
+
+
+var arreglo1: vector2;
+
+begin
+
+arreglo1[1] := 45;
+
+end.

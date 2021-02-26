@@ -9,7 +9,7 @@ namespace Pascal_AirMax.TipoDatos
     public class Arreglo : Objeto
     {
 
-        private LinkedList<Objeto> valor;
+        private Simbolo[] valores;
         private int inferior;
         private int superior;
         private Objeto contenido;
@@ -19,13 +19,33 @@ namespace Pascal_AirMax.TipoDatos
             this.inferior = inferior;
             this.superior = superior;
             this.contenido = cont;
+            declarar_arreglo();
         }
         public Arreglo():base(TipoObjeto.ARRAY) { }
 
-        public Arreglo Clone()
+        public void declarar_arreglo()
         {
-            return (Arreglo)this.MemberwiseClone();
+            int dimen = ((inferior - superior));
+            if (dimen < 0) { dimen = (dimen * -1) +1 ; }
+            this.valores = new Simbolo[dimen];
+
+            for(int i = 0; i< this.valores.Length; i++)
+            {
+                Simbolo simbolo = new Simbolo("", this.contenido.Clonar_Objeto());
+                this.valores[i] = simbolo;
+            }
         }
+
+        public override Simbolo get_posicion(int posicion)
+        {
+            if(posicion >= inferior && posicion <= superior)
+            {
+                posicion = posicion - inferior;
+                return valores[posicion];
+            }
+            throw new Exception("Limites fuera del rango del arreglo: ");
+        }
+
 
         public override object getValor()
         {
@@ -41,5 +61,12 @@ namespace Pascal_AirMax.TipoDatos
         {
             throw new NotImplementedException();
         }
+
+        public override Objeto Clonar_Objeto()
+        {
+            return (Objeto)this.MemberwiseClone();
+        }
+
+
     }
 }

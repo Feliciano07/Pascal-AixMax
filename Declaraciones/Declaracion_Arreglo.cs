@@ -154,14 +154,14 @@ namespace Pascal_AirMax.Declaraciones
         {
             if (entrada.getTipo() == Objeto.TipoObjeto.ARRAY)
             {
-                Arreglo tem = (Arreglo)entrada;
+                
 
-                return tem.Clone();
+                return entrada.Clonar_Objeto();
             }
             else
             {
-                Type_obj tem = (Type_obj)entrada;
-                return tem.Clone();
+                
+                return entrada.Clonar_Objeto();
             }
         }
 

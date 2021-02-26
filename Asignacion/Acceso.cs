@@ -12,6 +12,8 @@ namespace Pascal_AirMax.Asignacion
         private string nombre_variable;
         private Acceso llamada_anterior;
 
+        private LinkedList<Nodo> dimensiones;
+
         public Acceso(int linea, int columna, string nombre, Acceso anterior):base(linea,columna)
         {
             this.nombre_variable = nombre;
@@ -21,6 +23,13 @@ namespace Pascal_AirMax.Asignacion
         public Acceso():base(0,0)
         {
 
+        }
+
+        public Acceso(int linea, int columna, string nombre, Acceso anterior, LinkedList<Nodo> dim) : base(linea, columna)
+        {
+            this.nombre_variable = nombre;
+            this.llamada_anterior = anterior;
+            this.dimensiones = dim;
         }
 
         public void setAnterior(Acceso anterior)
@@ -47,6 +56,12 @@ namespace Pascal_AirMax.Asignacion
                     Maestra.getInstancia.addError(error);
                     throw new Exception("Error el simbolo: " + this.nombre_variable + " no se encontro");
                 }
+
+                if(simbolo_retorno.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)
+                {
+                    return Recorrer_array(entorno, simbolo_retorno);
+                }
+
                 return simbolo_retorno;
             }
             else
@@ -78,5 +93,43 @@ namespace Pascal_AirMax.Asignacion
                 throw new Exception("El simbolo: " + this.nombre_variable + "no es de tipo objeto");
             }
         }
+
+
+        public Simbolo Recorrer_array(Entorno entorno, Simbolo array)
+        {
+            foreach(Nodo exp in this.dimensiones)
+            {
+                Objeto valor = exp.execute(entorno);
+                Validar_Entero(valor);
+
+                int valor_intero = int.Parse(valor.getValor().ToString());
+
+                try
+                {
+                    array = array.getValor().get_posicion(valor_intero);
+
+                }catch(Exception e)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                        e.ToString() + this.nombre_variable);
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception(e.ToString());
+                }
+
+            }
+            return array;
+        }
+
+        public void Validar_Entero(Objeto valor)
+        {
+            if(valor .getTipo() != Objeto.TipoObjeto.INTEGER)
+            {
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                    "La dimension del arreglo: " + this.nombre_variable + " tiene que sen integer");
+                Maestra.getInstancia.addError(error);
+                throw new Exception("La dimension del arreglo: " + this.nombre_variable + " tiene que sen integer");
+            }
+        }
+
     }
 }

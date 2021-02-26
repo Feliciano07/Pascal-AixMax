@@ -19,7 +19,7 @@ namespace Pascal_AirMax.Environment
         private string nombre;
         private Objeto sym; // primitivos, array, objectos
         private Tipo_variable tipo;
-
+        public LinkedList<Nodo> dimension;
         //TODO: hace falta ver el entorno
 
         public Simbolo(string nombre, Objeto valor)
