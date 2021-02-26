@@ -348,7 +348,7 @@ namespace Pascal_AirMax.Analizador
 
 
 
-            asignacion.Rule = Id + Tasignar + exp
+            asignacion.Rule = Id + Tasignar + exp //*
                             | acceso_array + Tasignar + exp
                             | acceso_objeto + Tasignar + exp;
 
@@ -358,7 +358,7 @@ namespace Pascal_AirMax.Analizador
 
 
             // acceso objeto
-            acceso_objeto.Rule = Id + Tpunto + ingreso
+            acceso_objeto.Rule = Id + Tpunto + ingreso //*
                                 | Id + TcorA + lista_exp + TcorC + Tpunto + ingreso;
 
             ingreso.Rule = MakeListRule(ingreso, Tpunto, Id)

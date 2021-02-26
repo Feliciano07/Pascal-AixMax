@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
+using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.TipoDatos
 {
@@ -32,6 +33,11 @@ namespace Pascal_AirMax.TipoDatos
         }
 
         public override object toString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Simbolo get_atributo(string nombre)
         {
             throw new NotImplementedException();
         }

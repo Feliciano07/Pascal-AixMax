@@ -40,5 +40,12 @@ namespace Pascal_AirMax.TipoDatos
         {
             throw new NotImplementedException();
         }
+
+        public override Simbolo get_atributo(string nombre)
+        {
+            Simbolo retorno = entorno_type.GetSimbolo(nombre);
+
+            return retorno;
+        }
     }
 }

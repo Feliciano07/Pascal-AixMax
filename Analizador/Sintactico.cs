@@ -27,9 +27,9 @@ namespace Pascal_AirMax.Analizador
             GenerarAST(raiz);
 
 
-           encabezado(raiz.ChildNodes[0]);
+            //encabezado(raiz.ChildNodes[0]);
 
-            Maestra.getInstancia.ejecutar();
+           // Maestra.getInstancia.ejecutar();
 
             return true;
         }

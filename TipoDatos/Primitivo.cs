@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
- 
+using Pascal_AirMax.Environment;
+
 namespace Pascal_AirMax.TipoDatos
 {
     public class Primitivo: Objeto
@@ -18,6 +19,11 @@ namespace Pascal_AirMax.TipoDatos
         public override object getValor()
         {
             return this.valor;
+        }
+
+        public override Simbolo get_atributo(string nombre)
+        {
+            throw new NotImplementedException();
         }
 
         public override object toString()

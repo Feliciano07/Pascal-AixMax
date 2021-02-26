@@ -45,3 +45,28 @@ begin
   cir2 := 'bienvenidos';
   hola := true;
 end.
+
+// segunda prueba con esto ya se verifican la asignacion de niveles
+
+program hello;
+
+type 
+cuadro = object
+var interna:integer;
+end;
+
+
+type
+circulo = object
+var obj: cuadro;
+end;
+
+var prueba: circulo;
+
+begin
+
+    prueba.obj.interna := 45;
+end.
+
+
+// tercera prueba con esto se verifica el acceso a arreglos

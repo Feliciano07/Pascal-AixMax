@@ -18,6 +18,16 @@ namespace Pascal_AirMax.Asignacion
             this.llamada_anterior = anterior;
         }
 
+        public Acceso():base(0,0)
+        {
+
+        }
+
+        public void setAnterior(Acceso anterior)
+        {
+            this.llamada_anterior = anterior;
+        }
+
 
         public override Objeto execute(Entorno entorno)
         {
@@ -39,7 +49,34 @@ namespace Pascal_AirMax.Asignacion
                 }
                 return simbolo_retorno;
             }
-            return null;
+            else
+            {
+                Simbolo simbolo_retorno = llamada_anterior.retornar_simbolo(entorno);
+                Validar_Nivel(simbolo_retorno);
+
+                Simbolo atributo_objeto = simbolo_retorno.getValor().get_atributo(this.nombre_variable);
+                if(atributo_objeto == null)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                       "Error el simbolo: " + this.nombre_variable + " no se encontro");
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception("Error el simbolo: " + this.nombre_variable + " no se encontro");
+                }
+
+                return atributo_objeto;
+
+            }
+        }
+
+        public void Validar_Nivel(Simbolo simbolo)
+        {
+            if(simbolo.getValor().getTipo() != Objeto.TipoObjeto.OBJECTS)
+            {
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                    "El simbolo: " + this.nombre_variable + "no es de tipo objeto");
+                Maestra.getInstancia.addError(error);
+                throw new Exception("El simbolo: " + this.nombre_variable + "no es de tipo objeto");
+            }
         }
     }
 }

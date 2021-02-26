@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pascal_AirMax.Environment;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -41,6 +42,8 @@ namespace Pascal_AirMax.Abstract
         public abstract object getValor();
 
         public abstract object toString();
+
+        public abstract Simbolo get_atributo(string nombre);
 
        //implementar funcion para clonar
        
