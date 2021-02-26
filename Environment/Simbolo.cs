@@ -43,6 +43,11 @@ namespace Pascal_AirMax.Environment
             this.nombre = nombre;
         }
 
+        public string getNombre()
+        {
+            return this.nombre;
+        }
+
         public Objeto getValor()
         {
             return this.sym;
@@ -53,6 +58,11 @@ namespace Pascal_AirMax.Environment
             Objeto tem = this.sym;
             this.sym = valor;
             this.sym.setTipo(tem.getTipo());
+        }
+
+        public Tipo_variable GetTipo_Variable()
+        {
+            return this.tipo;
         }
 
     }

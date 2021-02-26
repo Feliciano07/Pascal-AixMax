@@ -29,6 +29,8 @@ namespace Pascal_AirMax.Asignacion
         {
             Simbolo simbolo = retornar_asignacion(entorno);
 
+            No_constante(simbolo);
+
             Objeto valor = retornar_valor_nuevo(entorno);
 
             Validar_tipos(simbolo.getValor(), valor);
@@ -53,6 +55,17 @@ namespace Pascal_AirMax.Asignacion
             }
 
             return simbolo;
+        }
+
+        public void No_constante(Simbolo simbolo)
+        {
+            if(simbolo.GetTipo_Variable() == Simbolo.Tipo_variable.CONST)
+            {
+                Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                    "No se puede asignar valor a una constante: "+ simbolo.getNombre());
+                Maestra.getInstancia.addError(error);
+                throw new Exception("No se puede asignar valor a una constante id= " + simbolo.getNombre());
+            }
         }
 
         public Objeto retornar_valor_nuevo(Entorno entorno)

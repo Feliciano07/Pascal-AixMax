@@ -35,7 +35,11 @@ var cir1:real;
 var cir2: string;
 var hola:boolean;
 
+const a = 45;
+
 begin
+  
+  a:= 20;
   cir := 50;
   cir1:= 50.23;
   cir2 := 'bienvenidos';
