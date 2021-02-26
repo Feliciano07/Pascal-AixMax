@@ -42,7 +42,7 @@ namespace Pascal_AirMax.Abstract
 
         public abstract object toString();
 
-       
+       //implementar funcion para clonar
        
 
     }

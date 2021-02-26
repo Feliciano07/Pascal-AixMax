@@ -22,3 +22,22 @@ begin
   aa[45].a.b[45].a:= variable1.a.d.g.a;
   aa[45].a.b[45].a:= variable1.a[45].de.dkdk[0];
 end.
+
+
+
+//Primera prueba
+
+program Hello;
+
+
+var cir:integer;
+var cir1:real;
+var cir2: string;
+var hola:boolean;
+
+begin
+  cir := 50;
+  cir1:= 50.23;
+  cir2 := 'bienvenidos';
+  hola := true;
+end.

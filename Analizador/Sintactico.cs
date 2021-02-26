@@ -133,6 +133,9 @@ namespace Pascal_AirMax.Analizador
                     return Main.Repeat(actual);
                 case "no_for":
                     return Main.For(actual);
+                case "asignacion":
+                    return Asignaciones.Tipo_asignacion(actual);
+                    
 
             }
             return null;

@@ -48,5 +48,12 @@ namespace Pascal_AirMax.Environment
             return this.sym;
         }
 
+        public void setValor(Objeto valor)
+        {
+            Objeto tem = this.sym;
+            this.sym = valor;
+            this.sym.setTipo(tem.getTipo());
+        }
+
     }
 }
