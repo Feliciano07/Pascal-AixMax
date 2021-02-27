@@ -56,16 +56,13 @@ var interna:integer;
 end;
 
 
-type
-circulo = object
-var obj: cuadro;
-end;
 
-var prueba: circulo;
+
+var prueba: cuadro;
 
 begin
 
-    prueba.obj.interna := 45;
+    prueba.interna := 45;
 end.
 
 

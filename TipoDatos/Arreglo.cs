@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.TipoDatos
 {
+    [Serializable]
     public class Arreglo : Objeto
     {
 
@@ -64,7 +67,17 @@ namespace Pascal_AirMax.TipoDatos
 
         public override Objeto Clonar_Objeto()
         {
-            return (Objeto)this.MemberwiseClone();
+            return Clone(this);
+            
+        }
+
+        public static Objeto Clone<Objeto>(Objeto objeto1)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, objeto1);
+            stream.Position = 0;
+            return (Objeto)formatter.Deserialize(stream);
         }
 
 

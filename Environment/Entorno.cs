@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Pascal_AirMax.Environment
 {
+    [Serializable]
     public class Entorno
     {
 

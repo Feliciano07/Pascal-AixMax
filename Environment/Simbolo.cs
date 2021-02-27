@@ -6,6 +6,7 @@ using Pascal_AirMax.Abstract;
 
 namespace Pascal_AirMax.Environment
 {
+    [Serializable]
     public class Simbolo
     {
  
