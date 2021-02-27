@@ -40,8 +40,9 @@ namespace Pascal_AirMax.Asignacion
 
         public override Objeto execute(Entorno entorno)
         {
-            
-            return null;
+            //TODO: validar si es primitivo(pasar por valor) o verificar si objeto o array (pasar por referencia)
+            Simbolo valor = this.retornar_simbolo(entorno);
+            return valor.getValor();
         }
 
         public Simbolo retornar_simbolo(Entorno entorno)

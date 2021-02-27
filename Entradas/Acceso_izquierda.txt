@@ -1,0 +1,18 @@
+﻿program hello;
+
+type 
+cuadro = object
+var interna:integer;
+end;
+
+
+var prueba: cuadro;
+
+var tem:integer;
+
+begin
+    tem := 45;
+    prueba.interna := tem;
+
+    writeln(prueba.interna);
+end.

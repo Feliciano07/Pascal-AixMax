@@ -256,7 +256,7 @@ namespace Pascal_AirMax.Analizador
                        | Id
                        | acceso_array
                        //| llamada_funciones
-                      | acceso_objeto
+                       | acceso_objeto
                        | TparA + exp + TparC; //*
 
             // LLamada de una funcion
