@@ -67,6 +67,12 @@ namespace Pascal_AirMax.Asignacion
             else
             {
                 Simbolo simbolo_retorno = llamada_anterior.retornar_simbolo(entorno);
+
+                if(simbolo_retorno.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)
+                {
+                    simbolo_retorno = Recorrer_array(entorno, simbolo_retorno);
+                }
+
                 Validar_Nivel(simbolo_retorno);
 
                 Simbolo atributo_objeto = simbolo_retorno.getValor().get_atributo(this.nombre_variable);
@@ -99,21 +105,32 @@ namespace Pascal_AirMax.Asignacion
         {
             foreach(Nodo exp in this.dimensiones)
             {
-                Objeto valor = exp.execute(entorno);
-                Validar_Entero(valor);
-
-                int valor_intero = int.Parse(valor.getValor().ToString());
-
-                try
+                if(array.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)
                 {
-                    array = array.getValor().get_posicion(valor_intero);
+                    Objeto valor = exp.execute(entorno);
+                    Validar_Entero(valor);
 
-                }catch(Exception e)
+                    int valor_intero = int.Parse(valor.getValor().ToString());
+
+                    try
+                    {
+                        array = array.getValor().get_posicion(valor_intero);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                            e.ToString() + this.nombre_variable);
+                        Maestra.getInstancia.addError(error);
+                        throw new Exception(e.ToString());
+                    }
+                }
+                else
                 {
                     Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
-                        e.ToString() + this.nombre_variable);
+                        "El simbolo definido: " + this.nombre_variable + " no es un arreglo o las dimensiones no son las correctas");
                     Maestra.getInstancia.addError(error);
-                    throw new Exception(e.ToString());
+                    throw new Exception("Dimensiones incorrectas");
                 }
 
             }

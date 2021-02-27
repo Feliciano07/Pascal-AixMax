@@ -45,24 +45,35 @@ namespace Pascal_AirMax.Analizador
         {
             Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[2]);
             return primer_nivel(entrada.ChildNodes[0], expresion);
-        }
+        } 
 
         public static Nodo primer_nivel(ParseTreeNode entrada, Nodo expresion)
         {
             //TODO: validar si es id o array
-
-
             int linea = entrada.ChildNodes[0].Span.Location.Line;
             int columna = entrada.ChildNodes[0].Span.Location.Column;
+            if (entrada.ChildNodes.Count == 3)
+            {
 
-            string nombre = entrada.ChildNodes[0].Token.Text;
+                string nombre = entrada.ChildNodes[0].Token.Text;
 
-            Acceso primero = new Acceso(linea, columna, nombre, null);
+                Acceso primero = new Acceso(linea, columna, nombre, null);
 
-            Acceso retorno = Niveles_abajo(entrada.ChildNodes[2], primero);
+                Acceso retorno = Niveles_abajo(entrada.ChildNodes[2], primero);
 
-            return new Asignacion1(linea, columna, retorno, expresion);
+                return new Asignacion1(linea, columna, retorno, expresion);
+            }
+            else if(entrada.ChildNodes.Count == 6)
+            {
+                string nombre = entrada.ChildNodes[0].Token.Text;
+                LinkedList<Nodo> dimensiones = Main.lista_expresion(entrada.ChildNodes[2]);
+                Acceso primero = new Acceso(linea, columna, nombre, null, dimensiones);
+                Acceso retorno = Niveles_abajo(entrada.ChildNodes[5],primero);
 
+                return new Asignacion1(linea, columna, retorno, expresion);
+            }
+
+            return null;
         }
 
         public static Acceso Niveles_abajo(ParseTreeNode entrada, Acceso primero)
@@ -72,6 +83,7 @@ namespace Pascal_AirMax.Analizador
             for(int i = 0; i < entrada.ChildNodes.Count; i++)
             {
                 //TODO: Validar si es solo id o un arreglo
+
 
                 if( i == 0)
                 {
@@ -95,12 +107,28 @@ namespace Pascal_AirMax.Analizador
         public static Acceso Llamada_id(ParseTreeNode entrada)
         {
             // prueba solo con id
-            int linea = entrada.Span.Location.Line;
-            int columna = entrada.Span.Location.Column;
 
-            string id_variable = entrada.Token.Text;
+            string toke = entrada.Term.Name;
 
-            return new Acceso(linea, columna, id_variable, null);
+            switch (toke)
+            {
+                case "Id":
+                    {
+                        int linea = entrada.Span.Location.Line;
+                        int columna = entrada.Span.Location.Column;
+
+                        string id_variable = entrada.Token.Text;
+
+                        return new Acceso(linea, columna, id_variable, null);
+                    }
+                case "acceso_array":
+                    {
+                        return Arreglo_Unico(entrada);
+                    }
+
+            }
+
+            return null;
         }
 
 

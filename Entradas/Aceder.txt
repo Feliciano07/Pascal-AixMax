@@ -71,13 +71,36 @@ end.
 program hello;
 
 type 
-vector2 = array[1..10] of integer;
+vector2 = array[1..10, 0..2] of integer;
 
 
 var arreglo1: vector2;
 
 begin
 
-arreglo1[1] := 45;
+arreglo1[1,1] := 45;
 
 end.
+
+
+// cuarta prueba la mera mera, caguamera
+
+program hello;
+
+type 
+cuadro = object
+var interna:integer;
+end;
+
+
+type 
+vector2 = array[1..10, 0..2] of cuadro;
+
+var arreglo1: vector2;
+
+begin 
+
+arreglo1[1,1].interna := 45; 
+
+end.
+
