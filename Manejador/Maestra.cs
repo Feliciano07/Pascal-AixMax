@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
+using Pascal_AirMax.Transferencia;
 
 namespace Pascal_AirMax.Manejador
 {
@@ -66,10 +67,28 @@ namespace Pascal_AirMax.Manejador
                     try
                     {
                         Objeto retorno = nodo.execute(entorno);
+
+                        if (retorno != null)
+                        {
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "Sentencia continue debe estar dentro de un ciclo");
+                                this.addError(error);
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "Sentencia break debe estar dentro de un ciclo o case");
+                                this.addError(error);
+                            }
+                        }
                     }
-                    catch (Exception e)
+                    catch(Exception e)
                     {
-                        Console.WriteLine(e);
+                        Console.WriteLine(e.ToString());
                     }
                 }    
 

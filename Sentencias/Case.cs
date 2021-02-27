@@ -64,19 +64,22 @@ namespace Pascal_AirMax.Sentencias
 
                 if (bool.Parse(salida.getValor().ToString()))
                 {
-                    foreach (Nodo inst in this.instrucciones)
+                    foreach (Nodo instruccion in this.instrucciones)
                     {
-                        //TODO: validar si retorna algo
-                        try
+                        Objeto retorno = instruccion.execute(entorno);
+
+                        if (retorno != null)
                         {
-                            inst.execute(entorno);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return retorno;
+                            }
                         }
                     }
-                    //TODO: verificar que si se cumplido el caso
                     throw new Exception("se cumplio la condicion");
                 }
 

@@ -1,0 +1,49 @@
+﻿program whileLoop;
+var
+   a: integer;
+
+begin
+   a := 10;
+   while  a < 20  do
+   
+   begin
+      writeln('value of a: ', a);
+      a := a + 1;
+      if true then
+      continue
+  else
+  writeln('falso');
+
+   end;
+end.
+
+/////////////////////////////////'program checkCase;
+var
+   grade: string;
+
+var
+   a: integer;
+   
+   
+begin
+   grade := 'A';
+   
+   a := 10;
+   
+   while  a < 20  do
+   
+   begin
+      a := a + 1;
+    case (grade) of
+      'A' : 
+        begin
+            writeln('Excellent!', a);
+            //continue;
+        end;
+      'B', 'C': writeln('Well done' );
+      'D' : writeln('You passed' );
+      'F' : writeln('Better try again' );
+    end;  
+    writeln('a');
+   end;
+end.

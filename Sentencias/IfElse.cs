@@ -47,12 +47,24 @@ namespace Pascal_AirMax.Sentencias
 
             if (bool.Parse(condicion.getValor().ToString()) == true) // por si es verdaderos
             {
-                foreach (Nodo inst in this.instru_if)
+                foreach (Nodo instruccion in this.instru_if)
                 {
                     //TODO: validar si retorna algo
                     try
                     {
-                        inst.execute(entorno);
+                        Objeto retorno = instruccion.execute(entorno);
+
+                        if (retorno != null)
+                        {
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return retorno;
+                            }
+                        }
                     }
                     catch (Exception e)
                     {
@@ -62,16 +74,20 @@ namespace Pascal_AirMax.Sentencias
             }
             else // por si es falso
             {
-                foreach (Nodo inst in this.instru_else)
+                foreach (Nodo instruccion in this.instru_else)
                 {
-                    //TODO: validar si retorna algo
-                    try
+                    Objeto retorno = instruccion.execute(entorno);
+
+                    if (retorno != null)
                     {
-                        inst.execute(entorno);
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
+                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        {
+                            return retorno;
+                        }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                        {
+                            return retorno;
+                        }
                     }
                 }
             }

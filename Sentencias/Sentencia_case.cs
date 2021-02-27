@@ -33,7 +33,7 @@ namespace Pascal_AirMax.Sentencias
         public override Objeto execute(Entorno entorno)
         {
             Objeto condicion = null;
-
+            this.datos_evaluados.Clear();   
             try
             {
                 condicion = expresion.execute(entorno);
@@ -49,8 +49,19 @@ namespace Pascal_AirMax.Sentencias
                 try
                 {
                     // TODO: validar si retorna algo
-                    caso.execute_caso(entorno, condicion, this.datos_evaluados);
-                    
+                    Objeto retorno = caso.execute_caso(entorno, condicion, this.datos_evaluados);
+                    if (retorno != null)
+                    {
+                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        {
+                            return retorno;
+                        }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                        {
+                            return retorno;
+                        }
+                    }
+
                 }
                 catch (Exception e)
                 {
