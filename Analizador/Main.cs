@@ -4,6 +4,7 @@ using System.Text;
 
 using Irony.Parsing;
 using Pascal_AirMax.Abstract;
+using Pascal_AirMax.Asignacion;
 using Pascal_AirMax.Expresion;
 using Pascal_AirMax.Instruccion;
 using Pascal_AirMax.Sentencias;
@@ -425,7 +426,7 @@ namespace Pascal_AirMax.Analizador
             int columna = entrada.Span.Location.Column;
 
             //captura de la expresion
-            Nodo asignacion = null; //entrada.childNodes[1];
+            Asignacion1 asignacion = (Asignacion1)Asignaciones.Tipo_asignacion(entrada.ChildNodes[1]); //entrada.childNodes[1];
 
             string token = entrada.ChildNodes[2].Term.Name.ToLower();
             bool comportamiento = false;
@@ -468,7 +469,7 @@ namespace Pascal_AirMax.Analizador
             int columna = entrada.Span.Location.Column;
 
             //captura de la expresion
-            Nodo asignacion = null; //entrada.childNodes[1];
+            Asignacion1 asignacion = (Asignacion1)Asignaciones.Tipo_asignacion(entrada.ChildNodes[1]);
 
             string token = entrada.ChildNodes[2].Term.Name.ToLower();
             bool comportamiento = false;

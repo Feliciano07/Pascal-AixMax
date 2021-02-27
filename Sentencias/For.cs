@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
+using Pascal_AirMax.Asignacion;
 using Pascal_AirMax.Environment;
 using Pascal_AirMax.Manejador;
+using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Sentencias
 {
     public class For : Nodo
     {
-        private Nodo condicion;
+        private Asignacion1 condicion;
         private Nodo expresion;
         private LinkedList<Nodo> instrucciones;
         private bool comportamiento;
 
-        public For(int linea, int columna, Nodo con, Nodo exp, LinkedList<Nodo> ins, bool compor) : base(linea, columna)
+        public For(int linea, int columna, Asignacion1 con, Nodo exp, LinkedList<Nodo> ins, bool compor) : base(linea, columna)
         {
             this.condicion = con;
             this.expresion = exp;
@@ -26,21 +28,24 @@ namespace Pascal_AirMax.Sentencias
         {
             //TODO: implementar asignacion, validar que sea integer
 
+            Simbolo inicio = this.condicion.execute_for(entorno);
+            validar_integer(inicio.getValor());
 
-            
-            Objeto exp = obtener_expresion(entorno);
-            validar_integer(exp);
+            Objeto final = obtener_expresion(entorno);
+            validar_integer(final);
 
-            int b = Int16.Parse(exp.getValor().ToString());
+            int b = Int16.Parse(final.getValor().ToString());
 
             // Asignacion se debe agregar aca
-            int a = 5;
+            int a = Int16.Parse(inicio.getValor().getValor().ToString());
 
             if (comportamiento)
             {
                 for(int i =a; i >= b; i--)
                 {
-                    foreach(Nodo instruccion in this.instrucciones)
+                    Primitivo pr = new Primitivo(Objeto.TipoObjeto.INTEGER, i);
+                    inicio.setValor(pr);
+                    foreach (Nodo instruccion in this.instrucciones)
                     {
                         try
                         {
@@ -51,12 +56,15 @@ namespace Pascal_AirMax.Sentencias
                             Console.WriteLine(e);
                         }
                     }
+
                 }
             }
             else
             {
                 for (int i = a; i <= b; i++)
                 {
+                    Primitivo pr = new Primitivo(Objeto.TipoObjeto.INTEGER, i);
+                    inicio.setValor(pr);
                     foreach (Nodo instruccion in this.instrucciones)
                     {
                         try
@@ -68,6 +76,7 @@ namespace Pascal_AirMax.Sentencias
                             Console.WriteLine(e);
                         }
                     }
+
                 }
             }
             

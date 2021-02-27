@@ -454,7 +454,7 @@ namespace Pascal_AirMax.Analizador
             repeat.Rule = Trepeat + opciones_main + Tuntil + exp + Tpuntocoma; //*
 
             sentencia_repeat.Rule = Trepeat + opciones_main + Tuntil + exp ; //*
-
+             
 
             //*************************** SENTENCIA FOR-DO, el for solo aceptar variables normales
 

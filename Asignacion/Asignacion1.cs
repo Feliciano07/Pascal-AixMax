@@ -37,7 +37,20 @@ namespace Pascal_AirMax.Asignacion
 
             simbolo.setValor(valor);
 
-            return null;
+            return simbolo.getValor();
+        }
+
+        public Simbolo execute_for(Entorno entorno)
+        {
+            Simbolo simbolo = retornar_asignacion(entorno);
+
+            No_constante(simbolo);
+
+            Objeto valor = retornar_valor_nuevo(entorno);
+
+            Validar_tipos(simbolo.getValor(), valor);
+            simbolo.setValor(valor);
+            return simbolo;
         }
 
 
