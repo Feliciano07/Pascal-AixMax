@@ -49,8 +49,20 @@ namespace Pascal_AirMax.Sentencias
                     {
                         try
                         {
-                            //TODO: validar los retornos
-                            instruccion.execute(entorno);
+                            Objeto retorno = instruccion.execute(entorno);
+
+                            if (retorno != null)
+                            {
+                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                {
+                                    break;
+                                }else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                {
+                                    return null;
+                                }
+                            }
+
+
                         }catch(Exception e)
                         {
                             Console.WriteLine(e);
@@ -70,8 +82,22 @@ namespace Pascal_AirMax.Sentencias
                         try
                         {
                             //validar los retornos
-                            instruccion.execute(entorno);
-                        }catch(Exception e)
+                            Objeto retorno = instruccion.execute(entorno);
+
+                            if (retorno != null)
+                            {
+                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                {
+                                    break;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                {
+                                    return null;
+                                }
+                            }
+
+                        }
+                        catch (Exception e)
                         {
                             Console.WriteLine(e);
                         }
@@ -112,6 +138,10 @@ namespace Pascal_AirMax.Sentencias
             }
         }
 
-        
+
+        public void Analizar_Retornos(Nodo instruccion, Entorno entorno)
+        {
+            
+        }
     }
 }

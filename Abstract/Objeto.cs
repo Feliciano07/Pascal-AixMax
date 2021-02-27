@@ -20,7 +20,9 @@ namespace Pascal_AirMax.Abstract
             NULO = 10,
             CONST = 11,
             FUNCION = 12,
-            TYPES = 13
+            TYPES = 13,
+            CONTINUE = 14,
+            BREAK = 15
         }
 
         private TipoObjeto tipo;

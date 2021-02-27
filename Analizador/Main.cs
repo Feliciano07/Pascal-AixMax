@@ -121,6 +121,10 @@ namespace Pascal_AirMax.Analizador
                     return Main.For_if(actual);
                 case "asignacion":
                     return Asignaciones.Tipo_asignacion(actual);
+                case "continue":
+                    return Tranferencias.Sentencia_continue(actual);
+                case "break":
+                    return Tranferencias.Sentencia_break(actual);
             }
             return null;
         }
@@ -414,6 +418,12 @@ namespace Pascal_AirMax.Analizador
                     return Main.Repeat(actual);
                 case "no_for":
                     return Main.For(actual);
+                case "asignacion":
+                    return Asignaciones.Tipo_asignacion(actual);
+                case "continue":
+                    return Tranferencias.Sentencia_continue(actual);
+                case "break":
+                    return Tranferencias.Sentencia_break(actual);
 
             }
             return null;
@@ -444,7 +454,7 @@ namespace Pascal_AirMax.Analizador
             Nodo expresion = Expresion.Expresion.evaluar(entrada.ChildNodes[3]);
 
             token = entrada.ChildNodes[5].Term.Name;
-
+             
             if(entrada.ChildNodes.Count == 6)
             {
                 LinkedList<Nodo> temporal = new LinkedList<Nodo>();

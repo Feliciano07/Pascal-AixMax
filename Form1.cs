@@ -22,7 +22,7 @@ namespace Pascal_AirMax
         private void button2_Click(object sender, EventArgs e)
         {
             //Console.WriteLine("se clickeo el ejecutar");
-
+            Manejador.Maestra.getInstancia.clear();
             string entrada = richTextBox1.Text; 
             Sintactico sintactico= new Sintactico();
             bool salida = sintactico.Analizar(entrada);

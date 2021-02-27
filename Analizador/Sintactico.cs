@@ -135,6 +135,10 @@ namespace Pascal_AirMax.Analizador
                     return Main.For(actual);
                 case "asignacion":
                     return Asignaciones.Tipo_asignacion(actual);
+                case "continue":
+                    return Tranferencias.Sentencia_continue(actual);
+                case "break":
+                    return Tranferencias.Sentencia_break(actual);
                     
 
             }

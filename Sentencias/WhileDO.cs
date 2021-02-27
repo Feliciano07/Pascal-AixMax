@@ -30,13 +30,25 @@ namespace Pascal_AirMax.Sentencias
 
             while (salida)
             {
-                foreach(Nodo inst in this.instruciones)
+                foreach(Nodo instruccion in this.instruciones)
                 {
                     try
                     {
-                        //TODO: validar si retorna algo
-                        inst.execute(entorno);
-                    }catch(Exception e)
+                        Objeto retorno = instruccion.execute(entorno);
+
+                        if (retorno != null)
+                        {
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                break;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                    catch(Exception e)
                     {
                         Console.WriteLine(e.ToString());
                     }

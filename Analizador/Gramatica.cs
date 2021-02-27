@@ -97,6 +97,7 @@ namespace Pascal_AirMax.Analizador
             var Tfor = ToTerm("for");
             var Tto = ToTerm("to");
             var Tdown = ToTerm("downto");
+
             var Tbreak = ToTerm("break");
             var Tcontinue = ToTerm("continue");
 
@@ -342,8 +343,11 @@ namespace Pascal_AirMax.Analizador
                          | caseof ///*
                          | whiledo //*
                          | repeat //*
-                         | non_for
+                         | non_for //*
+                         | Tcontinue + Tpuntocoma
+                         | Tbreak + Tpuntocoma
                          ;
+                         
 
 
 
@@ -404,6 +408,8 @@ namespace Pascal_AirMax.Analizador
                              | sentencia_while //*
                              | sentencia_repeat //*
                              | sentencia_for
+                             | Tbreak
+                             | Tcontinue
                              | Tbegin + lista_main + Tend;
 
             main_stm.Rule = asignacion + Tpuntocoma

@@ -30,9 +30,21 @@ namespace Pascal_AirMax.Sentencias
                 {
                     try
                     {
-                        //TODO: validar si retorna algo
-                        instruccion.execute(entorno);
-                    }catch(Exception e)
+                        Objeto retorno = instruccion.execute(entorno);
+
+                        if (retorno != null)
+                        {
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                break;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return null;
+                            }
+                        }
+                    }
+                    catch(Exception e)
                     {
                         Console.WriteLine(e);
                     }
@@ -40,7 +52,7 @@ namespace Pascal_AirMax.Sentencias
                 condicion = Obtener_condicion(entorno);
                 salida = Obtener_valor(condicion);
 
-            } while (salida);
+            } while (!salida);
             return null;
         }
 

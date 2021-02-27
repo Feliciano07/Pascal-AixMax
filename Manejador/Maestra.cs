@@ -78,7 +78,9 @@ namespace Pascal_AirMax.Manejador
 
         public void clear()
         {
-            this.errores = new LinkedList<Error>();
+            this.errores.Clear();
+            this.instrucciones.Clear();
+            this.Output = "";
         }
 
     }
