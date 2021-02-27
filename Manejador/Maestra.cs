@@ -31,7 +31,7 @@ namespace Pascal_AirMax.Manejador
 
         public void add_output_writeln(string mensaje)
         {
-            this.Output += "\n" + mensaje;
+            this.Output += mensaje;
         }
 
         public void add_output_write(string mensaje)

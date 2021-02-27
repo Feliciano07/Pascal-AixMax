@@ -95,7 +95,7 @@ namespace Pascal_AirMax.Analizador
         public static Nodo Main_If(ParseTreeNode actual)
         {
             String toke = actual.Term.Name;
-
+             
             switch (toke)
             {
                 case "writeln":
@@ -118,6 +118,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.Repeat(actual);
                 case "sentencia_for":
                     return Main.For_if(actual);
+                case "asignacion":
+                    return Asignaciones.Tipo_asignacion(actual);
             }
             return null;
         }

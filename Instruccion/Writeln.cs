@@ -6,7 +6,7 @@ using Pascal_AirMax.Environment;
 using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
-{
+{ 
     public class Writeln : Funcion
     {
 
@@ -34,6 +34,7 @@ namespace Pascal_AirMax.Instruccion
             {
                 Maestra.getInstancia.add_output_writeln(obj.getValor().ToString());
             }
+            Maestra.getInstancia.add_output_writeln("\n");
 
             return null;
         }
