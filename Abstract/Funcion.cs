@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pascal_AirMax.Funciones;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,11 +9,11 @@ namespace Pascal_AirMax.Abstract
     public abstract class Funcion:Nodo
     {
 
-        private LinkedList<Object> parametros;//TODO: cambiar en un futuro a tipo parametro
+        private LinkedList<Parametro> parametros;//TODO: cambiar en un futuro a tipo parametro
         private LinkedList<Objeto> actuales;
         private string nombre_fun;
 
-        public Funcion(int linea, int columna, LinkedList<Object> parametros, string nombre): base(linea, columna)
+        public Funcion(int linea, int columna, LinkedList<Parametro> parametros, string nombre): base(linea, columna)
         {
             this.parametros = parametros;
             this.nombre_fun = nombre;
@@ -21,7 +22,7 @@ namespace Pascal_AirMax.Abstract
 
 
         //obtener parametros de la funcion
-        public LinkedList<Object> getParametros()
+        public LinkedList<Parametro> getParametros()
         {
             return this.parametros;
 

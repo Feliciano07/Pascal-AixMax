@@ -29,7 +29,7 @@ namespace Pascal_AirMax.Analizador
 
             encabezado(raiz.ChildNodes[0]);
 
-           Maestra.getInstancia.ejecutar();
+           // Maestra.getInstancia.ejecutar();
 
             return true;
         }
@@ -79,7 +79,10 @@ namespace Pascal_AirMax.Analizador
                 case "arrays":
                     Variables.Declaracion_arreglo(actual.ChildNodes[1],0, null);
                     break;
-
+                case "dec_procedimiento":
+                    return Declaracion_funcion.Procedimiento(actual);
+                case "dec_funcion":
+                    return Declaracion_funcion.Funciones(actual);
             }
             return null;
         }

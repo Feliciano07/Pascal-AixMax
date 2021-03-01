@@ -344,8 +344,8 @@ namespace Pascal_AirMax.Analizador
                          | whiledo //*
                          | repeat //*
                          | non_for //*
-                         | Tcontinue + Tpuntocoma
-                         | Tbreak + Tpuntocoma
+                         | Tcontinue + Tpuntocoma//*
+                         | Tbreak + Tpuntocoma //*
                          ;
                          
 
@@ -353,20 +353,20 @@ namespace Pascal_AirMax.Analizador
 
 
             asignacion.Rule = Id + Tasignar + exp //*
-                            | acceso_array + Tasignar + exp
-                            | acceso_objeto + Tasignar + exp;
+                            | acceso_array + Tasignar + exp //*
+                            | acceso_objeto + Tasignar + exp; //*
 
 
 
-            acceso_array.Rule = Id + TcorA + lista_exp + TcorC;
+            acceso_array.Rule = Id + TcorA + lista_exp + TcorC; //*
 
 
             // acceso objeto
             acceso_objeto.Rule = Id + Tpunto + ingreso //*
-                                | Id + TcorA + lista_exp + TcorC + Tpunto + ingreso;
+                                | Id + TcorA + lista_exp + TcorC + Tpunto + ingreso; //*
 
-            ingreso.Rule = MakeListRule(ingreso, Tpunto, Id)
-                           |MakeListRule(ingreso, Tpunto, acceso_array);
+            ingreso.Rule = MakeListRule(ingreso, Tpunto, Id) //*
+                           |MakeListRule(ingreso, Tpunto, acceso_array); //*
 
 
 
@@ -496,6 +496,7 @@ namespace Pascal_AirMax.Analizador
 
             variable_fun.Rule = variable
                               | constante
+                              // esto de abajo no
                               | arrays
                               | objectos
                                ;

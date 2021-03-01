@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
+using Pascal_AirMax.Funciones;
 using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
@@ -10,7 +11,7 @@ namespace Pascal_AirMax.Instruccion
     public class Writeln : Funcion
     {
 
-        public Writeln(int linea, int columna):base(linea,columna,new LinkedList<object>(), "writeln")
+        public Writeln(int linea, int columna):base(linea,columna,new LinkedList<Parametro>(), "writeln")
         {
 
         }
