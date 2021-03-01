@@ -17,7 +17,9 @@ begin
    end;
 end.
 
-/////////////////////////////////'program checkCase;
+/////////////////////////////////'
+
+program checkCase;
 var
    grade: string;
 
