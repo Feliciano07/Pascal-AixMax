@@ -1,5 +1,7 @@
 ﻿program Hello;
 
+
+
 procedure findMin(x, y, z: integer; var m,aaa: integer); 
 
 var interna:integer;
@@ -20,9 +22,7 @@ var min:integer;
 begin
 
   
-{  findMin(89, 45, 30, min);
-  
-    writeln ('valor minimo ', min);}
+writeln('hola');
   
 end.
 

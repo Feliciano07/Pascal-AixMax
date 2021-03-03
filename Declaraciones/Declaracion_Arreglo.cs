@@ -48,6 +48,7 @@ namespace Pascal_AirMax.Declaraciones
                 throw new Exception(e.ToString());
             }
 
+            arreglo.nombre = this.nombre.ToLower();
 
             entorno.addArreglo(arreglo, this.nombre);
 

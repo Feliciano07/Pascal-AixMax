@@ -52,6 +52,8 @@ namespace Pascal_AirMax.Abstract
 
         public abstract Simbolo get_posicion(int posicion);
 
+        public abstract string getNombre();
+
        //implementar funcion para clonar
        
 

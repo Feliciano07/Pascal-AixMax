@@ -93,7 +93,7 @@ namespace Pascal_AirMax.Analizador
                 int columna = entrada.ChildNodes[i].Span.Location.Column;
                 string nombre = entrada.ChildNodes[i].Token.Text;
 
-                salida.AddLast(new Creacion_Parametro(linea, columna, nombre, tipo, nombre_tipo, tipo_Parametro));
+                salida.AddLast(new Creacion_Parametro(linea, columna, nombre, tipo, nombre_tipo, tipo_Parametro, Variables.getObjeto(tipo)));
 
             }
         }

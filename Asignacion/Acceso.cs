@@ -43,6 +43,7 @@ namespace Pascal_AirMax.Asignacion
             //TODO: validar si es primitivo(pasar por valor) o verificar si objeto o array (pasar por referencia)
             Simbolo valor = this.retornar_simbolo(entorno);
             return valor.getValor().Clonar_Objeto();
+            // aqui tengo que cambiar algo
         }
 
         public Simbolo retornar_simbolo(Entorno entorno)

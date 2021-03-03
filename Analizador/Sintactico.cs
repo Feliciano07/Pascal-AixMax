@@ -29,7 +29,7 @@ namespace Pascal_AirMax.Analizador
 
             encabezado(raiz.ChildNodes[0]);
 
-           // Maestra.getInstancia.ejecutar();
+            Maestra.getInstancia.ejecutar();
 
             return true;
         }

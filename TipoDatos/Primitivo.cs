@@ -53,5 +53,10 @@ namespace Pascal_AirMax.TipoDatos
         {
             throw new NotImplementedException();
         }
+
+        public override string getNombre()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
