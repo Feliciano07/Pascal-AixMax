@@ -58,6 +58,8 @@ namespace Pascal_AirMax.Declaraciones
             }
             Procedimiento nuevo = new Procedimiento(retornar_lista_parametos(parametro_procedimiento), this.instrucciones, this.nombre_procedimiento);
 
+            entorno.addFuncion(nuevo);
+
             return null;
         }
 

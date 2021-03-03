@@ -40,10 +40,55 @@ namespace Pascal_AirMax.Asignacion
 
         public override Objeto execute(Entorno entorno)
         {
-            //TODO: validar si es primitivo(pasar por valor) o verificar si objeto o array (pasar por referencia)
+       
             Simbolo valor = this.retornar_simbolo(entorno);
             return valor.getValor().Clonar_Objeto();
-            // aqui tengo que cambiar algo
+
+        }
+
+        public Simbolo execute_no_clonador(Entorno entorno)
+        {
+            if (this.llamada_anterior == null)
+            {
+                Simbolo simbolo_retorno = entorno.GetSimbolo(this.nombre_variable);
+                if (simbolo_retorno == null)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                        "se esperaba un identificador de variable");
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception("se esperaba un identificador de variable");
+                }
+
+                if (simbolo_retorno.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)
+                {
+                    return Recorrer_array(entorno, simbolo_retorno);
+                }
+
+                return simbolo_retorno;
+            }
+            else
+            {
+                Simbolo simbolo_retorno = llamada_anterior.retornar_simbolo(entorno);
+
+                if (simbolo_retorno.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)
+                {
+                    simbolo_retorno = Recorrer_array(entorno, simbolo_retorno);
+                }
+
+                Validar_Nivel(simbolo_retorno);
+
+                Simbolo atributo_objeto = simbolo_retorno.getValor().get_atributo(this.nombre_variable);
+                if (atributo_objeto == null)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                       "Se esperaba un identificador de variable");
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception("se esperaba un identificador de variable");
+                }
+
+                return atributo_objeto;
+
+            }
         }
 
         public Simbolo retornar_simbolo(Entorno entorno)

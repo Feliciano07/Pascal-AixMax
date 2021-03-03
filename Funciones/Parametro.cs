@@ -31,6 +31,11 @@ namespace Pascal_AirMax.Funciones
         {
             return this.nombre;
         }
+        
+        public Tipo_Parametro GetTipo_Parametro()
+        {
+            return this.tipo;
+        }
 
 
         public override Objeto Clonar_Objeto()

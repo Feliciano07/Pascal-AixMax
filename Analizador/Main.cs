@@ -27,6 +27,32 @@ namespace Pascal_AirMax.Analizador
             return parametros;
         }
 
+
+        public static Nodo LLamada_funcion(ParseTreeNode entrada)
+        {
+            int linea = entrada.Span.Location.Line;
+            int columna = entrada.Span.Location.Column;
+
+            if(entrada.ChildNodes.Count == 4)
+            {
+                LinkedList<Nodo> expresiones;
+                expresiones = lista_expresion(entrada.ChildNodes[2]);
+
+                string nombre_funcion = entrada.ChildNodes[0].Token.Text;
+
+                return new LlamadaFuncion(linea, columna, nombre_funcion, expresiones);
+
+            }else if(entrada.ChildNodes.Count == 3)
+            {
+                LinkedList<Nodo> expresion = new LinkedList<Nodo>();
+                string nombre_funcion = entrada.ChildNodes[0].Token.Text;
+
+                return new LlamadaFuncion(linea, columna, nombre_funcion, expresion);
+            }
+            return null;
+        }
+
+
         public static Nodo Inst_Writeln(ParseTreeNode entrada)
         {
             int linea = entrada.Span.Location.Line;
@@ -125,6 +151,8 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_continue(actual);
                 case "break":
                     return Tranferencias.Sentencia_break(actual);
+                case "llamada_funciones":
+                    return Main.LLamada_funcion(actual);
             }
             return null;
         }
@@ -424,6 +452,8 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_continue(actual);
                 case "break":
                     return Tranferencias.Sentencia_break(actual);
+                case "llamada_funciones":
+                    return Main.LLamada_funcion(actual);
 
             }
             return null;

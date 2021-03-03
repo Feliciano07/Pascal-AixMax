@@ -16,6 +16,11 @@ namespace Pascal_AirMax.Instruccion
 
         }
 
+        public override Objeto executar_funcion_usuario(Entorno entorno)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Objeto execute(Entorno entorno)
         {
             //mandamos a guardar la funcion, pero como nativa

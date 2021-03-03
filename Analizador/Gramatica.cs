@@ -346,7 +346,7 @@ namespace Pascal_AirMax.Analizador
                          | non_for //*
                          | Tcontinue + Tpuntocoma//*
                          | Tbreak + Tpuntocoma //*
-
+                         | llamada_funciones + Tpuntocoma
                          ;
                          
 
@@ -411,6 +411,7 @@ namespace Pascal_AirMax.Analizador
                              | sentencia_for
                              | Tbreak
                              | Tcontinue
+                             | llamada_funciones
                              | Tbegin + lista_main + Tend;
 
             main_stm.Rule = asignacion + Tpuntocoma

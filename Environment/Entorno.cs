@@ -10,11 +10,12 @@ namespace Pascal_AirMax.Environment
     public class Entorno
     {
 
-        private Dictionary<string, Simbolo> simbolos;// primitivo, array, objetos
-        private Dictionary<string,Funcion> funciones;
-        private Dictionary<string, Arreglo> arreglos;
-        private Dictionary<string, Type_obj> objetos;
-        private Entorno anterior;
+        public Dictionary<string, Simbolo> simbolos;// primitivo, array, objetos
+        public Dictionary<string,Funcion> funciones;
+        public Dictionary<string, Arreglo> arreglos;
+        public Dictionary<string, Type_obj> objetos;
+        public Entorno anterior;
+
 
         /*
          * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
@@ -29,6 +30,7 @@ namespace Pascal_AirMax.Environment
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
             this.anterior = null;
+
         }
 
         public Entorno(Entorno padre)
@@ -37,6 +39,7 @@ namespace Pascal_AirMax.Environment
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
             this.anterior = padre;
+
         }
 
         
@@ -59,29 +62,32 @@ namespace Pascal_AirMax.Environment
             this.objetos.Add(nombre, objeto);
         }
         
-        // TODO: cambiar esto
+        // TODO: Buscar por entorno esto
         public bool ExisteSimbolo(string nombre)
         {
             nombre = nombre.ToLower();
-            //verifica primero aquello que se declara como var o const
-            if (this.simbolos.ContainsKey(nombre))
+            for (Entorno e = this; e != null; e = e.anterior)
             {
-                return true;
-            }
-            //verifica aquello que se declara como funcion
-            if (this.funciones.ContainsKey(nombre))
-            {
-                return true;
-            }
+                //verifica primero aquello que se declara como var o const
+                if (e.simbolos.ContainsKey(nombre))
+                {
+                    return true;
+                }
+                //verifica aquello que se declara como funcion
+                if (e.funciones.ContainsKey(nombre))
+                {
+                    return true;
+                }
 
-            if (this.arreglos.ContainsKey(nombre))
-            {
-                return true;
-            }
+                if (e.arreglos.ContainsKey(nombre))
+                {
+                    return true;
+                }
 
-            if (this.objetos.ContainsKey(nombre))
-            {
-                return true;
+                if (e.objetos.ContainsKey(nombre))
+                {
+                    return true;
+                }
             }
 
             return false;

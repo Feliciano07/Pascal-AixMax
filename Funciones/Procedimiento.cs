@@ -18,6 +18,7 @@ namespace Pascal_AirMax.Funciones
         }
 
 
+
         public override Objeto execute(Entorno entorno)
         {
             // TODO:
@@ -29,6 +30,26 @@ namespace Pascal_AirMax.Funciones
             throw new NotImplementedException();
         }
 
+
+        public override Objeto executar_funcion_usuario(Entorno entorno)
+        {
+            foreach(Nodo instruccion in this.instruciones)
+            {
+                try
+                {
+                    instruccion.execute(entorno);
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    throw new Exception(e.ToString());
+                }
+            }
+
+            return null;
+        }
+
+ 
 
     }
 }
