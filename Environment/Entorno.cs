@@ -38,6 +38,7 @@ namespace Pascal_AirMax.Environment
             this.simbolos = new Dictionary<string, Simbolo>();
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
+            this.funciones = new Dictionary<string, Funcion>();
             this.anterior = padre;
 
         }
@@ -155,11 +156,15 @@ namespace Pascal_AirMax.Environment
         {
             id = id.ToLower();
 
-            if (this.funciones.ContainsKey(id))
+            for (Entorno e = this; e != null; e = e.anterior)
             {
-                Funcion ft;
-                this.funciones.TryGetValue(id, out ft);
-                return ft;
+                if (e.funciones.ContainsKey(id))
+                {
+                    Funcion ft;
+                    e.funciones.TryGetValue(id, out ft);
+                    return ft;
+                }
+
             }
             return null;
 

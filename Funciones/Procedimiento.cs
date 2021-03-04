@@ -4,6 +4,7 @@ using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 using Pascal_AirMax.Manejador;
+using Pascal_AirMax.Transferencia;
 
 namespace Pascal_AirMax.Funciones
 {
@@ -38,9 +39,39 @@ namespace Pascal_AirMax.Funciones
             {
                 try
                 {
-                    instruccion.execute(entorno);
+                    Objeto retorno  = instruccion.execute(entorno);
+                    if (retorno != null)
+                    {
+                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        {
+                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                "Sentencia continue debe estar dentro de un ciclo");
+                            Captura_error(error);
+                        }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                        {
+                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                "Sentencia break debe estar dentro de un ciclo o case");
+                            Captura_error(error);
+                            
+                        }else if(retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                        {
+                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                            if(tem.valor != null)
+                            {
+                                Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                "La sentencia de exit no debe retornar valor dentro del procedimiento");
+                                Captura_error(error);
+                            }
+                            // contrario termina la ejecucion
+                            return null;
+                        }
+                    }
 
-                }catch(Exception e)
+                }
+                catch(Exception e)
                 {
                     Console.WriteLine(e.ToString());
                     throw new Exception(e.ToString());
@@ -50,6 +81,12 @@ namespace Pascal_AirMax.Funciones
             return null;
         }
 
+
+        public void Captura_error(Error error)
+        {
+            Maestra.getInstancia.addError(error);
+            throw new Exception(error.descripcion);
+        }
  
 
     }

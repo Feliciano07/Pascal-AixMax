@@ -4,26 +4,15 @@ using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 
-namespace Pascal_AirMax.Transferencia
+namespace Pascal_AirMax.TipoDatos
 {
     [Serializable]
-    public class Sentencia_transferencia : Objeto
+    public class Nulo : Objeto
     {
-        public int linea;
-        public int columna;
-        public Objeto valor;
 
-        public Sentencia_transferencia(Objeto.TipoObjeto tipo, int linea, int columna): base(tipo)
+        public Nulo() : base(TipoObjeto.NULO)
         {
-            this.linea = linea;
-            this.columna = columna;
-        }
 
-        public Sentencia_transferencia(Objeto.TipoObjeto tipo, int linea, int columna, Objeto valor) : base(tipo)
-        {
-            this.linea = linea;
-            this.columna = columna;
-            this.valor = valor;
         }
 
         public override Objeto Clonar_Objeto()
