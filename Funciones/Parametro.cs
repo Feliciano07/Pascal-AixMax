@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Pascal_AirMax.Funciones
 {
+    [Serializable]
     public class Parametro:Objeto
     {
 

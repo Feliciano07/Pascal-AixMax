@@ -8,6 +8,7 @@ using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.Expresion.Aritmetica
 {
+    [Serializable]
     public class Suma : Nodo
     {
         private Nodo left;

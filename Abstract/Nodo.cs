@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Pascal_AirMax.Abstract
 {
+    [Serializable]
     public abstract class Nodo
     {
         private int linea;

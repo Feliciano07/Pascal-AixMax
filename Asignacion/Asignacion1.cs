@@ -13,7 +13,7 @@ namespace Pascal_AirMax.Asignacion
      * var1:= 45, var1:= true, var1:= 'hola'
      * objetovariable := otro_objeto
      */
-
+    [Serializable]
     public class Asignacion1 : Nodo
     {
         private Acceso asignar;

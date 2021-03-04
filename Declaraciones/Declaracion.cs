@@ -107,7 +107,7 @@ namespace Pascal_AirMax.Instruccion
 
         public Objeto Copia(Objeto entrada)
         {
-            if(entrada.getTipo() == Objeto.TipoObjeto.TYPES)
+            if(entrada.getTipo() == Objeto.TipoObjeto.OBJECTS)
             {
                 Type_obj salida = new Type_obj();
                 salida = (Type_obj)entrada.Clonar_Objeto();

@@ -9,6 +9,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Expresion.Relacionales
 {
+    [Serializable]
     public class Igual : Nodo
     {
 

@@ -8,6 +8,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
 {
+    [Serializable]
     public class Write : Funcion
     {
         public Write(int linea, int columna):base(linea,columna, new LinkedList<Parametro>(), "write")

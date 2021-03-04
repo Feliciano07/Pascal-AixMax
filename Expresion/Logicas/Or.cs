@@ -8,6 +8,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Expresion.Logicas
 {
+    [Serializable]
     public class Or : Nodo
     {
         private Nodo left;

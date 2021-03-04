@@ -6,6 +6,7 @@ using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.Sentencias
 {
+    [Serializable]
     public class Sentencia_case : Nodo
     {
         private Nodo expresion;

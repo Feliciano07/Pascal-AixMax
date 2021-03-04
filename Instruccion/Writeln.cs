@@ -8,6 +8,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
 { 
+    [Serializable]
     public class Writeln : Funcion
     {
 

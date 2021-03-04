@@ -8,6 +8,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Expresion.Aritmetica
 {
+    [Serializable]
     public class Modulo : Nodo
     {
         private Nodo left;

@@ -8,6 +8,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Sentencias
 {
+    [Serializable]
     public class WhileDO : Nodo
     {
         private Nodo expresion;

@@ -111,6 +111,8 @@ namespace Pascal_AirMax.Analizador
 
             var Tprogram = ToTerm("program");
 
+            
+
             #endregion
 
 
@@ -200,6 +202,8 @@ namespace Pascal_AirMax.Analizador
 
             NonTerminal instrucciones_objeto = new NonTerminal("instrucciones_objeto");
             NonTerminal instruccion_objeto = new NonTerminal("instruccion_objeto");
+
+            NonTerminal exit = new NonTerminal("exit");
 
             #endregion
 
@@ -337,6 +341,7 @@ namespace Pascal_AirMax.Analizador
             main.Rule = asignacion + Tpuntocoma
                          | writeln + Tpuntocoma //*
                          | write + Tpuntocoma //*
+                         | exit + Tpuntocoma
                          | sentencia_exit + Tpuntocoma
                          | ifthen //*
                          | ifelse //*
@@ -382,6 +387,9 @@ namespace Pascal_AirMax.Analizador
                         | Twrite + TparA + TparC; //*
 
 
+            exit.Rule = Texit + TparA + exp + TparC
+                        | Texit + TparA + TparC;
+
 
             //**************************** sentencias if then, puede venir con punto y coma?
 
@@ -403,6 +411,7 @@ namespace Pascal_AirMax.Analizador
             opcion_if.Rule = asignacion //*
                              | writeln //*
                              | write //*
+                             | exit
                              | sentencia_exit
                              | opcion_else //*
                              | sentencia_case //*

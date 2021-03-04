@@ -7,6 +7,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Sentencias
 {
+    [Serializable]
     public class IfElse: Nodo
     {
         private Nodo expresion;

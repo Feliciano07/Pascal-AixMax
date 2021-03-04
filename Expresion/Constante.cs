@@ -5,6 +5,7 @@ using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 namespace Pascal_AirMax.Expresion
 {
+    [Serializable]
     public class Constante : Nodo
     {
         Objeto valor;

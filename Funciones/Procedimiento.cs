@@ -7,6 +7,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Funciones
 {
+    [Serializable]
     public class Procedimiento : Funcion
     {
 

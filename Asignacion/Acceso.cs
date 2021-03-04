@@ -7,6 +7,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Asignacion
 {
+    [Serializable]
     public class Acceso : Nodo
     {
         private string nombre_variable;

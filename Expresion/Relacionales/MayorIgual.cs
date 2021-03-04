@@ -8,6 +8,7 @@ using Pascal_AirMax.Abstract;
 
 namespace Pascal_AirMax.Expresion.Relacionales
 {
+    [Serializable]
     public class MayorIgual : Nodo
     {
         private Nodo left;

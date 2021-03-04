@@ -10,6 +10,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Sentencias
 {
+    [Serializable]
     public class Case : Nodo
     {
         private LinkedList<Nodo> expresiones;

@@ -9,6 +9,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Sentencias
 {
+    [Serializable]
     public class For : Nodo
     {
         private Asignacion1 condicion;

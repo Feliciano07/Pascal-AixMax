@@ -7,6 +7,7 @@ using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.Transferencia
 {
+    [Serializable]
     public class Continue : Nodo
     {
 

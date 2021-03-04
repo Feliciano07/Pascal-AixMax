@@ -8,6 +8,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Expresion.Relacionales
 {
+    [Serializable]
     public class MenorIgual : Nodo
     {
 

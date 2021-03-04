@@ -6,6 +6,7 @@ using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.Transferencia
 {
+    [Serializable]
     public class Sentencia_transferencia : Objeto
     {
         public int linea;
