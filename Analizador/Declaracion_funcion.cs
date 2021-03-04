@@ -147,6 +147,12 @@ namespace Pascal_AirMax.Analizador
                 case "break":
                     lista.AddLast(Tranferencias.Sentencia_break(actual));
                     break;
+                case "llamada_funciones":
+                    lista.AddLast( Main.LLamada_funcion(actual));
+                    break;
+                case "exit":
+                    lista.AddLast(Tranferencias.Sentencia_Exit(actual));
+                    break;
             }
         }
 

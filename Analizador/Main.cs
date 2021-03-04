@@ -153,6 +153,8 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_break(actual);
                 case "llamada_funciones":
                     return Main.LLamada_funcion(actual);
+                case "exit":
+                    return Tranferencias.Sentencia_Exit(actual);
             }
             return null;
         }
@@ -454,6 +456,8 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_break(actual);
                 case "llamada_funciones":
                     return Main.LLamada_funcion(actual);
+                case "exit":
+                    return Tranferencias.Sentencia_Exit(actual);
 
             }
             return null;
