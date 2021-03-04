@@ -61,6 +61,10 @@ namespace Pascal_AirMax.Sentencias
                                 {
                                     return null;
                                 }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                {
+                                    return retorno;
+                                }
                             }
 
 
@@ -94,6 +98,10 @@ namespace Pascal_AirMax.Sentencias
                                 else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
                                 {
                                     return null;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                {
+                                    return retorno;
                                 }
                             }
 

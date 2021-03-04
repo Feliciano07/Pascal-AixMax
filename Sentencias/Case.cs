@@ -79,6 +79,10 @@ namespace Pascal_AirMax.Sentencias
                             {
                                 return retorno;
                             }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                return retorno;
+                            }
                         }
                     }
                     throw new Exception("se cumplio la condicion");

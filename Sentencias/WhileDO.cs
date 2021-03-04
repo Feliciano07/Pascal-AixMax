@@ -46,6 +46,9 @@ namespace Pascal_AirMax.Sentencias
                             else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
                             {
                                 return null;
+                            }else if(retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                return retorno;
                             }
                         }
                     }

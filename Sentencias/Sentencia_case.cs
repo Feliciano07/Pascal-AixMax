@@ -61,6 +61,10 @@ namespace Pascal_AirMax.Sentencias
                         {
                             return retorno;
                         }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                        {
+                            return retorno;
+                        }
                     }
 
                 }
@@ -78,8 +82,24 @@ namespace Pascal_AirMax.Sentencias
                 try
                 {
                     // TODO: validar si retorna algo
-                    instruccion.execute(entorno);
-                }catch(Exception e)
+                    Objeto retorno = instruccion.execute(entorno);
+                    if (retorno != null)
+                    {
+                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        {
+                            return retorno;
+                        }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                        {
+                            return retorno;
+                        }
+                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                        {
+                            return retorno;
+                        }
+                    }
+                }
+                catch(Exception e)
                 {
                     Console.WriteLine(e.ToString());
                 }
