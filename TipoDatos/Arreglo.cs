@@ -16,6 +16,7 @@ namespace Pascal_AirMax.TipoDatos
         private int inferior;
         private int superior;
         private Objeto contenido;
+        public string nombre;
 
         public Arreglo(int inferior, int superior, Objeto cont) : base(TipoObjeto.ARRAY)
         {
@@ -24,6 +25,7 @@ namespace Pascal_AirMax.TipoDatos
             this.contenido = cont;
             declarar_arreglo();
         }
+ 
         public Arreglo():base(TipoObjeto.ARRAY) { }
 
         public void declarar_arreglo()
@@ -80,6 +82,9 @@ namespace Pascal_AirMax.TipoDatos
             return (Objeto)formatter.Deserialize(stream);
         }
 
-
+        public override string getNombre()
+        {
+            return this.nombre;
+        }
     }
 }

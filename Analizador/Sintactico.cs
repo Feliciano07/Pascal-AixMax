@@ -29,7 +29,7 @@ namespace Pascal_AirMax.Analizador
 
             encabezado(raiz.ChildNodes[0]);
 
-           // Maestra.getInstancia.ejecutar();
+            Maestra.getInstancia.ejecutar();
 
             return true;
         }
@@ -142,8 +142,8 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_continue(actual);
                 case "break":
                     return Tranferencias.Sentencia_break(actual);
-                    
-
+                case "llamada_funciones":
+                    return Main.LLamada_funcion(actual);
             }
             return null;
         }

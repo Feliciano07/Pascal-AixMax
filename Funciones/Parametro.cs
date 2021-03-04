@@ -8,18 +8,33 @@ namespace Pascal_AirMax.Funciones
 {
     public class Parametro:Objeto
     {
-        private string nombre;
-        private Objeto valor;
+
         
         public enum Tipo_Parametro
         {
             VALOR,
             REFERENCIA
         }
+        private string nombre; // parametros
+        private Objeto valor;
+        private Tipo_Parametro tipo;
 
-        public Parametro(Objeto.TipoObjeto tipo, string nombre): base(tipo)
+
+        public Parametro(string nombre_parametro, Objeto.TipoObjeto tipo, Tipo_Parametro tipo_Parametro, Objeto valor): base(tipo)
         {
+            this.nombre = nombre_parametro;
+            this.valor = valor;
+            this.tipo = tipo_Parametro;
+        }
 
+        public string getNombreParametro()
+        {
+            return this.nombre;
+        }
+        
+        public Tipo_Parametro GetTipo_Parametro()
+        {
+            return this.tipo;
         }
 
 
@@ -46,6 +61,11 @@ namespace Pascal_AirMax.Funciones
         public override object toString()
         {
             throw new NotImplementedException();
+        }
+
+        public override string getNombre()
+        {
+            return this.valor.getNombre();
         }
     }
 }

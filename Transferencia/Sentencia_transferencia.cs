@@ -22,6 +22,11 @@ namespace Pascal_AirMax.Transferencia
             throw new NotImplementedException();
         }
 
+        public override string getNombre()
+        {
+            throw new NotImplementedException();
+        }
+
         public override object getValor()
         {
             throw new NotImplementedException();

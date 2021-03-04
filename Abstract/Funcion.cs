@@ -1,4 +1,5 @@
-﻿using Pascal_AirMax.Funciones;
+﻿using Pascal_AirMax.Environment;
+using Pascal_AirMax.Funciones;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -39,6 +40,10 @@ namespace Pascal_AirMax.Abstract
         }
 
         public abstract Objeto executeFuntion(LinkedList<Objeto> actuales);
+
+
+
+        public abstract Objeto executar_funcion_usuario(Entorno entorno);
 
     }
 }

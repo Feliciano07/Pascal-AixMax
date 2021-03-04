@@ -1,10 +1,6 @@
 ﻿program Hello;
 
-procedure findMin(x, y, z: integer; var m,aaa: integer); 
-
-var interna:integer;
-const b:real = 45.10;
-
+procedure findMin(x, y, z: integer; var m:integer); 
 begin
    if x < y then
       m := x
@@ -18,12 +14,7 @@ end;
 var min:integer;
 
 begin
-
-  
-{  findMin(89, 45, 30, min);
-  
-    writeln ('valor minimo ', min);}
-  
+findMin(45,56,50,40);  
 end.
 
 
