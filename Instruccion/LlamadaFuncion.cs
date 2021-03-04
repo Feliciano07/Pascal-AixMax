@@ -132,7 +132,10 @@ namespace Pascal_AirMax.Instruccion
                         }
                         else
                         {
-                            // error
+                            Error error = new Error(node.getLinea(), node.getColumna(), Error.Errores.Semantico,
+                            "se esperaba un identificador de variable");
+                            Maestra.getInstancia.addError(error);
+                            throw new Exception("se esperaba un identificador de variable");
                         }
                         
                     }
