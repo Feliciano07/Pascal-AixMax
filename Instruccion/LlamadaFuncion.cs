@@ -150,6 +150,9 @@ namespace Pascal_AirMax.Instruccion
                 contador++;
             }
 
+            llamada.setLinea(base.getLinea());
+            llamada.setColumna(base.getColumna());
+
             return llamada.executar_funcion_usuario(nuevo_entorno);
         }
 

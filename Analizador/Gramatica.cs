@@ -188,7 +188,7 @@ namespace Pascal_AirMax.Analizador
             NonTerminal var_funciones = new NonTerminal("var_funciones");
             NonTerminal variable_fun = new NonTerminal("variable_fun");
 
-            NonTerminal sentencia_exit = new NonTerminal("sentencia_exit");
+          
 
             NonTerminal dec_procedimiento = new NonTerminal("dec_procedimiento");
 
@@ -260,7 +260,7 @@ namespace Pascal_AirMax.Analizador
                        | Tfalse //*
                        | Id //
                        | acceso_array //
-                       //| llamada_funciones
+                       | llamada_funciones
                        | acceso_objeto //
                        | TparA + exp + TparC; //*
 
@@ -342,7 +342,6 @@ namespace Pascal_AirMax.Analizador
                          | writeln + Tpuntocoma //*
                          | write + Tpuntocoma //*
                          | exit + Tpuntocoma
-                         | sentencia_exit + Tpuntocoma
                          | ifthen //*
                          | ifelse //*
                          | caseof ///*
@@ -376,7 +375,7 @@ namespace Pascal_AirMax.Analizador
 
 
 
-            sentencia_exit.Rule = Texit + TparA + exp + TparC;
+            
 
             //funciones nativas
 
@@ -412,7 +411,6 @@ namespace Pascal_AirMax.Analizador
                              | writeln //*
                              | write //*
                              | exit
-                             | sentencia_exit
                              | opcion_else //*
                              | sentencia_case //*
                              | sentencia_while //*

@@ -4,6 +4,7 @@ using System.Text;
 using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 using Pascal_AirMax.Manejador;
+using Pascal_AirMax.TipoDatos;
 using Pascal_AirMax.Transferencia;
 
 namespace Pascal_AirMax.Funciones
@@ -66,7 +67,7 @@ namespace Pascal_AirMax.Funciones
                                 Captura_error(error);
                             }
                             // contrario termina la ejecucion
-                            return null;
+                            return new Nulo();
                         }
                     }
 
@@ -78,7 +79,7 @@ namespace Pascal_AirMax.Funciones
                 }
             }
 
-            return null;
+            return new Nulo();
         }
 
 

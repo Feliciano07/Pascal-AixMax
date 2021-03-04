@@ -115,6 +115,8 @@ namespace Pascal_AirMax.Expresion
                         return Asignaciones.Arreglo_Unico(entrada.ChildNodes[0]);
                     case "acceso_objeto":
                         return Primer_Nivel(entrada.ChildNodes[0]);
+                    case "llamada_funciones":
+                        return Main.LLamada_funcion(entrada.ChildNodes[0]);
                 }
             }
             return null;

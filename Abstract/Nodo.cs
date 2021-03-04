@@ -25,6 +25,16 @@ namespace Pascal_AirMax.Abstract
             return this.columna;
         }
 
+        public void setLinea(int linea)
+        {
+            this.linea = linea;
+        }
+
+        public void setColumna(int columna)
+        {
+            this.columna = columna;
+        }
+
 
         public abstract Objeto execute(Environment.Entorno entorno);
 

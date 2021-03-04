@@ -178,7 +178,7 @@ namespace Pascal_AirMax.Analizador
                 Variables.Variables_Objeto(entrada.ChildNodes[8], variables);
                 Instrucciones_Funcion(entrada.ChildNodes[9], variables);
 
-                return new CreacionFuncion(linea, columna, nombre_funcion, variables, parametros, nombre_retorno, tipo_retorno);
+                return new CreacionFuncion(linea, columna, nombre_funcion, variables, parametros, nombre_retorno, tipo_retorno, Variables.getObjeto(tipo_retorno));
 
             }
             else if(entrada.ChildNodes.Count == 9)
@@ -186,7 +186,7 @@ namespace Pascal_AirMax.Analizador
                 LinkedList<Nodo> variables = new LinkedList<Nodo>();
                 // chilnode[6] instrucciones
                 Instrucciones_Funcion(entrada.ChildNodes[8], variables);
-                return new CreacionFuncion(linea, columna, nombre_funcion, variables, parametros, nombre_retorno, tipo_retorno);
+                return new CreacionFuncion(linea, columna, nombre_funcion, variables, parametros, nombre_retorno, tipo_retorno, Variables.getObjeto(tipo_retorno));
             }
             return null;
         }
