@@ -1,0 +1,41 @@
+﻿// funcion factorial y numeo minimo
+
+
+program functionsandprocs;
+var a:integer = 50;
+var min:integer;
+// factorial usando la función Exit para asignar el retorno.
+function factorial( num : integer) : integer;
+begin
+ if num = 1 then
+ Exit(1)
+ else
+ Exit(num * factorial( num-1 ));
+end;
+// factorial usando el nombre de la función para asignar el retorno
+function factorial2( num : integer) : integer;
+begin
+ if num = 1 then
+ factorial2 := 1
+ else
+ factorial2 := num * factorial2( num-1 );
+end;
+// ejemplo de procedimiento
+procedure findMin(x, y, z: integer; var m: integer); {m es por referencia}
+(* Finds the minimum of the 3 values *)
+begin
+ if x < y then
+ m:= x
+ else
+ m:= y;
+
+ if z < m then
+ m:= z;
+end;
+
+begin
+ writeln('el resultado es: ', factorial(5));
+ writeln('el resultado es: ', factorial2(5));
+ findMin(1, 2, 3, min); (* Procedure call *)
+ writeln(' Minimum: ', min);
+end.

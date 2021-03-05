@@ -205,6 +205,13 @@ namespace Pascal_AirMax.Analizador
 
             NonTerminal exit = new NonTerminal("exit");
 
+            NonTerminal if_then_else = new NonTerminal("if_then_else");
+
+            NonTerminal lista_if_else = new NonTerminal("lista_if_else");
+
+            NonTerminal mas_if = new NonTerminal("mas_if");
+
+
             #endregion
 
 
@@ -402,7 +409,12 @@ namespace Pascal_AirMax.Analizador
 
 
             ifelse.Rule = Tif + exp + Tthen + opcion_if + Telse + main //*
-                         | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma; //*
+                         | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
+
+
+            lista_if_else.Rule = MakePlusRule(lista_if_else, if_then_else);
+
+            if_then_else.Rule = Telse + Tif + exp + Tthen + opcion_if;
 
 
             //TODO: falta agregar break y continue, ya que genera conflicto reduce reduce
@@ -432,7 +444,8 @@ namespace Pascal_AirMax.Analizador
             opcion_else.Rule = Tif + exp + Tthen + opcion_if +Telse + opcion_if; //*
 
 
-                                
+
+            
 
 
             //*************************** SENTENCIA CASE, existe conflicto reduce pero sirve 
