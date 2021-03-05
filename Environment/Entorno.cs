@@ -170,5 +170,15 @@ namespace Pascal_AirMax.Environment
 
         }
 
+        public Entorno getGlobal()
+        {
+            Entorno aux = this;
+            while(aux.anterior != null)
+            {
+                aux = aux.anterior;
+            }
+            return aux;
+        }
+
     }
 }

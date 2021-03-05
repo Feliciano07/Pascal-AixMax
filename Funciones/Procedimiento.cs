@@ -79,7 +79,7 @@ namespace Pascal_AirMax.Funciones
                 }
             }
 
-            return new Nulo();
+            return null;
         }
 
 

@@ -25,6 +25,9 @@ namespace Pascal_AirMax.Funciones
 
         public override Objeto executar_funcion_usuario(Entorno entorno)
         {
+            Simbolo simbolo_retorno = new Simbolo(base.getNombre(), this.retorno);
+            entorno.addSimbolo(simbolo_retorno, base.getNombre());
+
             foreach (Nodo instruccion in this.instrucciones)
             {
                 try
@@ -72,11 +75,9 @@ namespace Pascal_AirMax.Funciones
                     throw new Exception(e.ToString());
                 }
             }
-            //TODO: si llega hasta aca error, ya que tenia que a ver retornardo algo
-            Error error2 = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
-                                "La funcion: "+ base.getNombre() + " no retorna ningun valor");
-            Captura_error(error2);
-            return null;
+
+            Simbolo aux = entorno.GetSimbolo(base.getNombre());
+            return aux.getValor();
         }
 
         public void Captura_error(Error error)

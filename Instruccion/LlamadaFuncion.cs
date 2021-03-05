@@ -105,8 +105,8 @@ namespace Pascal_AirMax.Instruccion
             //Se procede a validar el total de parametros con el total enviados
             Validar_total_parametros(llamada);
 
-            // enlaza los entornos 
-            Entorno nuevo_entorno = new Entorno(entorno);
+            // enlaza los entornos, con el entorno global del programa
+            Entorno nuevo_entorno = new Entorno(entorno.getGlobal());
             
             int contador = 0;
             foreach (Nodo node in this.parametros)
