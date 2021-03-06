@@ -412,9 +412,9 @@ namespace Pascal_AirMax.Analizador
                          | Tif + exp + Tthen + opcion_if + Telse + Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            lista_if_else.Rule = MakePlusRule(lista_if_else, if_then_else);
+            //lista_if_else.Rule = MakePlusRule(lista_if_else, if_then_else);
 
-            if_then_else.Rule = Telse + Tif + exp + Tthen + opcion_if;
+ //           if_then_else.Rule = Telse + Tif + exp + Tthen + opcion_if;
 
 
             //TODO: falta agregar break y continue, ya que genera conflicto reduce reduce
