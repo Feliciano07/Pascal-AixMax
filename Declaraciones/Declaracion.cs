@@ -42,13 +42,13 @@ namespace Pascal_AirMax.Instruccion
                         Objeto retorno = retornar_valor(entorno);
                         Verificar_Tipo_Valor(retorno, str);
                         retorno.setTipo(this.tipo);
-                        Simbolo simbolo = new Simbolo(str, retorno);
+                        Simbolo simbolo = new Simbolo(str, retorno, base.getLinea(), base.getColumna());
                         entorno.addSimbolo(simbolo, str);
                     }
                     else
                     {
                         Objeto retorno = Buscar_types(entorno);
-                        Simbolo simbolo = new Simbolo(str, retorno);
+                        Simbolo simbolo = new Simbolo(str, retorno, base.getLinea(), base.getColumna());
                         entorno.addSimbolo(simbolo, str);
                     }
 

@@ -107,13 +107,18 @@ namespace Pascal_AirMax.Environment
         public Simbolo GetSimbolo(string id)
         {
             id = id.ToLower();
-            if (this.simbolos.ContainsKey(id))
+            for (Entorno e = this; e!= null; e= e.anterior)
             {
-                Simbolo obj;
-                this.simbolos.TryGetValue(id, out obj);
-                return obj;
+                if (e.simbolos.ContainsKey(id))
+                {
+                    Simbolo obj;
+                    e.simbolos.TryGetValue(id, out obj);
+                    return obj;
+                }
+               
             }
             return null;
+
         }
 
         // Al declarar un objeto, como puede declarar una variable objeto dentro
@@ -196,14 +201,15 @@ namespace Pascal_AirMax.Environment
             string salida = "";
             for (Entorno e = this; e != null; e = e.anterior)
             {
-                foreach(Simbolo simbolo in e.simbolos.Values)
+                foreach(KeyValuePair<string, Simbolo> kvp in e.simbolos)
                 {
+                    
                     salida += "<tr>";
-                    salida += "<td>" + simbolo.getNombre() + "</td>\n";
-                    salida += "<td>" + simbolo.getValor().getTipo().ToString() + "</td>\n";
+                    salida += "<td>" + kvp.Key+ "</td>\n";
+                    salida += "<td>" + kvp.Value.getValor().getTipo().ToString() + "</td>\n";
                     salida += "<td>" + e.nombre_entorno + "</td>\n";
-                    salida += "<td>" + 0 + "</td>\n";
-                    salida += "<td>" + 0 + "</td>\n";
+                    salida += "<td>" + kvp.Value.getLinea() + "</td>\n";
+                    salida += "<td>" + kvp.Value.getColumna() + "</td>\n";
                     salida += "</tr>";
                 }
                 foreach(Funcion funcion in e.funciones.Values)
@@ -215,8 +221,8 @@ namespace Pascal_AirMax.Environment
                         salida += "<td>" + funcion.getNombre() + "</td>\n";
                         salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
                         salida += "<td>" + e.nombre_entorno + "</td>\n";
-                        salida += "<td>" + 0 + "</td>\n";
-                        salida += "<td>" + 0 + "</td>\n";
+                        salida += "<td>" + funcion.getLinea() + "</td>\n";
+                        salida += "<td>" + funcion.getColumna() + "</td>\n";
                         salida += "</tr>";
                     }
 

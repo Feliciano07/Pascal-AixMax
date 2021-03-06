@@ -65,13 +65,13 @@ namespace Pascal_AirMax.Declaraciones
             {
                 Objeto salida = retornar_valor(entorno);
 
-                Function nueva = new Function(retornar_lista_parametos(parametro_procedimiento), this.instrucciones, salida, this.nombre_funcion);
+                Function nueva = new Function(base.getLinea(), base.getColumna(),retornar_lista_parametos(parametro_procedimiento), this.instrucciones, salida, this.nombre_funcion);
                 entorno.addFuncion(nueva);
             }
             else
             {
                 Objeto salida = Buscar_types(entorno);
-                Function nueva = new Function(retornar_lista_parametos(parametro_procedimiento), this.instrucciones, salida, this.nombre_funcion);
+                Function nueva = new Function(base.getLinea(), base.getColumna(),retornar_lista_parametos(parametro_procedimiento), this.instrucciones, salida, this.nombre_funcion);
                 entorno.addFuncion(nueva);
             }
             return null;

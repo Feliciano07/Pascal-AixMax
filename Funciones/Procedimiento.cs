@@ -15,7 +15,8 @@ namespace Pascal_AirMax.Funciones
 
         private LinkedList<Nodo> instruciones; // instruciones validas
         
-        public Procedimiento(LinkedList<Parametro> para, LinkedList<Nodo> instru, string nombre):base(0,0,para, nombre)
+        public Procedimiento(int linea, int columna,LinkedList<Parametro> para, LinkedList<Nodo> instru, string nombre)
+            :base(linea,columna,para, nombre)
         {
             this.instruciones = instru;
         }

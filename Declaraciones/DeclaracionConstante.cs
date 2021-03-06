@@ -35,7 +35,7 @@ namespace Pascal_AirMax.Instruccion
             {
                 Verificar_Tipo_Valor(retorno, nombre);
                 retorno.setTipo(this.tipo);
-                Simbolo simbolo = new Simbolo(nombre, retorno, Simbolo.Tipo_variable.CONST);
+                Simbolo simbolo = new Simbolo(nombre, retorno, Simbolo.Tipo_variable.CONST, base.getLinea(), base.getColumna());
                 entorno.addSimbolo(simbolo, nombre);
             }
 
