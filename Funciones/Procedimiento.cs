@@ -88,7 +88,10 @@ namespace Pascal_AirMax.Funciones
             Maestra.getInstancia.addError(error);
             throw new Exception(error.descripcion);
         }
- 
 
+        public override Objeto valor_retorno()
+        {
+            return new Primitivo(Objeto.TipoObjeto.VOID, 'a');
+        }
     }
 }

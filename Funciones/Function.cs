@@ -13,7 +13,7 @@ namespace Pascal_AirMax.Funciones
     {
 
         private LinkedList<Nodo> instrucciones;
-        private Objeto retorno;
+        public Objeto retorno;
 
 
         public Function(LinkedList<Parametro> para, LinkedList<Nodo> instru, Objeto retorno, string nombre):base(0,0, para, nombre)
@@ -124,6 +124,11 @@ namespace Pascal_AirMax.Funciones
         public override Objeto executeFuntion(LinkedList<Objeto> actuales)
         {
             throw new NotImplementedException();
+        }
+
+        public override Objeto valor_retorno()
+        {
+            return this.retorno;
         }
     }
 }

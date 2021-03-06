@@ -1,6 +1,7 @@
 ﻿program Hello;
 
 procedure findMin(x, y, z: integer; var m:integer); 
+var hola:string;
 begin
    if x < y then
       m := x
@@ -9,12 +10,15 @@ begin
    
    if z <m then
       m := z;
+hola:= 'hola ';
+writeln(hola);
 end;
 
 var min:integer;
 
 begin
-findMin(45,56,50,40);  
+findMin(45,56,50,min); 
+writeln(min);
 end.
 
 

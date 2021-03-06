@@ -111,7 +111,7 @@ namespace Pascal_AirMax.Analizador
 
             var Tprogram = ToTerm("program");
 
-            
+            var Tgraficar = ToTerm("graficar_ts");
 
             #endregion
 
@@ -210,6 +210,8 @@ namespace Pascal_AirMax.Analizador
             NonTerminal lista_if_else = new NonTerminal("lista_if_else");
 
             NonTerminal mas_if = new NonTerminal("mas_if");
+
+            NonTerminal tabla_sym = new NonTerminal("tabla_sym");
 
 
             #endregion
@@ -349,6 +351,7 @@ namespace Pascal_AirMax.Analizador
                          | writeln + Tpuntocoma //*
                          | write + Tpuntocoma //*
                          | exit + Tpuntocoma
+                         | tabla_sym + Tpuntocoma
                          | ifthen //*
                          | ifelse //*
                          | caseof ///*
@@ -396,6 +399,8 @@ namespace Pascal_AirMax.Analizador
             exit.Rule = Texit + TparA + exp + TparC
                         | Texit + TparA + TparC;
 
+            tabla_sym.Rule = Tgraficar + TparA + TparC;
+
 
             //**************************** sentencias if then, puede venir con punto y coma?
 
@@ -423,6 +428,7 @@ namespace Pascal_AirMax.Analizador
                              | writeln //*
                              | write //*
                              | exit
+                             | tabla_sym
                              | opcion_else //*
                              | sentencia_case //*
                              | sentencia_while //*
@@ -551,7 +557,7 @@ namespace Pascal_AirMax.Analizador
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",
                 "case", "false", "true", "string", "integer","real", "boolean", "type", "of", "array", "object",
                 "then", "writeln", "while", "do", "repeat", "until", "write", "for","to", "down", "function", "break", "continue",
-                "exit", "procedure", "mod");
+                "exit", "procedure", "mod", "graficar_ts");
 
 
             //this.MarkTransient(lista_id);

@@ -146,6 +146,9 @@ namespace Pascal_AirMax.Analizador
                     return Main.LLamada_funcion(actual);
                 case "exit":
                     return Tranferencias.Sentencia_Exit(actual);
+                case "tabla_sym":
+                    return Main.Instruccion_Graficar_ts(actual);
+
             }
             return null;
         }

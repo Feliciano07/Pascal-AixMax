@@ -96,6 +96,16 @@ namespace Pascal_AirMax.Analizador
             return null;
         }
 
+        public static Nodo Instruccion_Graficar_ts(ParseTreeNode entrada)
+        {
+            int linea = entrada.ChildNodes[0].Span.Location.Line;
+            int columna = entrada.ChildNodes[0].Span.Location.Column;
+
+            Manejador.Maestra.getInstancia.addInstruccion(new GraficarTs(linea, columna));
+            return new LlamadaFuncion(linea, columna, "graficar_ts", null);
+        }
+
+
         public static Nodo Inst_Ifthen(ParseTreeNode entrada)
         {
             int linea = entrada.Span.Location.Line;
@@ -155,6 +165,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.LLamada_funcion(actual);
                 case "exit":
                     return Tranferencias.Sentencia_Exit(actual);
+                case "tabla_sym":
+                    return Main.Instruccion_Graficar_ts(actual);
             }
             return null;
         }
@@ -458,6 +470,8 @@ namespace Pascal_AirMax.Analizador
                     return Main.LLamada_funcion(actual);
                 case "exit":
                     return Tranferencias.Sentencia_Exit(actual);
+                case "tabla_sym":
+                    return Main.Instruccion_Graficar_ts(actual);
 
             }
             return null;

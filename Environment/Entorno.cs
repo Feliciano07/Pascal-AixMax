@@ -16,12 +16,23 @@ namespace Pascal_AirMax.Environment
         public Dictionary<string, Type_obj> objetos;
         public Entorno anterior;
 
+        public string nombre_entorno;
 
         /*
          * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
          */
         public Entorno Anterior { get => anterior; set => anterior = value; }
 
+
+        public Entorno(string nombre)
+        {
+            this.simbolos = new Dictionary<string, Simbolo>();
+            this.funciones = new Dictionary<string, Funcion>();
+            this.arreglos = new Dictionary<string, Arreglo>();
+            this.objetos = new Dictionary<string, Type_obj>();
+            this.anterior = null;
+            this.nombre_entorno = nombre;
+        }
 
         public Entorno()
         {
@@ -30,17 +41,16 @@ namespace Pascal_AirMax.Environment
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
             this.anterior = null;
-
         }
 
-        public Entorno(Entorno padre)
+        public Entorno(Entorno padre, string nombre)
         {
             this.simbolos = new Dictionary<string, Simbolo>();
             this.arreglos = new Dictionary<string, Arreglo>();
             this.objetos = new Dictionary<string, Type_obj>();
             this.funciones = new Dictionary<string, Funcion>();
             this.anterior = padre;
-
+            this.nombre_entorno = nombre;
         }
 
         
@@ -178,6 +188,43 @@ namespace Pascal_AirMax.Environment
                 aux = aux.anterior;
             }
             return aux;
+        }
+
+
+        public string Retornar_simbolos()
+        {
+            string salida = "";
+            for (Entorno e = this; e != null; e = e.anterior)
+            {
+                foreach(Simbolo simbolo in e.simbolos.Values)
+                {
+                    salida += "<tr>";
+                    salida += "<td>" + simbolo.getNombre() + "</td>\n";
+                    salida += "<td>" + simbolo.getValor().getTipo().ToString() + "</td>\n";
+                    salida += "<td>" + e.nombre_entorno + "</td>\n";
+                    salida += "<td>" + 0 + "</td>\n";
+                    salida += "<td>" + 0 + "</td>\n";
+                    salida += "</tr>";
+                }
+                foreach(Funcion funcion in e.funciones.Values)
+                {
+                    if(string.Compare(funcion.getNombre(),"write") !=0 & string.Compare(funcion.getNombre(), "writeln") !=0
+                        & string.Compare(funcion.getNombre(), "graficar_ts") != 0)
+                    {
+                        salida += "<tr>";
+                        salida += "<td>" + funcion.getNombre() + "</td>\n";
+                        salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
+                        salida += "<td>" + e.nombre_entorno + "</td>\n";
+                        salida += "<td>" + 0 + "</td>\n";
+                        salida += "<td>" + 0 + "</td>\n";
+                        salida += "</tr>";
+                    }
+
+
+                }
+
+            }
+            return salida;
         }
 
     }

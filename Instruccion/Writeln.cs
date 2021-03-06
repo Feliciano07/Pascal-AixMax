@@ -45,5 +45,10 @@ namespace Pascal_AirMax.Instruccion
 
             return null;
         }
+
+        public override Objeto valor_retorno()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
