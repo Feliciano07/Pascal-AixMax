@@ -56,7 +56,7 @@ namespace Pascal_AirMax.Declaraciones
                     throw new Exception(e.ToString());
                 }
             }
-            Procedimiento nuevo = new Procedimiento(retornar_lista_parametos(parametro_procedimiento), this.instrucciones, this.nombre_procedimiento);
+            Procedimiento nuevo = new Procedimiento(base.getLinea(), base.getColumna(),retornar_lista_parametos(parametro_procedimiento), this.instrucciones, this.nombre_procedimiento);
 
             entorno.addFuncion(nuevo);
 

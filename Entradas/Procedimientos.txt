@@ -1,6 +1,7 @@
 ﻿program Hello;
 
 procedure findMin(x, y, z: integer; var m:integer); 
+var hola:string;
 begin
    if x < y then
       m := x
@@ -9,12 +10,15 @@ begin
    
    if z <m then
       m := z;
+hola:= 'hola ';
+writeln(hola);
 end;
 
 var min:integer;
 
 begin
-findMin(45,56,50,40);  
+findMin(45,56,50,min); 
+writeln(min);
 end.
 
 
@@ -46,4 +50,37 @@ begin
   
     writeln ('valor minimo ', min);}
   
+end.
+
+
+
+
+program Fact_rec;
+function factorial(n: integer): integer;
+begin
+  if n>1 then
+    factorial:=n*factorial(n-1)
+  else
+    factorial:=1;
+end;
+function ackermann(m:integer; n:integer):integer;
+begin
+    if (m = 0) then
+        ackermann:=n+1
+    else if ( (m > 0) and (n = 0)) then
+        ackermann:=ackermann(m - 1, 1)
+    else
+        ackermann:=ackermann(m - 1, ackermann(m,n - 1));
+end;
+var num, f, m, n, r: integer;
+begin
+  //write('n = ');
+  //readln(n);
+  num:=7;
+  f:=factorial(num);
+  writeln(num,'! = ',f);
+  m:=3;
+  n:=9;//4, 6, 9
+  r:=ackermann(m, n);
+  writeln('ackermann(',m,', ',n,') = ', r);
 end.

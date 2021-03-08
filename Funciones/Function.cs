@@ -13,10 +13,11 @@ namespace Pascal_AirMax.Funciones
     {
 
         private LinkedList<Nodo> instrucciones;
-        private Objeto retorno;
+        public Objeto retorno;
 
 
-        public Function(LinkedList<Parametro> para, LinkedList<Nodo> instru, Objeto retorno, string nombre):base(0,0, para, nombre)
+        public Function(int linea, int columna,LinkedList<Parametro> para, LinkedList<Nodo> instru, Objeto retorno, string nombre)
+            :base(linea,columna, para, nombre)
         {
             this.instrucciones = instru;
             this.retorno = retorno;
@@ -25,7 +26,7 @@ namespace Pascal_AirMax.Funciones
 
         public override Objeto executar_funcion_usuario(Entorno entorno)
         {
-            Simbolo simbolo_retorno = new Simbolo(base.getNombre(), this.retorno);
+            Simbolo simbolo_retorno = new Simbolo(base.getNombre(), this.retorno,base.getLinea(), base.getColumna());
             entorno.addSimbolo(simbolo_retorno, base.getNombre());
 
             foreach (Nodo instruccion in this.instrucciones)
@@ -124,6 +125,11 @@ namespace Pascal_AirMax.Funciones
         public override Objeto executeFuntion(LinkedList<Objeto> actuales)
         {
             throw new NotImplementedException();
+        }
+
+        public override Objeto valor_retorno()
+        {
+            return this.retorno;
         }
     }
 }

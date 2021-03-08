@@ -15,7 +15,8 @@ namespace Pascal_AirMax.Funciones
 
         private LinkedList<Nodo> instruciones; // instruciones validas
         
-        public Procedimiento(LinkedList<Parametro> para, LinkedList<Nodo> instru, string nombre):base(0,0,para, nombre)
+        public Procedimiento(int linea, int columna,LinkedList<Parametro> para, LinkedList<Nodo> instru, string nombre)
+            :base(linea,columna,para, nombre)
         {
             this.instruciones = instru;
         }
@@ -88,7 +89,10 @@ namespace Pascal_AirMax.Funciones
             Maestra.getInstancia.addError(error);
             throw new Exception(error.descripcion);
         }
- 
 
+        public override Objeto valor_retorno()
+        {
+            return new Primitivo(Objeto.TipoObjeto.VOID, 'a');
+        }
     }
 }

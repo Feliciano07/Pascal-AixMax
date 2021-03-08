@@ -153,6 +153,9 @@ namespace Pascal_AirMax.Analizador
                 case "exit":
                     lista.AddLast(Tranferencias.Sentencia_Exit(actual));
                     break;
+                case "tabla_sym":
+                    lista.AddLast( Main.Instruccion_Graficar_ts(actual));
+                    break;
             }
         }
 

@@ -36,7 +36,7 @@ namespace Pascal_AirMax.TipoDatos
 
             for(int i = 0; i< this.valores.Length; i++)
             {
-                Simbolo simbolo = new Simbolo("", this.contenido.Clonar_Objeto());
+                Simbolo simbolo = new Simbolo("", this.contenido.Clonar_Objeto(),0,0);
                 this.valores[i] = simbolo;
             }
         }

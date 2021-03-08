@@ -41,14 +41,13 @@ namespace Pascal_AirMax.Instruccion
                 return Ejecutar_Writeln_Write(entorno, retorno);
             }else if (Funcion_graficar(retorno))
             {
-
+                return Ejecutar_graficar(entorno, retorno);
             }
             else
             {
                 return Ejecutar_Funcion_usuario(entorno, retorno);
             }
 
-            return null;
         }
 
 
@@ -63,7 +62,7 @@ namespace Pascal_AirMax.Instruccion
 
         public bool Funcion_graficar(Funcion llamada)
         {
-            if (string.Compare(llamada.getNombre(), "graficar") == 0)
+            if (string.Compare(llamada.getNombre(), "graficar_ts") == 0)
             {
                 return true;
             }
@@ -95,6 +94,13 @@ namespace Pascal_AirMax.Instruccion
 
         //ejecuta la funcion para graficar tabla de simbolos
 
+        public Objeto Ejecutar_graficar(Entorno entorno, Funcion llamada)
+        {
+            llamada.setLinea(base.getLinea());
+            llamada.setColumna(base.getColumna());
+            return llamada.executar_funcion_usuario(entorno);
+        }
+
 
         //ejecuta
         public Objeto Ejecutar_Funcion_usuario(Entorno entorno, Funcion llamada)
@@ -106,7 +112,7 @@ namespace Pascal_AirMax.Instruccion
             Validar_total_parametros(llamada);
 
             // enlaza los entornos, con el entorno global del programa
-            Entorno nuevo_entorno = new Entorno(entorno.getGlobal());
+            Entorno nuevo_entorno = new Entorno(entorno.getGlobal(), llamada.getNombre());
             
             int contador = 0;
             foreach (Nodo node in this.parametros)
@@ -119,7 +125,7 @@ namespace Pascal_AirMax.Instruccion
                         Objeto salida = node.execute(entorno);
                         Match_Parametro(auxiliar[contador], salida);
 
-                        Simbolo simbolo = new Simbolo(auxiliar[contador].getNombreParametro(), salida, Simbolo.Tipo_variable.VAR);
+                        Simbolo simbolo = new Simbolo(auxiliar[contador].getNombreParametro(), salida, Simbolo.Tipo_variable.VAR, llamada.getLinea(), llamada.getColumna());
                         nuevo_entorno.addSimbolo(simbolo, auxiliar[contador].getNombreParametro());
                     }
                     else
@@ -150,8 +156,10 @@ namespace Pascal_AirMax.Instruccion
                 contador++;
             }
 
-            llamada.setLinea(base.getLinea());
-            llamada.setColumna(base.getColumna());
+
+            // TODO: verificar el cambio de esto
+            //llamada.setLinea(base.getLinea());
+            //llamada.setColumna(base.getColumna());
 
             return llamada.executar_funcion_usuario(nuevo_entorno);
         }

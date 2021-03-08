@@ -39,6 +39,8 @@ namespace Pascal_AirMax.Abstract
             return this.nombre_fun;
         }
 
+        public abstract Objeto valor_retorno();
+
         public abstract Objeto executeFuntion(LinkedList<Objeto> actuales);
 
 

@@ -23,18 +23,26 @@ namespace Pascal_AirMax.Environment
         public LinkedList<Nodo> dimension;
         //TODO: hace falta ver el entorno
 
-        public Simbolo(string nombre, Objeto valor)
+        private int line;
+        private int columna;
+
+        public Simbolo(string nombre, Objeto valor, int linea, int columna)
         {
             this.nombre = nombre;
             this.sym = valor;
             tipo = Tipo_variable.VAR;
+            this.line = linea;
+            this.columna = columna;
         }
 
-        public Simbolo(string nombre, Objeto valor, Tipo_variable tipo)
+
+        public Simbolo(string nombre, Objeto valor, Tipo_variable tipo, int linea, int columna)
         {
             this.nombre = nombre;
             this.sym = valor;
             this.tipo = tipo;
+            this.line = linea;
+            this.columna = columna;
         }
 
         public Simbolo() { }
@@ -52,6 +60,16 @@ namespace Pascal_AirMax.Environment
         public Objeto getValor()
         {
             return this.sym;
+        }
+
+
+        public int getLinea()
+        {
+            return this.line;
+        }
+        public int getColumna()
+        {
+            return this.columna;
         }
 
         public void setValor(Objeto valor)

@@ -59,7 +59,7 @@ namespace Pascal_AirMax.Manejador
 
         public void ejecutar()
         {
-            Entorno entorno = new Entorno();
+            Entorno entorno = new Entorno("global");
             foreach (Nodo nodo in instrucciones)
             {
                 if(nodo != null)
