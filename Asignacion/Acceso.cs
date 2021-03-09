@@ -151,6 +151,10 @@ namespace Pascal_AirMax.Asignacion
 
         public Simbolo Recorrer_array(Entorno entorno, Simbolo array)
         {
+            if (this.dimensiones == null)
+            {
+                return array;
+            }
             foreach(Nodo exp in this.dimensiones)
             {
                 if(array.getValor().getTipo() == Objeto.TipoObjeto.ARRAY)

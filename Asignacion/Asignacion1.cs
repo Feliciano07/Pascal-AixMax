@@ -25,6 +25,8 @@ namespace Pascal_AirMax.Asignacion
             this.expresion = exp;
         }
 
+        //TODO: validar tipos
+
         public override Objeto execute(Entorno entorno)
         {
             Simbolo simbolo = retornar_asignacion(entorno);
@@ -39,6 +41,8 @@ namespace Pascal_AirMax.Asignacion
 
             return simbolo.getValor();
         }
+
+        //TODO: validar tipos
 
         public Simbolo execute_for(Entorno entorno)
         {

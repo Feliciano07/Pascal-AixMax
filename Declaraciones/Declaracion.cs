@@ -8,6 +8,7 @@ using Pascal_AirMax.TipoDatos;
 
 namespace Pascal_AirMax.Instruccion
 {
+    [Serializable]
     public class Declaracion : Nodo
     {
         private string[] ids;

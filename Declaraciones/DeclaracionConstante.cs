@@ -8,6 +8,7 @@ using Pascal_AirMax.Manejador;
 
 namespace Pascal_AirMax.Instruccion
 {
+    [Serializable]
     public class DeclaracionConstante : Nodo
     {
         private string nombre;
@@ -34,7 +35,10 @@ namespace Pascal_AirMax.Instruccion
             else
             {
                 Verificar_Tipo_Valor(retorno, nombre);
-                retorno.setTipo(this.tipo);
+                if(this.tipo != Objeto.TipoObjeto.CONST)
+                {
+                    retorno.setTipo(this.tipo);
+                }
                 Simbolo simbolo = new Simbolo(nombre, retorno, Simbolo.Tipo_variable.CONST, base.getLinea(), base.getColumna());
                 entorno.addSimbolo(simbolo, nombre);
             }
