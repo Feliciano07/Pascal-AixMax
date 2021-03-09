@@ -2,6 +2,7 @@
 using Pascal_AirMax.TipoDatos;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Pascal_AirMax.Environment
@@ -231,6 +232,31 @@ namespace Pascal_AirMax.Environment
 
             }
             return salida;
+        }
+
+        public void Tabla_general()
+        {
+            string ruta = @"C:\compiladores2";
+
+            StreamWriter fichero = new StreamWriter(ruta + "\\" + "Tabla_general"+ ".html");
+            fichero.WriteLine("<html>");
+            fichero.WriteLine("<head><title>Simbolos</title></head>");
+            fichero.WriteLine("<body>");
+            fichero.WriteLine("<h2>"+"Simbolos"+ "</h2>");
+            fichero.WriteLine("<br></br>");
+            fichero.WriteLine("<center>" +
+            "<table border=3 width=60% height=7%>");
+            fichero.WriteLine("<tr>");
+            fichero.WriteLine("<th>Nombre</th>");
+            fichero.WriteLine("<th>Tipo</th>");
+            fichero.WriteLine("<th>Ambito</th>");
+            fichero.WriteLine("<th>Fila</th>");
+            fichero.WriteLine("<th>Columna</th>");
+            fichero.WriteLine("</tr>");
+            fichero.Write(this.Retornar_simbolos());
+            fichero.Write("</table>");
+            fichero.WriteLine("</center>" + "</body>" + "</html>");
+            fichero.Close();
         }
 
     }

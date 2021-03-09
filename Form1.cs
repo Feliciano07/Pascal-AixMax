@@ -38,6 +38,7 @@ namespace Pascal_AirMax
             {
                 var result = MessageBox.Show("Analisis incorrecto");
             }
+            Manejador.Maestra.getInstancia.ReccorerErrores();
         }
     }
 }
