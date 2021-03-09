@@ -115,6 +115,24 @@ namespace Pascal_AirMax.Asignacion
                     "Tipos de datos incompatibles: " + variable.getTipo().ToString() + ", " + valor_nuevo.getTipo().ToString());
                 Maestra.getInstancia.addError(error);
                 throw new Exception("tipos de datos incompatibles");
+            }else if(tipo_dominante == Objeto.TipoObjeto.OBJECTS)
+            {
+                if(string.Compare(variable.getNombre(), valor_nuevo.getNombre()) != 0)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                   "Tipos de datos incompatibles: " + variable.getNombre() + ", " + valor_nuevo.getNombre());
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception("tipos de datos incompatibles");
+                }
+            }else if(tipo_dominante == Objeto.TipoObjeto.ARRAY)
+            {
+                if (string.Compare(variable.getNombre(), valor_nuevo.getNombre()) != 0)
+                {
+                    Error error = new Error(base.getLinea(), base.getColumna(), Error.Errores.Semantico,
+                   "Tipos de datos incompatibles: " + variable.getNombre() + ", " + valor_nuevo.getNombre());
+                    Maestra.getInstancia.addError(error);
+                    throw new Exception("tipos de datos incompatibles");
+                }
             }
 
             return true;
