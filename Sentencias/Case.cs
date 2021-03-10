@@ -85,13 +85,13 @@ namespace Pascal_AirMax.Sentencias
                             }
                         }
                     }
-                    throw new Exception("se cumplio la condicion");
+                    return new Primitivo(Objeto.TipoObjeto.BOOLEAN, true);
                 }
 
                 
 
             }
-            return null;
+            return new Primitivo(Objeto.TipoObjeto.BOOLEAN, false);
         }
 
         public void Evaluar_Tipo(Objeto condicion, Objeto actual)

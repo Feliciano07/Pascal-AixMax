@@ -60,6 +60,7 @@ namespace Pascal_AirMax.Sentencias
                 condicion = Obtener_condicion(entorno);
                 salida = Obtener_valor(condicion);
             }
+
             return null;
         }
 

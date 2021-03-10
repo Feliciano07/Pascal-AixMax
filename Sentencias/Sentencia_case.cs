@@ -64,6 +64,12 @@ namespace Pascal_AirMax.Sentencias
                         else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
                         {
                             return retorno;
+                        }else if(retorno.getTipo() == Objeto.TipoObjeto.BOOLEAN)
+                        {
+                            if (Parser(retorno))
+                            {
+                                return null;
+                            }
                         }
                     }
 
@@ -107,6 +113,18 @@ namespace Pascal_AirMax.Sentencias
 
             return null;
 
+        }
+
+        public bool Parser(Objeto valor)
+        {
+            if(bool.Parse(valor.getValor().ToString()) == true)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

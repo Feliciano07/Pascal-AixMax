@@ -58,6 +58,7 @@ namespace Pascal_AirMax.Sentencias
                 salida = Obtener_valor(condicion);
 
             } while (!salida);
+
             return null;
         }
 
