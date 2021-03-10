@@ -11,8 +11,7 @@ namespace Pascal_AirMax.Declaraciones
 {
     public class Declaracion_type : Nodo
     {
-        private int linea;
-        private int columna;
+
         private LinkedList<Nodo> declaraciones;
         private string nombre;
 
@@ -35,7 +34,7 @@ namespace Pascal_AirMax.Declaraciones
             else
             {
                 Type_obj nuevo_objeto = new Type_obj(this.nombre);
-                nuevo_objeto.entorno_type.Anterior = entorno;
+                nuevo_objeto.entorno_type.setAnterior(entorno);
                 foreach(Nodo instruccion in declaraciones)
                 {
                     try
@@ -47,8 +46,10 @@ namespace Pascal_AirMax.Declaraciones
                         throw new Exception(e.ToString());
                     }
                 }
-                entorno.Anterior = null;
-                entorno.addObjeto(nuevo_objeto, this.nombre);
+                entorno.setAnterior(null);
+                nuevo_objeto.entorno_type.setAnterior(null);
+                Simbolo simbolo = new Simbolo(this.nombre, nuevo_objeto,base.getLinea(), base.getColumna());
+                entorno.addSimbolo(simbolo, this.nombre);
             }
 
             return null;

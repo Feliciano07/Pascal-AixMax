@@ -50,7 +50,9 @@ namespace Pascal_AirMax.Declaraciones
 
             arreglo.nombre = this.nombre.ToLower();
 
-            entorno.addArreglo(arreglo, this.nombre);
+            Simbolo simbolo = new Simbolo(this.nombre, arreglo, base.getLinea(), base.getColumna());
+
+            entorno.addSimbolo(simbolo, this.nombre);
 
             return null;
              
