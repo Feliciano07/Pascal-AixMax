@@ -68,7 +68,7 @@ namespace Pascal_AirMax.Funciones
                                 Captura_error(error);
                             }
                             // contrario termina la ejecucion
-                            return new Nulo();
+                            return null;
                         }
                     }
 

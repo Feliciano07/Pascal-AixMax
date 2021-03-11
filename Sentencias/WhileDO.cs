@@ -13,8 +13,7 @@ namespace Pascal_AirMax.Sentencias
     {
         private Nodo expresion;
         private LinkedList<Nodo> instruciones;
-        private int linea;
-        private int columna;
+
 
         public WhileDO(int linea, int columna, Nodo exp, LinkedList<Nodo> ins):base(linea, columna)
         {

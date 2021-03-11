@@ -36,7 +36,7 @@ namespace Pascal_AirMax.Instruccion
             }
 
 
-            if (Funciones_no_nativas(retorno))
+            if (Funciones_no_nativas(retorno, entorno))
             {
                 return Ejecutar_Writeln_Write(entorno, retorno);
             }else if (Funcion_graficar(retorno))
@@ -51,7 +51,7 @@ namespace Pascal_AirMax.Instruccion
         }
 
 
-        public bool Funciones_no_nativas(Funcion llamada)
+        public bool Funciones_no_nativas(Funcion llamada, Entorno entorno)
         {
             if(string.Compare(llamada.getNombre(), "write") ==0 || string.Compare(llamada.getNombre(), "writeln")==0)
             {
@@ -105,7 +105,7 @@ namespace Pascal_AirMax.Instruccion
         //ejecuta
         public Objeto Ejecutar_Funcion_usuario(Entorno entorno, Funcion llamada)
         {
-            // Se procede a copiar la lista de parametros a una arreglo
+            // Se procede a copiar la lista de parametros a un arreglo
             Parametro[] auxiliar = new Parametro[llamada.getParametros().Count];
             llamada.getParametros().CopyTo(auxiliar, 0);
             //Se procede a validar el total de parametros con el total enviados
@@ -160,8 +160,11 @@ namespace Pascal_AirMax.Instruccion
             // TODO: verificar el cambio de esto
             //llamada.setLinea(base.getLinea());
             //llamada.setColumna(base.getColumna());
+            auxiliar = null;
+            
+            Objeto retorno =  llamada.executar_funcion_usuario(nuevo_entorno);
 
-            return llamada.executar_funcion_usuario(nuevo_entorno);
+            return retorno;
         }
 
         public void Validar_total_parametros(Funcion llamada)

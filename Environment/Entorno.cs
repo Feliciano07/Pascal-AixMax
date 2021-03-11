@@ -13,8 +13,6 @@ namespace Pascal_AirMax.Environment
 
         public Dictionary<string, Simbolo> simbolos;// primitivo, array, objetos
         public Dictionary<string,Funcion> funciones;
-        public Dictionary<string, Arreglo> arreglos;
-        public Dictionary<string, Type_obj> objetos;
         public Entorno anterior;
 
         public string nombre_entorno;
@@ -22,15 +20,24 @@ namespace Pascal_AirMax.Environment
         /*
          * Al asignar un valor tomar en cuenta que el id a la izquierda puede ser funciones o simbolos
          */
-        public Entorno Anterior { get => anterior; set => anterior = value; }
+  
+
+        public Entorno getAnterior()
+        {
+            return this.anterior;
+        }
+
+        public void setAnterior(Entorno e)
+        {
+            this.anterior = e;
+        }
 
 
-        public Entorno(string nombre)
+        public Entorno(string nombre) 
         {
             this.simbolos = new Dictionary<string, Simbolo>();
             this.funciones = new Dictionary<string, Funcion>();
-            this.arreglos = new Dictionary<string, Arreglo>();
-            this.objetos = new Dictionary<string, Type_obj>();
+
             this.anterior = null;
             this.nombre_entorno = nombre;
         }
@@ -38,18 +45,12 @@ namespace Pascal_AirMax.Environment
         public Entorno()
         {
             this.simbolos = new Dictionary<string, Simbolo>();
-            this.funciones = new Dictionary<string, Funcion>();
-            this.arreglos = new Dictionary<string, Arreglo>();
-            this.objetos = new Dictionary<string, Type_obj>();
             this.anterior = null;
         }
 
         public Entorno(Entorno padre, string nombre)
         {
             this.simbolos = new Dictionary<string, Simbolo>();
-            this.arreglos = new Dictionary<string, Arreglo>();
-            this.objetos = new Dictionary<string, Type_obj>();
-            this.funciones = new Dictionary<string, Funcion>();
             this.anterior = padre;
             this.nombre_entorno = nombre;
         }
@@ -62,17 +63,9 @@ namespace Pascal_AirMax.Environment
             this.simbolos.Add(nombre, simbolo);
         }
 
-        public void addArreglo(Arreglo arreglo, string nombre)
-        {
-            nombre = nombre.ToLower();
-            this.arreglos.Add(nombre, arreglo);
-        }
 
-        public void addObjeto(Type_obj objeto, string nombre)
-        {
-            nombre = nombre.ToLower();
-            this.objetos.Add(nombre, objeto);
-        }
+
+   
         
         // TODO: Buscar por entorno esto
         public bool ExisteSimbolo(string nombre)
@@ -81,24 +74,20 @@ namespace Pascal_AirMax.Environment
             for (Entorno e = this; e != null; e = e.anterior)
             {
                 //verifica primero aquello que se declara como var o const
-                if (e.simbolos.ContainsKey(nombre))
+                if (e.simbolos != null)
                 {
-                    return true;
+                    if (e.simbolos.ContainsKey(nombre))
+                    {
+                        return true;
+                    }
                 }
                 //verifica aquello que se declara como funcion
-                if (e.funciones.ContainsKey(nombre))
+                if (e.funciones != null)
                 {
-                    return true;
-                }
-
-                if (e.arreglos.ContainsKey(nombre))
-                {
-                    return true;
-                }
-
-                if (e.objetos.ContainsKey(nombre))
-                {
-                    return true;
+                    if (e.funciones.ContainsKey(nombre))
+                    {
+                        return true;
+                    }
                 }
             }
 
@@ -110,11 +99,14 @@ namespace Pascal_AirMax.Environment
             id = id.ToLower();
             for (Entorno e = this; e!= null; e= e.anterior)
             {
-                if (e.simbolos.ContainsKey(id))
+                if(e.simbolos != null)
                 {
-                    Simbolo obj;
-                    e.simbolos.TryGetValue(id, out obj);
-                    return obj;
+                    if (e.simbolos.ContainsKey(id))
+                    {
+                        Simbolo obj;
+                        e.simbolos.TryGetValue(id, out obj);
+                        return obj;
+                    }
                 }
                
             }
@@ -137,18 +129,14 @@ namespace Pascal_AirMax.Environment
         }
         public Objeto GetObjeto(string id)
         {
-            if (this.arreglos.ContainsKey(id))
+            if(this.simbolos != null)
             {
-                Arreglo arr;
-                this.arreglos.TryGetValue(id, out arr);
-                return arr;
-            }
-
-            if (this.objetos.ContainsKey(id))
-            {
-                Type_obj arr;
-                this.objetos.TryGetValue(id, out arr);
-                return arr;
+                if (this.simbolos.ContainsKey(id))
+                {
+                    Simbolo obj;
+                    this.simbolos.TryGetValue(id, out obj);
+                    return obj.getValor();
+                }
             }
 
             return null;
@@ -174,11 +162,15 @@ namespace Pascal_AirMax.Environment
 
             for (Entorno e = this; e != null; e = e.anterior)
             {
-                if (e.funciones.ContainsKey(id))
+
+                if(e.funciones != null)
                 {
-                    Funcion ft;
-                    e.funciones.TryGetValue(id, out ft);
-                    return ft;
+                    if (e.funciones.ContainsKey(id))
+                    {
+                        Funcion ft;
+                        e.funciones.TryGetValue(id, out ft);
+                        return ft;
+                    }
                 }
 
             }
@@ -213,21 +205,25 @@ namespace Pascal_AirMax.Environment
                     salida += "<td>" + kvp.Value.getColumna() + "</td>\n";
                     salida += "</tr>";
                 }
-                foreach(Funcion funcion in e.funciones.Values)
+                if(e.funciones != null)
                 {
-                    if(string.Compare(funcion.getNombre(),"write") !=0 & string.Compare(funcion.getNombre(), "writeln") !=0
-                        & string.Compare(funcion.getNombre(), "graficar_ts") != 0)
+                    foreach (Funcion funcion in e.funciones.Values)
                     {
-                        salida += "<tr>";
-                        salida += "<td>" + funcion.getNombre() + "</td>\n";
-                        salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
-                        salida += "<td>" + e.nombre_entorno + "</td>\n";
-                        salida += "<td>" + funcion.getLinea() + "</td>\n";
-                        salida += "<td>" + funcion.getColumna() + "</td>\n";
-                        salida += "</tr>";
+
+                        if (string.Compare(funcion.getNombre(), "write") != 0 & string.Compare(funcion.getNombre(), "writeln") != 0
+                            & string.Compare(funcion.getNombre(), "graficar_ts") != 0)
+                        {
+                            salida += "<tr>";
+                            salida += "<td>" + funcion.getNombre() + "</td>\n";
+                            salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
+                            salida += "<td>" + e.nombre_entorno + "</td>\n";
+                            salida += "<td>" + funcion.getLinea() + "</td>\n";
+                            salida += "<td>" + funcion.getColumna() + "</td>\n";
+                            salida += "</tr>";
+                        }
+
+
                     }
-
-
                 }
 
             }

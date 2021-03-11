@@ -7,7 +7,7 @@ using Pascal_AirMax.Abstract;
 using Pascal_AirMax.Environment;
 
 namespace Pascal_AirMax.TipoDatos
-{
+{ 
     [Serializable]
     public class Type_obj : Objeto
     {
