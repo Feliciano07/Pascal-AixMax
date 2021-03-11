@@ -205,21 +205,25 @@ namespace Pascal_AirMax.Environment
                     salida += "<td>" + kvp.Value.getColumna() + "</td>\n";
                     salida += "</tr>";
                 }
-                foreach(Funcion funcion in e.funciones.Values)
+                if(e.funciones != null)
                 {
-                    if(string.Compare(funcion.getNombre(),"write") !=0 & string.Compare(funcion.getNombre(), "writeln") !=0
-                        & string.Compare(funcion.getNombre(), "graficar_ts") != 0)
+                    foreach (Funcion funcion in e.funciones.Values)
                     {
-                        salida += "<tr>";
-                        salida += "<td>" + funcion.getNombre() + "</td>\n";
-                        salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
-                        salida += "<td>" + e.nombre_entorno + "</td>\n";
-                        salida += "<td>" + funcion.getLinea() + "</td>\n";
-                        salida += "<td>" + funcion.getColumna() + "</td>\n";
-                        salida += "</tr>";
+
+                        if (string.Compare(funcion.getNombre(), "write") != 0 & string.Compare(funcion.getNombre(), "writeln") != 0
+                            & string.Compare(funcion.getNombre(), "graficar_ts") != 0)
+                        {
+                            salida += "<tr>";
+                            salida += "<td>" + funcion.getNombre() + "</td>\n";
+                            salida += "<td>" + funcion.valor_retorno().getTipo().ToString() + "</td>\n";
+                            salida += "<td>" + e.nombre_entorno + "</td>\n";
+                            salida += "<td>" + funcion.getLinea() + "</td>\n";
+                            salida += "<td>" + funcion.getColumna() + "</td>\n";
+                            salida += "</tr>";
+                        }
+
+
                     }
-
-
                 }
 
             }
