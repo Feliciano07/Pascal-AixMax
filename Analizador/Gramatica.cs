@@ -387,15 +387,18 @@ namespace Pascal_AirMax.Analizador
 
 
 
-            
+
 
             //funciones nativas
 
             writeln.Rule = Twriteln + TparA + lista_exp + TparC //*
-                            | Twriteln + TparA + TparC;  //*
+                            | Twriteln + TparA + TparC
+                            | Twriteln;  //*
+
 
             write.Rule = Twrite + TparA + lista_exp + TparC //*
-                        | Twrite + TparA + TparC; //*
+                        | Twrite + TparA + TparC
+                        | Twrite; //*
 
 
             exit.Rule = Texit + TparA + exp + TparC
@@ -546,14 +549,14 @@ namespace Pascal_AirMax.Analizador
 
             #region PREFERENCIA
             this.Root = init;
-            RegisterOperators(1, Associativity.Left, Tor);
-            RegisterOperators(2, Associativity.Left, Tand);
-            RegisterOperators(3, Associativity.Left, Tigual, Tdiferencia);
-            RegisterOperators(4, Associativity.Left, Tmayorq, Tmenorq, Tmayori, Tmenori);
-            RegisterOperators(5, Associativity.Left, Tsuma, Tresta);
-            RegisterOperators(6, Associativity.Left, Tpor, Tdiv, Tmod); // aca se agrega el modulo
-            RegisterOperators(7, Associativity.Right,Tnot);
-            RegisterOperators(8, Associativity.Left, TparA, TparC);
+            //RegisterOperators(1, Associativity.Left, Tor);
+            //RegisterOperators(2, Associativity.Left, Tand);
+            //RegisterOperators(1, Associativity.Left, Tigual, Tdiferencia);
+            RegisterOperators(1, Associativity.Left, Tmayorq, Tmenorq, Tmayori, Tmenori, Tigual, Tdiferencia);
+            RegisterOperators(2, Associativity.Left, Tsuma, Tresta, Tor);
+            RegisterOperators(3, Associativity.Left, Tpor, Tdiv, Tmod, TDIV, Tand); // aca se agrega el modulo
+            RegisterOperators(4, Associativity.Right,Tnot);
+            RegisterOperators(5, Associativity.Left, TparA, TparC);
 
 
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",

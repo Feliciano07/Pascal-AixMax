@@ -71,6 +71,12 @@ namespace Pascal_AirMax.Analizador
                 Manejador.Maestra.getInstancia.addInstruccion(new Writeln(linea, columna));
                 return new LlamadaFuncion(linea, columna, "writeln", tem);
             }
+            else
+            {
+                LinkedList<Nodo> tem = new LinkedList<Nodo>();
+                Manejador.Maestra.getInstancia.addInstruccion(new Writeln(linea, columna));
+                return new LlamadaFuncion(linea, columna, "writeln", tem);
+            }
             return null;
         }
 
@@ -88,6 +94,12 @@ namespace Pascal_AirMax.Analizador
 
             }
             else if (entrada.ChildNodes.Count == 3)
+            {
+                LinkedList<Nodo> tem = new LinkedList<Nodo>();
+                Manejador.Maestra.getInstancia.addInstruccion(new Write(linea, columna));
+                return new LlamadaFuncion(linea, columna, "write", tem);
+            }
+            else
             {
                 LinkedList<Nodo> tem = new LinkedList<Nodo>();
                 Manejador.Maestra.getInstancia.addInstruccion(new Write(linea, columna));

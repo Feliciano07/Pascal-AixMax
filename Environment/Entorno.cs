@@ -79,6 +79,9 @@ namespace Pascal_AirMax.Environment
                     if (e.simbolos.ContainsKey(nombre))
                     {
                         return true;
+                    }else if(string.Compare(e.nombre_entorno, "global", false) != 0)
+                    {
+                        return false;
                     }
                 }
                 //verifica aquello que se declara como funcion
