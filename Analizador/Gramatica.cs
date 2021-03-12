@@ -53,6 +53,7 @@ namespace Pascal_AirMax.Analizador
 
             var TparA = ToTerm("(");
             var TparC = ToTerm(")");
+            var TDIV = ToTerm("div");
 
             //declaracion de variables y constantes, asi mismo inicar con un valor
             var Tvar = ToTerm("var");
@@ -253,6 +254,7 @@ namespace Pascal_AirMax.Analizador
                        | exp + Tresta + exp //*
                        | exp + Tpor + exp //*
                        | exp + Tdiv + exp //*
+                       | exp + TDIV + exp //*
                        | exp + Tmod + exp //*
                        | exp + Tmayorq + exp //*
                        | exp + Tmenorq + exp //*
