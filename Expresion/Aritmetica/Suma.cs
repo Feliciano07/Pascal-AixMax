@@ -41,7 +41,7 @@ namespace Pascal_AirMax.Expresion.Aritmetica
                 return new Primitivo(tipo_dominante, res_left.getValor().ToString() + res_right.getValor().ToString());
             }else if(tipo_dominante == Objeto.TipoObjeto.REAL)
             {
-                return new Primitivo(tipo_dominante, Double.Parse(res_left.getValor().ToString()) + Double.Parse(res_right.getValor().ToString()));
+                return new Primitivo(tipo_dominante, double.Parse(res_left.getValor().ToString()) + double.Parse(res_right.getValor().ToString()));
             }
             else
             {

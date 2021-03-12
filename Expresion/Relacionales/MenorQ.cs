@@ -39,7 +39,7 @@ namespace Pascal_AirMax.Expresion.Relacionales
             }
             else if (tipo_dominante == Objeto.TipoObjeto.REAL)
             {
-                if (Double.Parse(res_left.getValor().ToString()) < Double.Parse(res_right.getValor().ToString()))
+                if (double.Parse(res_left.getValor().ToString()) < double.Parse(res_right.getValor().ToString()))
                 {
                     return new Primitivo(Objeto.TipoObjeto.BOOLEAN, true);
                 }

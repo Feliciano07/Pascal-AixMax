@@ -29,9 +29,9 @@ namespace Pascal_AirMax.Expresion.Aritmetica
 
             if(tipo_dominante == Objeto.TipoObjeto.INTEGER || tipo_dominante == Objeto.TipoObjeto.REAL)
             {
-                if(Double.Parse(res_right.getValor().ToString()) != 0)
+                if(double.Parse(res_right.getValor().ToString()) != 0)
                 {
-                    return new Primitivo(Objeto.TipoObjeto.REAL, Double.Parse(res_left.getValor().ToString()) / Double.Parse(res_right.getValor().ToString()));
+                    return new Primitivo(Objeto.TipoObjeto.REAL, double.Parse(res_left.getValor().ToString()) / double.Parse(res_right.getValor().ToString()));
                 }
                 else
                 {
