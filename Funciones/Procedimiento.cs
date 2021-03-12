@@ -39,45 +39,50 @@ namespace Pascal_AirMax.Funciones
         {
             foreach(Nodo instruccion in this.instruciones)
             {
-                try
+                if(instruccion != null)
                 {
-                    Objeto retorno  = instruccion.execute(entorno);
-                    if (retorno != null)
+                    try
                     {
-                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        Objeto retorno = instruccion.execute(entorno);
+                        if (retorno != null)
                         {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "Sentencia continue debe estar dentro de un ciclo");
-                            Captura_error(error);
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                        {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "Sentencia break debe estar dentro de un ciclo o case");
-                            Captura_error(error);
-                            
-                        }else if(retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                        {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            if(tem.valor != null)
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
                             {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
                                 Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "La sentencia de exit no debe retornar valor dentro del procedimiento");
+                                    "Sentencia continue debe estar dentro de un ciclo");
                                 Captura_error(error);
                             }
-                            // contrario termina la ejecucion
-                            return null;
-                        }
-                    }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "Sentencia break debe estar dentro de un ciclo o case");
+                                Captura_error(error);
 
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                if (tem.valor != null)
+                                {
+                                    Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "La sentencia de exit no debe retornar valor dentro del procedimiento");
+                                    Captura_error(error);
+                                }
+                                // contrario termina la ejecucion
+                                return null;
+                            }
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                        //throw new Exception(e.ToString());
+                    }
                 }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    throw new Exception(e.ToString());
-                }
+                
             }
 
             return null;

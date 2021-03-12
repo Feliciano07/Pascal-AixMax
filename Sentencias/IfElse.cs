@@ -50,30 +50,33 @@ namespace Pascal_AirMax.Sentencias
             {
                 foreach (Nodo instruccion in this.instru_if)
                 {
-                    //TODO: validar si retorna algo
-                    try
+                    if (instruccion != null)
                     {
-                        Objeto retorno = instruccion.execute(entorno);
-
-                        if (retorno != null)
+                        //TODO: validar si retorna algo
+                        try
                         {
-                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            Objeto retorno = instruccion.execute(entorno);
+
+                            if (retorno != null)
                             {
-                                return retorno;
-                            }
-                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                            {
-                                return retorno;
-                            }
-                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                            {
-                                return retorno;
+                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                {
+                                    return retorno;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                {
+                                    return retorno;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                {
+                                    return retorno;
+                                }
                             }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
                 }
             }
@@ -81,23 +84,34 @@ namespace Pascal_AirMax.Sentencias
             {
                 foreach (Nodo instruccion in this.instru_else)
                 {
-                    Objeto retorno = instruccion.execute(entorno);
-
-                    if (retorno != null)
+                    if (instruccion != null)
                     {
-                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        try
                         {
-                            return retorno;
+                            Objeto retorno = instruccion.execute(entorno);
+
+                            if (retorno != null)
+                            {
+                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                {
+                                    return retorno;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                {
+                                    return retorno;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                {
+                                    return retorno;
+                                }
+                            }
                         }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                        catch (Exception e)
                         {
-                            return retorno;
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                        {
-                            return retorno;
+                            Console.WriteLine(e.ToString());
                         }
                     }
+                    
                 }
             }
             return null;

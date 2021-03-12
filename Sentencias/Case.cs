@@ -67,23 +67,39 @@ namespace Pascal_AirMax.Sentencias
                 {
                     foreach (Nodo instruccion in this.instrucciones)
                     {
-                        Objeto retorno = instruccion.execute(entorno);
 
-                        if (retorno != null)
+                        if (instruccion != null)
                         {
-                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            try
                             {
-                                return retorno;
+                                Objeto retorno = instruccion.execute(entorno);
+
+                                if (retorno != null)
+                                {
+                                    if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                    {
+                                        return retorno;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                    {
+                                        return retorno;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                    {
+                                        return retorno;
+                                    }
+                                }
+
                             }
-                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            catch (Exception e)
                             {
-                                return retorno;
-                            }
-                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                            {
-                                return retorno;
+                                Console.Write(e.ToString());
                             }
                         }
+
+
+
+
                     }
                     return new Primitivo(Objeto.TipoObjeto.BOOLEAN, true);
                 }

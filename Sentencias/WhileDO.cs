@@ -32,28 +32,32 @@ namespace Pascal_AirMax.Sentencias
             {
                 foreach(Nodo instruccion in this.instruciones)
                 {
-                    try
+                    if(instruccion != null)
                     {
-                        Objeto retorno = instruccion.execute(entorno);
-
-                        if (retorno != null)
+                        try
                         {
-                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            Objeto retorno = instruccion.execute(entorno);
+
+                            if (retorno != null)
                             {
-                                break;
-                            }
-                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                            {
-                                return null;
-                            }else if(retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                            {
-                                return retorno;
+                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                {
+                                    break;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                {
+                                    return null;
+                                }
+                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                {
+                                    return retorno;
+                                }
                             }
                         }
-                    }
-                    catch(Exception e)
-                    {
-                        Console.WriteLine(e.ToString());
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.ToString());
+                        }
                     }
                 }
                 condicion = Obtener_condicion(entorno);

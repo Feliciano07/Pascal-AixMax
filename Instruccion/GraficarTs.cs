@@ -31,7 +31,7 @@ namespace Pascal_AirMax.Instruccion
 
         public void Crear_Archivo(Entorno entorno)
         {
-            string ruta = @"C:\compiladores2\Tablas";
+            string ruta = @"C:\compiladores2";
 
             if (!Directory.Exists(ruta))
             {

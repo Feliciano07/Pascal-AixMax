@@ -47,37 +47,41 @@ namespace Pascal_AirMax.Sentencias
             foreach(Case caso in casos)
             {
                 
-                try
+                if(caso != null)
                 {
-                    // TODO: validar si retorna algo
-                    Objeto retorno = caso.execute_caso(entorno, condicion, this.datos_evaluados);
-                    if (retorno != null)
+                    try
                     {
-                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        // TODO: validar si retorna algo
+                        Objeto retorno = caso.execute_caso(entorno, condicion, this.datos_evaluados);
+                        if (retorno != null)
                         {
-                            return retorno;
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                        {
-                            return retorno;
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                        {
-                            return retorno;
-                        }else if(retorno.getTipo() == Objeto.TipoObjeto.BOOLEAN)
-                        {
-                            if (Parser(retorno))
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
                             {
-                                return null;
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BOOLEAN)
+                            {
+                                if (Parser(retorno))
+                                {
+                                    return null;
+                                }
                             }
                         }
-                    }
 
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw new Exception(e.ToString());
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        //throw new Exception(e.ToString());
+                    }
                 }
             }
             
@@ -85,29 +89,32 @@ namespace Pascal_AirMax.Sentencias
 
             foreach(Nodo instruccion in instru_else)
             {
-                try
+                if(instruccion != null)
                 {
-                    // TODO: validar si retorna algo
-                    Objeto retorno = instruccion.execute(entorno);
-                    if (retorno != null)
+                    try
                     {
-                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        // TODO: validar si retorna algo
+                        Objeto retorno = instruccion.execute(entorno);
+                        if (retorno != null)
                         {
-                            return retorno;
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                        {
-                            return retorno;
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                        {
-                            return retorno;
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                return retorno;
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                return retorno;
+                            }
                         }
                     }
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e.ToString());
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                    }
                 }
             }
 

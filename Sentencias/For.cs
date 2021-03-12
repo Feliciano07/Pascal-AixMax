@@ -48,29 +48,34 @@ namespace Pascal_AirMax.Sentencias
                     inicio.setValor(pr);
                     foreach (Nodo instruccion in this.instrucciones)
                     {
-                        try
+                        if(instruccion != null)
                         {
-                            Objeto retorno = instruccion.execute(entorno);
-
-                            if (retorno != null)
+                            try
                             {
-                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                Objeto retorno = instruccion.execute(entorno);
+
+                                if (retorno != null)
                                 {
-                                    break;
-                                }else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                                {
-                                    return null;
+                                    if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                    {
+                                        break;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                    {
+                                        return null;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                    {
+                                        return retorno;
+                                    }
                                 }
-                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                                {
-                                    return retorno;
-                                }
+
+
                             }
-
-
-                        }catch(Exception e)
-                        {
-                            Console.WriteLine(e);
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                         }
                     }
 
@@ -84,31 +89,34 @@ namespace Pascal_AirMax.Sentencias
                     inicio.setValor(pr);
                     foreach (Nodo instruccion in this.instrucciones)
                     {
-                        try
+                       if(instruccion != null)
                         {
-                            //validar los retornos
-                            Objeto retorno = instruccion.execute(entorno);
-
-                            if (retorno != null)
+                            try
                             {
-                                if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
-                                {
-                                    break;
-                                }
-                                else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                                {
-                                    return null;
-                                }
-                                else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                                {
-                                    return retorno;
-                                }
-                            }
+                                //validar los retornos
+                                Objeto retorno = instruccion.execute(entorno);
 
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine(e);
+                                if (retorno != null)
+                                {
+                                    if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                                    {
+                                        break;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                                    {
+                                        return null;
+                                    }
+                                    else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                                    {
+                                        return retorno;
+                                    }
+                                }
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                            }
                         }
                     }
 

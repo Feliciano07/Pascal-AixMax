@@ -75,15 +75,18 @@ namespace Pascal_AirMax.Instruccion
             LinkedList<Objeto> actuales = new LinkedList<Objeto>();
             foreach (Nodo node in this.parametros)
             {
-                try
+                if(node != null)
                 {
-                    Objeto salida_objeto = node.execute(entorno);
-                    actuales.AddLast(salida_objeto);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    throw new Exception(e.ToString());
+                    try
+                    {
+                        Objeto salida_objeto = node.execute(entorno);
+                        actuales.AddLast(salida_objeto);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                        throw new Exception(e.ToString());
+                    }
                 }
 
             }
@@ -117,41 +120,44 @@ namespace Pascal_AirMax.Instruccion
             int contador = 0;
             foreach (Nodo node in this.parametros)
             {
-                try
+               if(node != null)
                 {
-                    if(auxiliar[contador].GetTipo_Parametro() == Parametro.Tipo_Parametro.VALOR)
+                    try
                     {
-                        // obtiene lo que viene por valor
-                        Objeto salida = node.execute(entorno);
-                        Match_Parametro(auxiliar[contador], salida);
-
-                        Simbolo simbolo = new Simbolo(auxiliar[contador].getNombreParametro(), salida, Simbolo.Tipo_variable.VAR, llamada.getLinea(), llamada.getColumna());
-                        nuevo_entorno.addSimbolo(simbolo, auxiliar[contador].getNombreParametro());
-                    }
-                    else
-                    {
-                        //obtiene lo que se manda por referencia y se guarda ese mismo simbolo
-                        if(node is Acceso aux)
+                        if (auxiliar[contador].GetTipo_Parametro() == Parametro.Tipo_Parametro.VALOR)
                         {
-                            Simbolo salida = aux.execute_no_clonador(entorno);
-                            Match_Parametro(auxiliar[contador], salida.getValor());
-                            nuevo_entorno.addSimbolo(salida, auxiliar[contador].getNombreParametro());
+                            // obtiene lo que viene por valor
+                            Objeto salida = node.execute(entorno);
+                            Match_Parametro(auxiliar[contador], salida);
+
+                            Simbolo simbolo = new Simbolo(auxiliar[contador].getNombreParametro(), salida, Simbolo.Tipo_variable.VAR, llamada.getLinea(), llamada.getColumna());
+                            nuevo_entorno.addSimbolo(simbolo, auxiliar[contador].getNombreParametro());
                         }
                         else
                         {
-                            Error error = new Error(node.getLinea(), node.getColumna(), Error.Errores.Semantico,
-                            "se esperaba un identificador de variable");
-                            Maestra.getInstancia.addError(error);
-                            throw new Exception("se esperaba un identificador de variable");
+                            //obtiene lo que se manda por referencia y se guarda ese mismo simbolo
+                            if (node is Acceso aux)
+                            {
+                                Simbolo salida = aux.execute_no_clonador(entorno);
+                                Match_Parametro(auxiliar[contador], salida.getValor());
+                                nuevo_entorno.addSimbolo(salida, auxiliar[contador].getNombreParametro());
+                            }
+                            else
+                            {
+                                Error error = new Error(node.getLinea(), node.getColumna(), Error.Errores.Semantico,
+                                "se esperaba un identificador de variable");
+                                Maestra.getInstancia.addError(error);
+                                throw new Exception("se esperaba un identificador de variable");
+                            }
+
                         }
-                        
+
                     }
-                    
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    throw new Exception(e.ToString());
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                        throw new Exception(e.ToString());
+                    }
                 }
                 contador++;
             }

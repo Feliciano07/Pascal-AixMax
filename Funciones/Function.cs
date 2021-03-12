@@ -31,50 +31,55 @@ namespace Pascal_AirMax.Funciones
 
             foreach (Nodo instruccion in this.instrucciones)
             {
-                try
+                if (instruccion != null)
                 {
-                    Objeto retorno = instruccion.execute(entorno);
-                    if (retorno != null)
+                    try
                     {
-                        if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
+                        Objeto retorno = instruccion.execute(entorno);
+                        if (retorno != null)
                         {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "Sentencia continue debe estar dentro de un ciclo");
-                            Captura_error(error);
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
-                        {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "Sentencia break debe estar dentro de un ciclo o case");
-                            Captura_error(error);
-
-                        }
-                        else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
-                        {
-                            Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
-                            if (tem.valor != null)
+                            if (retorno.getTipo() == Objeto.TipoObjeto.CONTINUE)
                             {
-                                Validar_retorno(tem.valor, instruccion);
-                                return tem.valor;
-                            }
-                            else
-                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
                                 Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
-                                "La sentencia de exit en funcion debe de retornar un valor");
+                                    "Sentencia continue debe estar dentro de un ciclo");
                                 Captura_error(error);
                             }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.BREAK)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "Sentencia break debe estar dentro de un ciclo o case");
+                                Captura_error(error);
 
+                            }
+                            else if (retorno.getTipo() == Objeto.TipoObjeto.NULO)
+                            {
+                                Sentencia_transferencia tem = (Sentencia_transferencia)retorno;
+                                if (tem.valor != null)
+                                {
+                                    Validar_retorno(tem.valor, instruccion);
+                                    return tem.valor;
+                                }
+                                else
+                                {
+                                    Error error = new Error(tem.linea, tem.columna, Error.Errores.Semantico,
+                                    "La sentencia de exit en funcion debe de retornar un valor");
+                                    Captura_error(error);
+                                }
+
+                            }
                         }
-                    }
 
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.ToString());
+                        //throw new Exception(e.ToString());
+                    }
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.ToString());
-                    throw new Exception(e.ToString());
-                }
+
+                
             }
 
             Simbolo aux = entorno.GetSimbolo(base.getNombre());
