@@ -109,7 +109,7 @@ namespace Pascal_AirMax
             this.Controls.Add(this.richTextBox1);
             this.MaximumSize = new System.Drawing.Size(1382, 744);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Pascal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
