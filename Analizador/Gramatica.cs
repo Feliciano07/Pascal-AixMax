@@ -247,7 +247,9 @@ namespace Pascal_AirMax.Analizador
             sentencias_main.Rule = Tbegin + lista_main + Tend + Tpuntocoma;
 
 
-            exp.Rule = exp + Tsuma + exp //*
+            exp.Rule =  Tnot + exp //*
+                       | Tresta + exp //*
+                       | exp + Tsuma + exp //*
                        | exp + Tresta + exp //*
                        | exp + Tpor + exp //*
                        | exp + Tdiv + exp //*
@@ -260,8 +262,6 @@ namespace Pascal_AirMax.Analizador
                        | exp + Tdiferencia + exp //*
                        | exp + Tand + exp //*
                        | exp + Tor + exp //*
-                       | Tnot + exp //*
-                       | Tresta + exp //*
                        | Entero //*
                        | Decimal //*
                        | Cadena //*
@@ -544,14 +544,14 @@ namespace Pascal_AirMax.Analizador
 
             #region PREFERENCIA
             this.Root = init;
-            RegisterOperators(3, Associativity.Left, Tor);
-            RegisterOperators(4, Associativity.Left, Tand);
-            RegisterOperators(5, Associativity.Left, Tigual, Tdiferencia);
-            RegisterOperators(6, Associativity.Left, Tmayorq, Tmenorq, Tmayori, Tmenori);
-            RegisterOperators(7, Associativity.Left, Tsuma, Tresta);
-            RegisterOperators(8, Associativity.Left, Tpor, Tdiv, Tmod); // aca se agrega el modulo
-            RegisterOperators(9, Associativity.Right, Tresta, Tnot);
-            RegisterOperators(10, Associativity.Left, TparA, TparC);
+            RegisterOperators(1, Associativity.Left, Tor);
+            RegisterOperators(2, Associativity.Left, Tand);
+            RegisterOperators(3, Associativity.Left, Tigual, Tdiferencia);
+            RegisterOperators(4, Associativity.Left, Tmayorq, Tmenorq, Tmayori, Tmenori);
+            RegisterOperators(5, Associativity.Left, Tsuma, Tresta);
+            RegisterOperators(6, Associativity.Left, Tpor, Tdiv, Tmod); // aca se agrega el modulo
+            RegisterOperators(7, Associativity.Right, Tresta, Tnot);
+            RegisterOperators(8, Associativity.Left, TparA, TparC);
 
 
             this.MarkReservedWords("var", "const", "if", "else", "begin", "end",

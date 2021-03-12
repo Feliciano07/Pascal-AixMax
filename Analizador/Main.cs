@@ -167,6 +167,12 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_Exit(actual);
                 case "tabla_sym":
                     return Main.Instruccion_Graficar_ts(actual);
+                case "no_for":
+                    return Main.For(actual);
+                case "whiledo":
+                    return Main.While(actual);
+                case "repeat":
+                    return Main.Repeat(actual);
             }
             return null;
         }
@@ -472,6 +478,18 @@ namespace Pascal_AirMax.Analizador
                     return Tranferencias.Sentencia_Exit(actual);
                 case "tabla_sym":
                     return Main.Instruccion_Graficar_ts(actual);
+                case "opcion_else":
+                    return Main.Opcion_else(actual);
+                case "sentencia_case":
+                    return Main.Case_OF(actual);
+                case "sentencia_while":
+                    return Main.While_If(actual);
+                case "sentencia_repeat":
+                    return Main.Repeat(actual);
+                case "sentencia_for":
+                    return Main.For_if(actual);
+
+
 
             }
             return null;
