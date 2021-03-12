@@ -402,7 +402,8 @@ namespace Pascal_AirMax.Analizador
 
 
             exit.Rule = Texit + TparA + exp + TparC
-                        | Texit + TparA + TparC;
+                        | Texit + TparA + TparC
+                        | Texit;
 
             tabla_sym.Rule = Tgraficar + TparA + TparC;
 
