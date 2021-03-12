@@ -550,7 +550,7 @@ namespace Pascal_AirMax.Analizador
             RegisterOperators(4, Associativity.Left, Tmayorq, Tmenorq, Tmayori, Tmenori);
             RegisterOperators(5, Associativity.Left, Tsuma, Tresta);
             RegisterOperators(6, Associativity.Left, Tpor, Tdiv, Tmod); // aca se agrega el modulo
-            RegisterOperators(7, Associativity.Right, Tresta, Tnot);
+            RegisterOperators(7, Associativity.Right,Tnot);
             RegisterOperators(8, Associativity.Left, TparA, TparC);
 
 
