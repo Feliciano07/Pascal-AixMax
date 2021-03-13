@@ -37,6 +37,7 @@ namespace Pascal_AirMax
             else
             {
                 var result = MessageBox.Show("Analisis incorrecto");
+                richTextBox2.Text = Maestra.getInstancia.getOutput();
             }
             Manejador.Maestra.getInstancia.ReccorerErrores();
         }

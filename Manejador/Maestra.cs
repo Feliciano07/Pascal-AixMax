@@ -57,6 +57,11 @@ namespace Pascal_AirMax.Manejador
             this.instrucciones.AddLast(nodo);
         }
 
+        public int total_errores_encontrados()
+        {
+            return this.errores.Count;
+        }
+
 
         public void ejecutar()
         {

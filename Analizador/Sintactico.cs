@@ -28,6 +28,11 @@ namespace Pascal_AirMax.Analizador
             encabezado(raiz.ChildNodes[0]);
             Maestra.getInstancia.ejecutar();
 
+            if(Maestra.getInstancia.total_errores_encontrados() > 0)
+            {
+                return false;
+            }
+
             return true;
         }
 
