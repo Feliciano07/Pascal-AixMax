@@ -66,9 +66,9 @@ namespace Pascal_AirMax
             this.richTextBox2.BackColor = System.Drawing.SystemColors.InfoText;
             this.richTextBox2.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.richTextBox2.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.richTextBox2.Location = new System.Drawing.Point(754, 67);
+            this.richTextBox2.Location = new System.Drawing.Point(734, 67);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(430, 429);
+            this.richTextBox2.Size = new System.Drawing.Size(459, 429);
             this.richTextBox2.TabIndex = 3;
             this.richTextBox2.Text = "";
             // 
@@ -77,11 +77,12 @@ namespace Pascal_AirMax
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Font = new System.Drawing.Font("Cooper Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(754, 34);
+            this.label1.Location = new System.Drawing.Point(734, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 19);
+            this.label1.Size = new System.Drawing.Size(75, 19);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Salida";
+            this.label1.Text = "Consola";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // richTextBox3
             // 
@@ -101,7 +102,7 @@ namespace Pascal_AirMax
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 573);
+            this.ClientSize = new System.Drawing.Size(1235, 573);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.richTextBox2);

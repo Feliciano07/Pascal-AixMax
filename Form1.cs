@@ -135,5 +135,10 @@ namespace Pascal_AirMax
         {
             AddLineNumbers();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
